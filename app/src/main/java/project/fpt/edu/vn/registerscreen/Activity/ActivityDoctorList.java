@@ -22,11 +22,12 @@ import java.util.ArrayList;
 
 import project.fpt.edu.vn.registerscreen.Application.SocketApplication;
 import project.fpt.edu.vn.registerscreen.BusEvent.EventChangeChatServerStateEvent;
-import project.fpt.edu.vn.registerscreen.BusEvent.EventLoadDoctor;
-import project.fpt.edu.vn.registerscreen.Doctor;
+import project.fpt.edu.vn.registerscreen.BusEvent.EventLoadDoctorOnline;
+import project.fpt.edu.vn.registerscreen.Model.Doctor;
 import project.fpt.edu.vn.registerscreen.DoctorProfileActivity;
 import project.fpt.edu.vn.registerscreen.Fragment.FragmentHome;
 import project.fpt.edu.vn.registerscreen.ListAdapter;
+import project.fpt.edu.vn.registerscreen.Model.DoctorOnline;
 import project.fpt.edu.vn.registerscreen.R;
 import project.fpt.edu.vn.registerscreen.Service.SocketServiceProvider;
 import project.fpt.edu.vn.registerscreen.Session;
@@ -36,7 +37,7 @@ import project.fpt.edu.vn.registerscreen.Session;
  */
 
 public class ActivityDoctorList extends AppCompatActivity {
-    ArrayList<Doctor> arrayDoctor = new ArrayList<Doctor>();
+    ArrayList<DoctorOnline> arrayDoctorOnline = new ArrayList<DoctorOnline>();
     TextView tv;
     ListView lv;
     Session session;
@@ -82,16 +83,15 @@ public class ActivityDoctorList extends AppCompatActivity {
         Intent intent = getIntent();
         String name = intent.getStringExtra(FragmentHome.NAME);
         if(name.equals("Bệnh tâm lý")){
-            arrayDoctor.add(new Doctor("Doctor A", true));
-            arrayDoctor.add(new Doctor("Doctor B", false));
+//            arrayDoctor.add(new Doctor("Doctor A", true));
+//            arrayDoctor.add(new Doctor("Doctor B", false));
         }
         if(name.equals("Bệnh thai sản")){
-            arrayDoctor.add(new Doctor("Doctor C", false));
-            arrayDoctor.add(new Doctor("Doctor D", true));
+//            arrayDoctor.add(new Doctor("Doctor C", false));
+//            arrayDoctor.add(new Doctor("Doctor D", true));
         }
         if(name.equals("Bệnh nam khoa")){
-            arrayDoctor.add(new Doctor("Doctor E", true));
-            arrayDoctor.add(new Doctor("Doctor F", false));
+            socketApplication.getSocket().emit("patient_load_doctor","2");
         }
         if(name.equals("Bệnh phụ khoa")){
             socketApplication.getSocket().emit("patient_load_doctor","1");
@@ -100,7 +100,7 @@ public class ActivityDoctorList extends AppCompatActivity {
         ListAdapter adapter = new ListAdapter(
                 ActivityDoctorList.this,
                 R.layout.activity_line_doctor,
-                arrayDoctor
+                arrayDoctorOnline
         );
         lv.setAdapter(adapter);
 
@@ -108,7 +108,7 @@ public class ActivityDoctorList extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 Intent intent = new Intent(ActivityDoctorList.this, DoctorProfileActivity.class);
-                intent.putExtra("array_doctor", arrayDoctor.get(i));
+                intent.putExtra("array_doctor", arrayDoctorOnline.get(i));
                 startActivity(intent);
             }
         });
@@ -146,7 +146,8 @@ public class ActivityDoctorList extends AppCompatActivity {
         super.onDestroy();
     }
     @Subscribe(threadMode = ThreadMode.MAIN)
-    public void onMessageEvent(EventLoadDoctor event) {
-
+    public void onMessageEvent(EventLoadDoctorOnline event) {
+        Log.d("ListDoctorOnline","True");
+        arrayDoctor = event.getArrayDoctorOnline();
     }
 }

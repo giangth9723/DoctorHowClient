@@ -2,7 +2,6 @@ package project.fpt.edu.vn.registerscreen;
 
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.Color;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
@@ -17,19 +16,19 @@ import android.widget.Toast;
 import java.util.List;
 
 import project.fpt.edu.vn.registerscreen.Activity.ActivityAppoint;
-import project.fpt.edu.vn.registerscreen.Activity.LoginActivity;
-import project.fpt.edu.vn.registerscreen.Activity.MenuActivity;
+import project.fpt.edu.vn.registerscreen.Model.Doctor;
+import project.fpt.edu.vn.registerscreen.Model.DoctorOnline;
 
 /**
  * Created by User on 2/6/2018.
  */
 
-public class ListAdapter extends ArrayAdapter<Doctor> {
+public class ListAdapter extends ArrayAdapter<DoctorOnline> {
     public ListAdapter(@NonNull Context context, int resource) {
         super(context, resource);
     }
 
-    public ListAdapter(Context context, int resource, List<Doctor> items){
+    public ListAdapter(Context context, int resource, List<DoctorOnline> items){
         super(context, resource, items);
     }
 
@@ -43,15 +42,15 @@ public class ListAdapter extends ArrayAdapter<Doctor> {
             vi = LayoutInflater.from(getContext());
             v = vi.inflate(R.layout.activity_line_doctor, null);
         }
-        Doctor d = getItem(position);
+        DoctorOnline d = getItem(position);
         final ImageButton ib = (ImageButton)v.findViewById(R.id.imgCall);
         final ImageView iv = (ImageView)v.findViewById(R.id.imgStatus);
         final ImageButton ib2 = (ImageButton) v.findViewById(R.id.imgAppoint);
 
         if(d != null){
             TextView tv1 = (TextView)v.findViewById(R.id.tvListDocName);
-            tv1.setText(d.Name);
-            if(d.DoctorStatus == false){
+            tv1.setText(d.getUsername());
+            if(d.getStatus() == "online"){
                 iv.setColorFilter(getContext().getResources().getColor(R.color.colorAccent));
                 ib.setBackgroundResource(R.drawable.not_available_border);
                 ib.setColorFilter(getContext().getResources().getColor(R.color.colorGray));

@@ -6,21 +6,25 @@ import android.os.Binder;
 import android.os.Handler;
 import android.os.IBinder;
 import android.os.Looper;
-import android.support.annotation.Nullable;
 import android.util.Log;
 import android.widget.Toast;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+
+import java.util.ArrayList;
 
 import io.socket.client.Socket;
 import io.socket.emitter.Emitter;
 import project.fpt.edu.vn.registerscreen.Application.SocketApplication;
 import project.fpt.edu.vn.registerscreen.BusEvent.EventChangeChatServerStateEvent;
 import project.fpt.edu.vn.registerscreen.BusEvent.EventCheckLogin;
+import project.fpt.edu.vn.registerscreen.BusEvent.EventLoadDoctorOnline;
+import project.fpt.edu.vn.registerscreen.Model.DoctorOnline;
 
 /**
  * Created by GIang on 3/7/2018.
@@ -67,6 +71,7 @@ public class SocketServiceProvider extends Service {
         signalApplication.getSocket().on(Socket.EVENT_CONNECT_TIMEOUT, onConnectError);
         signalApplication.getSocket().on(Socket.EVENT_CONNECT, onConnect);
         signalApplication.getSocket().on("server_check_login_patient",onLoginStatus);
+        signalApplication.getSocket().on("server_load_doctor_list",onLoadDoctor);
 
         //@formatter:off
         //@formatter:on
@@ -144,7 +149,33 @@ public class SocketServiceProvider extends Service {
             });
         }
     };
-
+    private Emitter.Listener onLoadDoctor = new Emitter.Listener() {
+        @Override
+        public void call(final Object... args) {
+            new Handler(Looper.getMainLooper()).post(new Runnable() {
+                @Override
+                public void run() {
+                    JSONObject object = (JSONObject) args[0];
+                    try {
+                        ArrayList<DoctorOnline> arrayDoctorOnline = new ArrayList<>();
+                        Log.d("Load Doctor","da nhan");
+                        JSONArray arrayDoctor = object.getJSONArray("arrayDoctor");
+                        for ( int i = 0 ; i< arrayDoctor.length();i++){
+                            JSONObject obj = (JSONObject) arrayDoctor.get(i);
+                            int doctorID = obj.getInt("DoctorID");
+                            String username = obj.getString("Username");
+                            String status = obj.getString("status");
+                            String socketID = obj.getString("SocketID");
+                            arrayDoctorOnline.add(new DoctorOnline(doctorID,username,status,socketID));
+                        }
+                        EventBus.getDefault().post(new EventLoadDoctorOnline(arrayDoctorOnline));
+                    }catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                }
+            });
+        }
+    };
     private void connectConnection() {
         instance = this;
         signalApplication.getSocket().connect();

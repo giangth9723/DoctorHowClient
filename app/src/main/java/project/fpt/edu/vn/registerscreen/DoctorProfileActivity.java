@@ -1,23 +1,19 @@
 package project.fpt.edu.vn.registerscreen;
 
 import android.content.Intent;
-import android.graphics.Typeface;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
-import android.view.animation.AccelerateInterpolator;
 import android.view.animation.Animation;
 import android.view.animation.Transformation;
-import android.view.animation.TranslateAnimation;
 import android.widget.ImageButton;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import project.fpt.edu.vn.registerscreen.Activity.ActivityAppoint;
-import project.fpt.edu.vn.registerscreen.Activity.ActivityDoctorList;
+import project.fpt.edu.vn.registerscreen.Model.Doctor;
 
 public class DoctorProfileActivity extends AppCompatActivity {
 

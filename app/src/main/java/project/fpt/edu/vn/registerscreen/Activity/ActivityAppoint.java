@@ -13,7 +13,7 @@ import android.widget.TextView;
 
 import java.util.Calendar;
 
-import project.fpt.edu.vn.registerscreen.Doctor;
+import project.fpt.edu.vn.registerscreen.Model.Doctor;
 import project.fpt.edu.vn.registerscreen.R;
 
 public class ActivityAppoint extends AppCompatActivity {
