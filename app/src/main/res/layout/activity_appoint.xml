@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="project.fpt.edu.vn.registerscreen.Activity.ActivityAppoint">
+    <!-- top -->
+    <LinearLayout
+        android:orientation="horizontal"
+        android:id="@+id/LineAppTop"
+        android:background="@drawable/border_top"
+        android:layout_width="match_parent"
+        android:layout_height="50dp">
+
+        <ImageButton
+            android:id="@+id/ImgBtnBack"
+            app:srcCompat="@drawable/ic_chevron_left"
+            android:background="@null"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            tools:ignore="VectorDrawableCompat" />
+
+        <TextView
+            android:layout_gravity="center_vertical"
+            android:layout_marginBottom="5dp"
+            android:layout_marginTop="6dp"
+            android:textSize="20sp"
+            android:text="Đặt lịch"
+            android:textColor="@color/colorBlack"
+            android:layout_width="wrap_content"
+            android:layout_height="30dp"/>
+
+    </LinearLayout>
+
+    <!-- mid -->
+    <LinearLayout
+        android:layout_below="@+id/LineAppTop"
+        android:background="@drawable/border"
+        android:orientation="vertical"
+        android:layout_marginRight="7dp"
+        android:layout_marginLeft="7dp"
+        android:layout_marginTop="7dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/profileImageView"
+            android:layout_gravity="center_horizontal"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_marginTop="10dp"
+            android:layout_centerVertical="true"
+            android:layout_centerHorizontal="true"
+            android:src="@drawable/male_doctor"
+            app:civ_border_color="#363632"
+            app:civ_border_width="2dp"/>
+
+        <TextView
+            android:text="Đặt lịch với"
+            android:textSize="18dp"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="7dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <TextView
+            android:text="Doctor Vu Dang"
+            android:id="@+id/tvAppDocName"
+            android:textColor="@color/colorBlack"
+            android:textSize="20dp"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="7dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <TextView
+            android:fontFamily="@font/laxanh"
+            android:textSize="30dp"
+            android:textAlignment="center"
+            android:id="@+id/etDate"
+            android:textColor="@color/colorBlack"
+            android:background="@drawable/edittext_border"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginTop="15dp"
+            android:layout_marginLeft="15dp"
+            android:layout_marginRight="15dp"/>
+
+        <TextView
+            android:id="@+id/edTime"
+            android:textColor="@color/colorBlack"
+            android:background="@drawable/edittext_border"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginTop="15dp"
+            android:layout_marginLeft="15dp"
+            android:layout_marginRight="15dp"
+            android:layout_marginBottom="20dp"/>
+
+    </LinearLayout>
+
+    <!-- bottom -->
+    <LinearLayout
+        android:id="@+id/LineRegBot"
+        android:layout_alignParentBottom="true"
+        android:layout_width="match_parent"
+        android:layout_height="50dp">
+
+        <Button
+            android:background="@drawable/green_button"
+            android:id="@+id/Btnreg"
+            android:text="Tiếp tục"
+            android:textSize="20dp"
+            android:layout_marginRight="5dp"
+            android:layout_marginLeft="5dp"
+            android:textColor="#FFFFFF"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+    </LinearLayout>
+</RelativeLayout>

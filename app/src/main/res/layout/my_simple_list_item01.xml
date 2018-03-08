@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TextView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@android:id/text1"
+    android:text="castlevania"
+    android:textColor="@color/colorBlack"
+    android:paddingTop="7dp"
+    android:paddingBottom="7dp"
+    android:paddingLeft="7dp"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:textSize="20dp" />

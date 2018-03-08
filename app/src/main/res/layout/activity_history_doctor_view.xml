@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    android:orientation="vertical"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="project.fpt.edu.vn.registerscreen.Activity.ActivityHistoryDoctorView">
+    <!-- top -->
+    <LinearLayout
+        android:orientation="horizontal"
+        android:id="@+id/LineRegTop"
+        android:background="@drawable/border_top"
+        android:layout_width="match_parent"
+        android:layout_height="50dp">
+
+        <ImageButton
+            android:id="@+id/ImgBtnBack"
+            app:srcCompat="@drawable/ic_chevron_left"
+            android:background="@null"
+            android:layout_width="50dp"
+            android:layout_height="50dp" />
+
+        <TextView
+            android:layout_gravity="center_vertical"
+            android:layout_marginBottom="5dp"
+            android:layout_marginTop="6dp"
+            android:textSize="20dp"
+            android:textColor="@color/colorBlack"
+            android:text="Trở về"
+            android:layout_width="wrap_content"
+            android:layout_height="30dp"/>
+
+    </LinearLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <!-- Top -->
+        <LinearLayout
+            android:id="@+id/LineDoctorTop"
+            android:layout_width="match_parent"
+            android:layout_height="250dp"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:background="#F4F6F7  "
+            android:orientation="vertical">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="0.99">
+
+                <de.hdodenhof.circleimageview.CircleImageView
+                    android:id="@+id/profileImageView"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center_horizontal"
+                    android:src="@drawable/male_doctor"
+                    app:civ_border_color="#363632"
+                    app:civ_border_width="2dp" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="0.2">
+
+                <TextView
+                    android:id="@+id/TvDoctorName"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:text="Doctor"
+                    android:textColor="@color/colorBlack"
+                    android:textSize="30dp" />
+            </RelativeLayout>
+        </LinearLayout>
+        <!-- Bot -->
+        <RelativeLayout
+            android:background="#F4F6F7 "
+            android:layout_below="@+id/LineDoctorTop"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <LinearLayout
+                android:orientation="vertical"
+                android:background="@drawable/border"
+                android:layout_marginTop="20dp"
+                android:layout_marginBottom="20dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <LinearLayout
+                        android:orientation="vertical"
+                        android:layout_width="0dp"
+                        android:layout_weight="0.8"
+                        android:layout_height="wrap_content">
+
+                        <TextView
+                            android:layout_marginTop="10dp"
+                            android:layout_marginBottom="10dp"
+                            android:layout_marginLeft="7dp"
+                            android:id="@+id/TvHisProDateCall"
+                            android:drawableLeft="@drawable/ic_date"
+                            android:textSize="20dp"
+                            android:layout_width="200dp"
+                            android:layout_height="25dp"
+                            android:layout_alignParentStart="true"
+                            android:layout_alignParentTop="true"
+                            android:text="TextView"
+                            android:textColor="@color/colorBlack"
+                            android:textAppearance="?android:attr/textAppearanceLarge" />
+                        <TextView
+                            android:layout_marginBottom="10dp"
+                            android:layout_marginLeft="7dp"
+                            android:id="@+id/TvHisProTime"
+                            android:drawableLeft="@drawable/ic_watch"
+                            android:textSize="20dp"
+                            android:layout_width="200dp"
+                            android:layout_height="25dp"
+                            android:layout_alignParentStart="true"
+                            android:layout_alignParentTop="true"
+                            android:text="TextView"
+                            android:textColor="@color/colorBlack"
+                            android:textAppearance="?android:attr/textAppearanceLarge" />
+                    </LinearLayout>
+                    <LinearLayout
+                        android:orientation="vertical"
+                        android:layout_width="0dp"
+                        android:layout_weight="0.3"
+                        android:layout_height="match_parent">
+                        <TextView
+                            android:paddingTop="35dp"
+                            android:id="@+id/TvHisProMoney"
+                            android:textSize="20dp"
+                            android:layout_width="200dp"
+                            android:layout_height="match_parent"
+                            android:layout_alignParentStart="true"
+                            android:layout_alignParentTop="true"
+                            android:text=""
+                            android:textAppearance="?android:attr/textAppearanceLarge" />
+                    </LinearLayout>
+
+                </LinearLayout>
+            </LinearLayout>
+        </RelativeLayout>
+
+    </RelativeLayout>
+
+
+</LinearLayout>

@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:orientation="vertical"
+    android:layout_height="match_parent"
+    tools:context="project.fpt.edu.vn.registerscreen.Activity.ActivityForgotPass">
+
+    <!-- Top -->
+    <RelativeLayout
+        android:id="@+id/RelFgTop"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+    </RelativeLayout>
+    <!-- Mid -->
+    <LinearLayout
+        android:layout_below="@+id/RelFgTop"
+        android:id="@+id/LineFgMid"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:layout_marginTop="10dp"
+            android:textSize="20dp"
+            android:textStyle="bold"
+            android:textColor="@color/colorBlack"
+            android:layout_gravity="center_horizontal"
+            android:text="Quên mật khẩu?"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+        <TextView
+            android:layout_marginTop="20dp"
+            android:textSize="20dp"
+            android:textAlignment="center"
+            android:textColor="@color/colorBlack"
+            android:layout_gravity="center_horizontal"
+            android:text="Hãy gửi số điện thoại của bạn\n chúng tôi sẽ gửi cho bạn mật khẩu mới"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+        <EditText
+            android:id="@+id/EtForgetPhone"
+            android:layout_width="300dp"
+            android:layout_height="50dp"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="20dp"
+            android:background="@drawable/edittext_border02"
+            android:hint="Số điện thoại đăng kí"
+            android:textColor="@color/colorBlack"
+            android:inputType="number"
+            android:textAlignment="center" />
+
+        <Button
+            android:id="@+id/BtnForgetResetPass"
+            android:background="@drawable/button_style02"
+            android:text="Cài lại mật khẩu"
+            android:layout_marginTop="20dp"
+            android:textColor="#FFFF"
+            android:layout_width="300dp"
+            android:layout_height="50dp"
+            android:textAlignment="center"
+            android:layout_gravity="center_horizontal" />
+    </LinearLayout>
+
+    <!-- Bot -->
+    <LinearLayout
+        android:layout_alignParentBottom="true"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_marginTop="10dp"
+            android:textSize="20dp"
+            android:layout_gravity="center_horizontal"
+            android:id="@+id/TvForgetReturn"
+            android:textColor="#21B0F4"
+            android:text="Trở về trang chủ"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+    </LinearLayout>
+</RelativeLayout>

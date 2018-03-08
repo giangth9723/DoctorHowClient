@@ -1,0 +1,199 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="project.fpt.edu.vn.registerscreen.DoctorProfileActivity">
+
+    <!-- Top -->
+    <LinearLayout
+        android:orientation="horizontal"
+        android:id="@+id/LineDocProTop"
+        android:background="@drawable/border_top"
+        android:layout_width="match_parent"
+        android:layout_height="50dp">
+
+        <ImageButton
+            android:id="@+id/ImgBtnBack"
+            app:srcCompat="@drawable/ic_chevron_left"
+            android:background="@null"
+            android:layout_width="50dp"
+            android:layout_height="50dp" />
+
+        <TextView
+            android:layout_gravity="center_vertical"
+            android:layout_marginBottom="5dp"
+            android:textSize="20sp"
+            android:layout_marginTop="6dp"
+            android:textColor="@color/colorBlack"
+            android:text="Thông tin bác sĩ"
+            android:layout_width="wrap_content"
+            android:layout_height="30dp"/>
+
+    </LinearLayout>
+
+    <!-- Mid -->
+
+    <!-- Doctor Avatar-->
+    <ScrollView
+        android:layout_below="@id/LineDocProTop"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <RelativeLayout
+                android:id="@+id/RelDocAva"
+                android:layout_below="@+id/LineDocProTop"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <de.hdodenhof.circleimageview.CircleImageView
+                    android:id="@+id/profileImageView"
+                    android:layout_gravity="center_vertical"
+                    android:layout_width="200dp"
+                    android:layout_height="200dp"
+                    android:layout_centerVertical="true"
+                    android:layout_centerHorizontal="true"
+                    android:src="@drawable/male_doctor"
+                    app:civ_border_color="#363632"
+                    app:civ_border_width="2dp"/>
+
+                <android.support.design.widget.FloatingActionButton
+                    android:id="@+id/fabCall"
+                    android:layout_width="55dp"
+                    android:layout_height="match_parent"
+                    android:layout_centerVertical="true"
+                    android:layout_marginEnd="15dp"
+                    android:layout_toStartOf="@+id/profileImageView"
+                    app:backgroundTint="#54C242"
+                    app:srcCompat="@drawable/ic_white_phone"/>
+                <android.support.design.widget.FloatingActionButton
+                    android:id="@+id/fabDate"
+                    android:layout_width="55dp"
+                    android:layout_height="match_parent"
+                    android:layout_centerVertical="true"
+                    android:layout_marginStart="15dp"
+                    android:layout_toEndOf="@+id/profileImageView"
+                    app:backgroundTint="#54C242"
+                    app:srcCompat="@drawable/ic_white_date"/>
+            </RelativeLayout>
+
+            <!-- Doctor Name -->
+
+            <TextView
+                android:layout_below="@+id/RelDocAva"
+                android:id="@+id/tvProDocName"
+                android:text="Doctor A"
+                android:textSize="25dp"
+                android:layout_marginBottom="10dp"
+                android:textColor="@color/colorBlack"
+                android:layout_gravity="center_horizontal"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <!-- Doctor Information -->
+            <LinearLayout
+                android:id="@+id/LineDocProInfor"
+                android:orientation="vertical"
+                android:clickable="true"
+                android:background="@drawable/border"
+                android:layout_below="@id/tvProDocName"
+                android:layout_marginLeft="7dp"
+                android:layout_marginRight="7dp"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+                <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+                    <TextView
+                        android:text="  Giới thiệu bản thân"
+                        android:textColor="@color/colorBlack"
+                        android:layout_marginTop="10dp"
+                        android:layout_width="0dp"
+                        android:layout_weight="0.9"
+                        android:layout_height="wrap_content"
+                        android:gravity="left"/>
+                    <ImageButton
+                        android:id="@+id/imgBtnEp01"
+                        android:background="@null"
+                        app:srcCompat="@drawable/ic_down"
+                        android:layout_width="0dp"
+                        android:layout_weight="0.1"
+                        android:layout_height="30dp"
+                        android:gravity="right"/>
+                </LinearLayout>
+                <TextView
+                    android:visibility="gone"
+                    android:id="@+id/tvDocProfile"
+
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginBottom="7dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginTop="10dp"
+                    android:textColor="@color/colorBlack"
+                    android:text="@string/description" />
+            </LinearLayout>
+
+            <!-- Doctor Specialty -->
+            <LinearLayout
+                android:id="@+id/LineDocProSp"
+                android:orientation="vertical"
+                android:background="@drawable/border"
+                android:layout_below="@id/tvProDocName"
+                android:layout_marginTop="5dp"
+                android:layout_marginLeft="7dp"
+                android:layout_marginRight="7dp"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+                    <TextView
+                        android:text="  Chuyên ngành"
+                        android:textColor="@color/colorBlack"
+                        android:layout_marginTop="10dp"
+                        android:layout_width="0dp"
+                        android:layout_weight="0.9"
+                        android:layout_height="wrap_content"
+                        android:gravity="left"/>
+                    <ImageButton
+                        android:id="@+id/imgBtnEp02"
+                        android:background="@null"
+                        app:srcCompat="@drawable/ic_down"
+                        android:layout_width="0dp"
+                        android:layout_weight="0.1"
+                        android:layout_height="30dp"
+                        android:gravity="right"/>
+                </LinearLayout>
+                <TextView
+                    android:visibility="gone"
+                    android:id="@+id/tvDocSp"
+
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginBottom="7dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginTop="10dp"
+                    android:textColor="@color/colorBlack"
+                    android:text="@string/description"
+                    />
+            </LinearLayout>
+
+
+
+        </LinearLayout>
+
+    </ScrollView>
+
+</RelativeLayout>
