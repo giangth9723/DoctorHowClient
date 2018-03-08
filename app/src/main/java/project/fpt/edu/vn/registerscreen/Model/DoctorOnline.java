@@ -1,20 +1,32 @@
 package project.fpt.edu.vn.registerscreen.Model;
 
+import java.io.Serializable;
+
 /**
  * Created by GIang on 3/8/2018.
  */
 
-public class DoctorOnline {
+public class DoctorOnline implements Serializable {
+    String doctorName;
     int doctorID;
     String username;
     String status;
     String socketID;
 
-    public DoctorOnline(int doctorID, String username, String status, String socketID) {
+    public DoctorOnline(String doctorName, int doctorID, String username, String status, String socketID) {
+        this.doctorName = doctorName;
         this.doctorID = doctorID;
         this.username = username;
         this.status = status;
         this.socketID = socketID;
+    }
+
+    public String getDoctorName() {
+        return doctorName;
+    }
+
+    public void setDoctorName(String doctorName) {
+        this.doctorName = doctorName;
     }
 
     public int getDoctorID() {

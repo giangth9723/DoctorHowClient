@@ -38,6 +38,7 @@ import project.fpt.edu.vn.registerscreen.Session;
 
 public class ActivityDoctorList extends AppCompatActivity {
     ArrayList<DoctorOnline> arrayDoctorOnline = new ArrayList<DoctorOnline>();
+    ListAdapter adapter;
     TextView tv;
     ListView lv;
     Session session;
@@ -96,8 +97,7 @@ public class ActivityDoctorList extends AppCompatActivity {
         if(name.equals("Bệnh phụ khoa")){
             socketApplication.getSocket().emit("patient_load_doctor","1");
         }
-
-        ListAdapter adapter = new ListAdapter(
+        adapter = new ListAdapter(
                 ActivityDoctorList.this,
                 R.layout.activity_line_doctor,
                 arrayDoctorOnline
@@ -148,6 +148,11 @@ public class ActivityDoctorList extends AppCompatActivity {
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void onMessageEvent(EventLoadDoctorOnline event) {
         Log.d("ListDoctorOnline","True");
-        arrayDoctor = event.getArrayDoctorOnline();
+        arrayDoctorOnline.clear();
+        for(int i=0;i< event.getArrayDoctorOnline().size();i++){
+            arrayDoctorOnline.add(event.getArrayDoctorOnline().get(i));
+        }
+        adapter.notifyDataSetChanged();
     }
+
 }

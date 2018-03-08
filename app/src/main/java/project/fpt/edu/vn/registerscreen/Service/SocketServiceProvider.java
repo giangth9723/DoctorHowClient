@@ -166,7 +166,8 @@ public class SocketServiceProvider extends Service {
                             String username = obj.getString("Username");
                             String status = obj.getString("status");
                             String socketID = obj.getString("SocketID");
-                            arrayDoctorOnline.add(new DoctorOnline(doctorID,username,status,socketID));
+                            String doctorName = obj.getString("Name");
+                            arrayDoctorOnline.add(new DoctorOnline(doctorName,doctorID,username,status,socketID));
                         }
                         EventBus.getDefault().post(new EventLoadDoctorOnline(arrayDoctorOnline));
                     }catch (JSONException e) {

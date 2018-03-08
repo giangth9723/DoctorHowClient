@@ -14,6 +14,7 @@ import android.widget.TextView;
 
 import project.fpt.edu.vn.registerscreen.Activity.ActivityAppoint;
 import project.fpt.edu.vn.registerscreen.Model.Doctor;
+import project.fpt.edu.vn.registerscreen.Model.DoctorOnline;
 
 public class DoctorProfileActivity extends AppCompatActivity {
 
@@ -43,8 +44,8 @@ public class DoctorProfileActivity extends AppCompatActivity {
 
         Bundle b = getIntent().getExtras();
         if (b != null) {
-            Doctor doctor = (Doctor) b.getSerializable("array_doctor");
-            tvDocName.setText(doctor.getName());
+            DoctorOnline doctorOnline = (DoctorOnline) b.getSerializable("array_doctor");
+            tvDocName.setText(doctorOnline.getDoctorName());
         }
 
         lnDocInfor = (LinearLayout)findViewById(R.id.LineDocProInfor);
