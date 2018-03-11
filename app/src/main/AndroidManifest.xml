@@ -29,7 +29,19 @@
             android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustPan" />
         <activity
-            android:name=".Activity.ActivityDoctorList"
+            android:name=".Activity.DoctorList.ActivityDoctorList1"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateHidden" />
+        <activity
+            android:name=".Activity.DoctorList.ActivityDoctorList2"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateHidden" />
+        <activity
+            android:name=".Activity.DoctorList.ActivityDoctorList3"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateHidden" />
+        <activity
+            android:name=".Activity.DoctorList.ActivityDoctorList4"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateHidden" />
         <activity

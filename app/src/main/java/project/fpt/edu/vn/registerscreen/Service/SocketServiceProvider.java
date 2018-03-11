@@ -83,7 +83,7 @@ public class SocketServiceProvider extends Service {
     public int onStartCommand(Intent intent, int flags, int startId) {
         if (isInstanceCreated()) {
             Log.d("SocketServiceProvider","Exist");
-            return START_STICKY;
+            return START_NOT_STICKY;
         }
         super.onStartCommand(intent, flags, startId);
         connectConnection();
@@ -113,6 +113,7 @@ public class SocketServiceProvider extends Service {
                     EventBus.getDefault().post(
                             new EventChangeChatServerStateEvent("disconnect from socket")
                     );
+
                 }
             });
         }

@@ -17,7 +17,6 @@ import android.widget.ListView;
 
 import java.util.ArrayList;
 
-import project.fpt.edu.vn.registerscreen.Activity.ActivityDoctorList;
 import project.fpt.edu.vn.registerscreen.Activity.ActivityHistoryDoctorView;
 import project.fpt.edu.vn.registerscreen.HistoryCall;
 import project.fpt.edu.vn.registerscreen.ListAdapterHistory;
