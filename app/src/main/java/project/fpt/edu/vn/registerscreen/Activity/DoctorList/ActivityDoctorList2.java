@@ -24,6 +24,8 @@ import project.fpt.edu.vn.registerscreen.Activity.LoginActivity;
 import project.fpt.edu.vn.registerscreen.Application.SocketApplication;
 import project.fpt.edu.vn.registerscreen.BusEvent.EventChangeChatServerStateEvent;
 import project.fpt.edu.vn.registerscreen.BusEvent.EventLoadDoctorOnline;
+import project.fpt.edu.vn.registerscreen.BusEvent.EventReloadDoctorOnline1;
+import project.fpt.edu.vn.registerscreen.BusEvent.EventReloadDoctorOnline2;
 import project.fpt.edu.vn.registerscreen.DoctorProfileActivity;
 import project.fpt.edu.vn.registerscreen.Fragment.FragmentHome;
 import project.fpt.edu.vn.registerscreen.ListAdapter;
@@ -137,6 +139,15 @@ public class ActivityDoctorList2 extends AppCompatActivity {
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void onMessageEvent(EventLoadDoctorOnline event) {
         Log.d("ListDoctorOnline","True");
+        arrayDoctorOnline.clear();
+        for(int i=0;i< event.getArrayDoctorOnline().size();i++){
+            arrayDoctorOnline.add(event.getArrayDoctorOnline().get(i));
+        }
+        adapter.notifyDataSetChanged();
+    }
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void onMessageEvent(EventReloadDoctorOnline2 event) {
+        Log.d("ListDoctorOnline2","True");
         arrayDoctorOnline.clear();
         for(int i=0;i< event.getArrayDoctorOnline().size();i++){
             arrayDoctorOnline.add(event.getArrayDoctorOnline().get(i));
