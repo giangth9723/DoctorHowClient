@@ -29,12 +29,14 @@ import project.fpt.edu.vn.registerscreen.BusEvent.EventReloadDoctorOnline2;
 import project.fpt.edu.vn.registerscreen.BusEvent.EventReloadDoctorOnline3;
 import project.fpt.edu.vn.registerscreen.BusEvent.EventReloadDoctorOnline4;
 import project.fpt.edu.vn.registerscreen.Model.DoctorOnline;
+import project.fpt.edu.vn.registerscreen.Session;
 
 /**
  * Created by GIang on 3/7/2018.
  */
 
 public class SocketServiceProvider extends Service {
+    Session session;
     private SocketApplication signalApplication;
 
     public static SocketServiceProvider instance = null;
@@ -74,6 +76,7 @@ public class SocketServiceProvider extends Service {
         signalApplication.getSocket().on(Socket.EVENT_CONNECT_ERROR, onConnectError);
         signalApplication.getSocket().on(Socket.EVENT_CONNECT_TIMEOUT, onConnectError);
         signalApplication.getSocket().on(Socket.EVENT_CONNECT, onConnect);
+        signalApplication.getSocket().on(Socket.EVENT_DISCONNECT, onDisconnect);
         signalApplication.getSocket().on("server_check_login_patient",onLoginStatus);
         signalApplication.getSocket().on("server_load_doctor_list",onLoadDoctor);
         signalApplication.getSocket().on("server_reload_doctor_1",onReloadDoctor1);
@@ -96,7 +99,7 @@ public class SocketServiceProvider extends Service {
         }
         super.onStartCommand(intent, flags, startId);
         connectConnection();
-        return START_STICKY;
+        return START_NOT_STICKY;
     }
 
     private Emitter.Listener onConnect = new Emitter.Listener() {
@@ -135,7 +138,7 @@ public class SocketServiceProvider extends Service {
                 @Override
                 public void run() {
                     EventBus.getDefault().post(
-                            new EventChangeChatServerStateEvent("flash connection icon")
+                            new EventChangeChatServerStateEvent("connect error")
                     );
                 }
             });

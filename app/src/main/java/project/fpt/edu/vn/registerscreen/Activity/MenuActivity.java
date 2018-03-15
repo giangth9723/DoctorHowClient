@@ -19,6 +19,10 @@ import android.view.MenuItem;
 import android.view.SubMenu;
 import android.widget.TextView;
 import android.support.v4.app.FragmentManager;
+import android.widget.Toast;
+
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
 
 import java.net.Socket;
 import java.net.URISyntaxException;
@@ -26,6 +30,7 @@ import java.net.URISyntaxException;
 import io.socket.client.IO;
 import project.fpt.edu.vn.registerscreen.Application.SocketApplication;
 import project.fpt.edu.vn.registerscreen.BottomNavigationHelper;
+import project.fpt.edu.vn.registerscreen.BusEvent.EventChangeChatServerStateEvent;
 import project.fpt.edu.vn.registerscreen.CustomTypefaceSpan;
 import project.fpt.edu.vn.registerscreen.Fragment.FragmentHistory;
 import project.fpt.edu.vn.registerscreen.Fragment.FragmentHome;
@@ -114,9 +119,6 @@ public class MenuActivity extends AppCompatActivity {
             Logout();
         }
         tvShowName = (TextView)findViewById(R.id.txtShowName);
-        tvShowName.setText(session.getName());
-
-
     }
 
     private void Logout(){
@@ -147,6 +149,9 @@ public class MenuActivity extends AppCompatActivity {
     protected void onDestroy() {
         super.onDestroy();
     }
-
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void onEvent(EventChangeChatServerStateEvent event){
+        Toast.makeText(getBaseContext(), event.getState(), Toast.LENGTH_SHORT).show();
+    }
 
 }

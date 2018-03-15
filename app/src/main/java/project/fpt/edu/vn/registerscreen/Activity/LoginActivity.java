@@ -83,9 +83,14 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         session = new Session(this);
 
         if(session.LoggedIn()){
-            socketApplication.getSocket().emit("patient_relogin",session.getName());
-            startActivity(new Intent(LoginActivity.this, MenuActivity.class));
-            finish();
+            JSONObject USP=new JSONObject();
+            try {
+                USP.put("Username",session.getName());
+                USP.put("Password",session.getPassword());
+                socketApplication.getSocket().emit("patient_login",USP.toString());
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
         }
         socketApplication = (SocketApplication) getApplication();
         Log.d("Check", "Login created");
@@ -113,7 +118,6 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
-
                 break;
             case R.id.BtnReg:
                 startActivity(new Intent(LoginActivity.this, RegisterActivity.class));
@@ -152,8 +156,11 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     @Subscribe
     public void onMessageEvent(EventCheckLogin event){
         if(event.isKet_qua()){
-            session.setName(etUser.getText().toString());
-            session.setLoggedIn(true);
+            if(!session.LoggedIn()) {
+                session.setName(etUser.getText().toString());
+                session.setPassword(etPass.getText().toString());
+                session.setLoggedIn(true);
+            }
             Intent intent = new Intent(getBaseContext(),MenuActivity.class);
             startActivity(intent);
             finish();
