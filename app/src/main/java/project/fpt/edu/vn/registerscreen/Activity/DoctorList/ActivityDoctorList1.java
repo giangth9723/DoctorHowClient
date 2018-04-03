@@ -17,10 +17,14 @@ import android.widget.Toast;
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 
+import project.fpt.edu.vn.registerscreen.Activity.ActivityForgotPass;
 import project.fpt.edu.vn.registerscreen.Activity.LoginActivity;
+import project.fpt.edu.vn.registerscreen.Activity.RegisterActivity;
 import project.fpt.edu.vn.registerscreen.Application.SocketApplication;
 import project.fpt.edu.vn.registerscreen.BusEvent.EventChangeChatServerStateEvent;
 import project.fpt.edu.vn.registerscreen.BusEvent.EventLoadDoctorOnline;
@@ -84,9 +88,8 @@ public class ActivityDoctorList1 extends AppCompatActivity {
 
         Intent intent = getIntent();
         String name = intent.getStringExtra(FragmentHome.NAME);
-        if(name.equals("Bệnh phụ khoa")){
-            socketApplication.getSocket().emit("patient_load_doctor","1");
-        }
+        socketApplication.getSocket().emit("patient_load_doctor","1");
+
         adapter = new ListAdapter(
                 ActivityDoctorList1.this,
                 R.layout.activity_line_doctor,
@@ -104,6 +107,7 @@ public class ActivityDoctorList1 extends AppCompatActivity {
         });
 
     }
+
     private void Logout(){
         session.setLoggedIn(false);
         finish();

@@ -101,10 +101,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         } else {
         }
     }
-    private void doBindService() {
-        bindService(new Intent(LoginActivity.this, SocketServiceProvider.class), socketConnection, Context.BIND_AUTO_CREATE);
-        mIsBound = true;
-    }
+
 
     @Override
     public void onClick(View view) {
@@ -128,7 +125,10 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             default:
         }
     }
-
+    private void doBindService() {
+        bindService(new Intent(LoginActivity.this, SocketServiceProvider.class), socketConnection, Context.BIND_AUTO_CREATE);
+        mIsBound = true;
+    }
     @Override
     protected void onStart() {
         super.onStart();

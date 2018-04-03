@@ -85,9 +85,7 @@ public class ActivityDoctorList3 extends AppCompatActivity {
 
         Intent intent = getIntent();
         String name = intent.getStringExtra(FragmentHome.NAME);
-        if(name.equals("Bệnh nam khoa")){
-            socketApplication.getSocket().emit("patient_load_doctor","3");
-        }
+        socketApplication.getSocket().emit("patient_load_doctor","3");
 
         adapter = new ListAdapter(
                 ActivityDoctorList3.this,

@@ -16,7 +16,6 @@ import android.widget.ListView;
 import project.fpt.edu.vn.registerscreen.Activity.DoctorList.ActivityDoctorList1;
 import project.fpt.edu.vn.registerscreen.Activity.DoctorList.ActivityDoctorList2;
 import project.fpt.edu.vn.registerscreen.Activity.DoctorList.ActivityDoctorList3;
-import project.fpt.edu.vn.registerscreen.Activity.DoctorList.ActivityDoctorList4;
 import project.fpt.edu.vn.registerscreen.R;
 
 
@@ -56,7 +55,7 @@ public class FragmentHome extends Fragment {
         });
         */
         lv = (ListView) view.findViewById(R.id.lstOption);
-        final String[] option = {"Bệnh phụ khoa", "Bệnh da liễu","Bệnh nam khoa", "Bệnh tâm lý"};
+        final String[] option = {"Bệnh phụ khoa", "Bệnh da liễu","Bệnh tâm thần"};
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(getContext(), R.layout.my_simple_list_item01, option);
         lv.setAdapter(adapter);
 
@@ -78,11 +77,6 @@ public class FragmentHome extends Fragment {
                         Intent intent3 = new Intent(getActivity(), ActivityDoctorList3.class);
                         intent3.putExtra(NAME, option[i]);
                         startActivity(intent3);
-                        break;
-                    case 3:
-                        Intent intent4 = new Intent(getActivity(), ActivityDoctorList4.class);
-                        intent4.putExtra(NAME, option[i]);
-                        startActivity(intent4);
                         break;
                 }
             }

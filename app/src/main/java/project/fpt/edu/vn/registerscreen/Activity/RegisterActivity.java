@@ -3,10 +3,14 @@ package project.fpt.edu.vn.registerscreen.Activity;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.DatePickerDialog;
+import android.content.ComponentName;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.ServiceConnection;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
+import android.os.IBinder;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -21,9 +25,22 @@ import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import java.util.Calendar;
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
+import org.json.JSONException;
+import org.json.JSONObject;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
+
+import project.fpt.edu.vn.registerscreen.Application.SocketApplication;
+import project.fpt.edu.vn.registerscreen.BusEvent.EventChangeChatServerStateEvent;
+import project.fpt.edu.vn.registerscreen.BusEvent.EventCheckRegister;
 import project.fpt.edu.vn.registerscreen.R;
+import project.fpt.edu.vn.registerscreen.Service.SocketServiceProvider;
 
 public class RegisterActivity extends AppCompatActivity {
 
@@ -31,11 +48,27 @@ public class RegisterActivity extends AppCompatActivity {
     ImageButton ImgBtn;
     TextView tvbirth;
 
-    EditText fname, lname, uname, pass, cpass, phone, birthdate;
-    String sfname, slname, suname, spass, scpass, sphone, sbirthdate;
+    EditText fname, lname, uname, pass, cpass, phone, birthdate ,address,idnumber ;
+    String sfname, slname, suname, spass, scpass, sphone, sbirthdate, saddress,sidnumber;
     Button btnreg;
     RadioGroup rg;
+    Boolean mIsBound;
+    SocketApplication socketApplication;
+    SocketServiceProvider mBoundService;
+    protected ServiceConnection socketConnection = new ServiceConnection() {
+        @Override
+        public void onServiceConnected(ComponentName name, IBinder service) {
+            Log.d("serviceConnection", "connected");
+            mBoundService = ((SocketServiceProvider.LocalBinder) service).getService();
+            mIsBound = true;
+        }
 
+        @Override
+        public void onServiceDisconnected(ComponentName name) {
+            mBoundService = null;
+            mIsBound = false;
+        }
+    };
     private static final String TAG = "ActivityRegister";
 
     @Override
@@ -52,6 +85,8 @@ public class RegisterActivity extends AppCompatActivity {
         btnreg = (Button) findViewById(R.id.Btnreg);
         birthdate = (EditText) findViewById(R.id.Etbirthday);
         rg = (RadioGroup) findViewById(R.id.Radgender);
+        address = (EditText)findViewById(R.id.Etaddress);
+        idnumber = (EditText)findViewById(R.id.Etidnumber);
 
         ImgBtn = (ImageButton)findViewById(R.id.ImgBtnBack);
 
@@ -70,7 +105,18 @@ public class RegisterActivity extends AppCompatActivity {
                 finish();
             }
         });
-
+        socketApplication = (SocketApplication) getApplication();
+        Log.d("Check", "Login created");
+        if (socketApplication.getSocket() != null) {
+            Log.d("Socket", " is not null");
+            startService(new Intent(getBaseContext(), SocketServiceProvider.class));
+            doBindService();
+        } else {
+        }
+    }
+    private void doBindService() {
+        bindService(new Intent(RegisterActivity.this, SocketServiceProvider.class), socketConnection, Context.BIND_AUTO_CREATE);
+        mIsBound = true;
     }
 
     public void inialize(){
@@ -81,15 +127,35 @@ public class RegisterActivity extends AppCompatActivity {
         scpass = cpass.getText().toString().trim();
         sphone = phone.getText().toString().trim();
         sbirthdate = birthdate.getText().toString().trim();
+        saddress = address.getText().toString().trim();
+        sidnumber = idnumber.getText().toString().trim();
     }
 
     public void register(){
         inialize();
-        if(!validate()){
-            Toast.makeText(this, "Đăng kí không thành công", Toast.LENGTH_SHORT).show();
+        if(validate()) {
+            JSONObject obj = new JSONObject();
+            try {
+                obj.put("Name", slname + " " + sfname);
+                obj.put("Username", suname);
+                obj.put("Password", spass);
+                obj.put("PhoneNumber", sphone);
+                obj.put("Address", saddress);
+                obj.put("ID_Number", sidnumber);
+                if (rg.getCheckedRadioButtonId() == 0) {
+                    obj.put("Gender", 1);
+                } else {
+                    obj.put("Gender", 0);
+                }
+                obj.put("Birthday", sbirthdate);
+                socketApplication.getSocket().emit("patient_register", obj.toString());
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
         }else{
-            Toast.makeText(this, "Đăng kí thành công", Toast.LENGTH_SHORT).show();
+
         }
+
     }
     public void onRegisterSuccess(String firstname){
 
@@ -100,33 +166,41 @@ public class RegisterActivity extends AppCompatActivity {
         if(sfname.isEmpty()){
             fname.setError("Hãy nhập tên");
             valid = false;
-        }
+        }else
         if(slname.isEmpty()){
             lname.setError("Hãy nhập họ");
             valid = false;
-        }
+        }else
         if(suname.isEmpty()){
             uname.setError("Hãy nhập tên tài khoản");
             valid = false;
-        }
+        }else
         if(spass.isEmpty()){
             pass.setError("Hãy nhập mật khẩu");
             valid = false;
-        }
+        }else
         if(scpass.isEmpty() || !spass.equals(scpass)){
             cpass.setError("Hãy nhập mật khẩu giống nhau");
             cpass.setText(null);
             valid = false;
-        }
+        }else
         if(sphone.isEmpty() || !Patterns.PHONE.matcher(sphone).matches()){
             phone.setError("Hãy nhập đúng số điện thoại");
             //phone.setText(null);
             valid = false;
-        }
+        }else
+        if(saddress.isEmpty()){
+            address.setError("Hãy nhập địa chỉ");
+            valid = false;
+        }else
+        if(sidnumber.isEmpty()){
+            idnumber.setError("Hãy nhập số chứng minh thư");
+            valid = false;
+        }else
         if(sbirthdate.equals("")){
             Toast.makeText(getApplicationContext(), "Hãy nhập ngày tháng năm sinh", Toast.LENGTH_SHORT).show();
             valid = false;
-        }
+        }else
         if(rg.getCheckedRadioButtonId()==-1){
             Toast.makeText(getApplicationContext(), "Hãy chọn giới tính", Toast.LENGTH_SHORT).show();
             valid = false;
@@ -168,7 +242,7 @@ public class RegisterActivity extends AppCompatActivity {
                 }else{
                     smonth = dmonth + "";
                 }
-                birth = sday + "/" + smonth + "/" + year;
+                birth = year + "-" + smonth + "-" + sday;
                 birthdate.setText(birth);
             }
         };
@@ -177,5 +251,42 @@ public class RegisterActivity extends AppCompatActivity {
     public void hideKey(View view){
         InputMethodManager inputMethodManager = (InputMethodManager)getSystemService(Activity.INPUT_METHOD_SERVICE);
         inputMethodManager.hideSoftInputFromWindow(view.getWindowToken(),0);
+    }
+    @Override
+    protected void onStart() {
+        super.onStart();
+        EventBus.getDefault().register(this);
+    }
+
+    @Override
+    protected void onStop() {
+        EventBus.getDefault().unregister(this);
+        if(mIsBound) {
+            unbindService(socketConnection);
+            mIsBound = false;
+        }
+        super.onStop();
+    }
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void onMessageEvent(EventChangeChatServerStateEvent event) {
+        Toast.makeText(getBaseContext(), event.getState(), Toast.LENGTH_SHORT).show();
+    }
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void onMessageEvent(EventCheckRegister event) {
+        AlertDialog.Builder alertDialog = new AlertDialog.Builder(this);
+        alertDialog.setTitle("Thông báo !!");
+        alertDialog.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+
+            }
+        });
+        if(event.isKet_qua()){
+            alertDialog.setMessage("Đăng kí thành công!");
+            alertDialog.show();
+        }else{
+            alertDialog.setMessage("Tên đăng nhập đã có người sử dụng!");
+            alertDialog.show();
+        }
     }
 }

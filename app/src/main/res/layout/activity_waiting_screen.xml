@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/calling_screen_background"
+    tools:context="project.fpt.edu.vn.registerscreen.Activity.WaitingCallActivity">
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/profileImageView"
+        android:layout_gravity="center_vertical"
+        android:layout_width="200dp"
+        android:layout_height="200dp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="30dp"
+        android:src="@drawable/male_doctor"
+        app:civ_border_color="#363632"
+        app:civ_border_width="1dp"/>
+
+    <TextView
+        android:textColor="#fff"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/profileImageView"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="20dp"
+        android:text="Đang gọi tới"
+        android:textSize="20dp"
+        android:id="@+id/textView" />
+    <TextView
+        android:id="@+id/txtCallDoctorName"
+        android:textColor="#fff"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/profileImageView"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="60dp"
+        android:text="Doctor Name"
+        android:textSize="25dp" />
+
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/fabCancelCall"
+        android:layout_width="55dp"
+        android:layout_height="match_parent"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="91dp"
+        app:backgroundTint="#ED0D0D"
+        app:srcCompat="@drawable/ic_end_call" />
+
+</RelativeLayout>

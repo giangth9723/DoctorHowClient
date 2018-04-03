@@ -85,9 +85,7 @@ public class ActivityDoctorList2 extends AppCompatActivity {
 
         Intent intent = getIntent();
         String name = intent.getStringExtra(FragmentHome.NAME);
-        if(name.equals("Bệnh da liễu")){
-            socketApplication.getSocket().emit("patient_load_doctor","2");
-        }
+        socketApplication.getSocket().emit("patient_load_doctor","2");
         adapter = new ListAdapter(
                 ActivityDoctorList2.this,
                 R.layout.activity_line_doctor,

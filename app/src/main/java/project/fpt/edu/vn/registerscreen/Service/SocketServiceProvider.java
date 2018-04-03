@@ -21,8 +21,11 @@ import java.util.ArrayList;
 import io.socket.client.Socket;
 import io.socket.emitter.Emitter;
 import project.fpt.edu.vn.registerscreen.Application.SocketApplication;
+import project.fpt.edu.vn.registerscreen.BusEvent.EventAcceptCall;
 import project.fpt.edu.vn.registerscreen.BusEvent.EventChangeChatServerStateEvent;
 import project.fpt.edu.vn.registerscreen.BusEvent.EventCheckLogin;
+import project.fpt.edu.vn.registerscreen.BusEvent.EventCheckRegister;
+import project.fpt.edu.vn.registerscreen.BusEvent.EventConnectCall;
 import project.fpt.edu.vn.registerscreen.BusEvent.EventLoadDoctorOnline;
 import project.fpt.edu.vn.registerscreen.BusEvent.EventReloadDoctorOnline1;
 import project.fpt.edu.vn.registerscreen.BusEvent.EventReloadDoctorOnline2;
@@ -78,11 +81,13 @@ public class SocketServiceProvider extends Service {
         signalApplication.getSocket().on(Socket.EVENT_CONNECT, onConnect);
         signalApplication.getSocket().on(Socket.EVENT_DISCONNECT, onDisconnect);
         signalApplication.getSocket().on("server_check_login_patient",onLoginStatus);
-        signalApplication.getSocket().on("server_load_doctor_list",onLoadDoctor);
+        signalApplication.getSocket().on("server_load_doctor_disease",onLoadDoctor);
         signalApplication.getSocket().on("server_reload_doctor_1",onReloadDoctor1);
         signalApplication.getSocket().on("server_reload_doctor_2",onReloadDoctor2);
         signalApplication.getSocket().on("server_reload_doctor_3",onReloadDoctor3);
-        signalApplication.getSocket().on("server_reload_doctor_4",onReloadDoctor4);
+        signalApplication.getSocket().on("server_check_register_patient",onRegisterStatus);
+        signalApplication.getSocket().on("server_execute_call",onCall);
+        signalApplication.getSocket().on("server_send_acception",onAcceptCall);
 //        signalApplication.getSocket().on("server_reload_doctor",onReloadDoctor);
 
         //@formatter:off
@@ -90,7 +95,39 @@ public class SocketServiceProvider extends Service {
 
         EventBus.getDefault().register(this);
     }
+    private Emitter.Listener onAcceptCall = new Emitter.Listener() {
+        @Override
+        public void call( final Object... args) {
+            new Handler(Looper.getMainLooper()).post(new Runnable() {
+                @Override
+                public void run() {
+                    EventBus.getDefault().post(new EventAcceptCall("AcceptCall"));
+                }
+            });
+        }
+    };
+    private Emitter.Listener onCall = new Emitter.Listener() {
+        @Override
+        public void call( final Object... args) {
+            new Handler(Looper.getMainLooper()).post(new Runnable() {
+                @Override
+                public void run() {
+                    JSONObject obj = (JSONObject)args[0];
+                    try {
+                        JSONArray connectionAu = obj.getJSONArray("component");
+                        String sessionID ;
+                        String token;
+                        sessionID = connectionAu.getString(0);
+                        token = connectionAu.getString(1);
+                        EventBus.getDefault().postSticky(new EventConnectCall(sessionID,token));
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
 
+                }
+            });
+        }
+    };
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
         if (isInstanceCreated()) {
@@ -144,6 +181,24 @@ public class SocketServiceProvider extends Service {
             });
         }
     };
+    private Emitter.Listener onRegisterStatus = new Emitter.Listener() {
+        @Override
+        public void call(final Object... args) {
+            new Handler(Looper.getMainLooper()).post(new Runnable() {
+                @Override
+                public void run() {
+                    JSONObject object = (JSONObject) args[0];
+                    try {
+                        Log.d("Register status","da nhan");
+                        boolean pass = object.getBoolean("ket_qua");
+                        EventBus.getDefault().post(new EventCheckRegister(pass));
+                    }catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                }
+            });
+        }
+    };
     private Emitter.Listener onLoginStatus = new Emitter.Listener() {
         @Override
         public void call(final Object... args) {
@@ -176,11 +231,11 @@ public class SocketServiceProvider extends Service {
                         JSONArray arrayDoctor = object.getJSONArray("arrayDoctor");
                         for ( int i = 0 ; i< arrayDoctor.length();i++){
                             JSONObject obj = (JSONObject) arrayDoctor.get(i);
-                            int doctorID = obj.getInt("DoctorID");
+                            int doctorID = obj.getInt("Doctor_id");
                             String username = obj.getString("Username");
                             String status = obj.getString("status");
-                            String socketID = obj.getString("SocketID");
-                            String doctorName = obj.getString("Name");
+                            String socketID = obj.getString("Socket_id");
+                            String doctorName = obj.getString("Doctor_name");
                             arrayDoctorOnline.add(new DoctorOnline(doctorName,doctorID,username,status,socketID));
                         }
                         EventBus.getDefault().post(new EventLoadDoctorOnline(arrayDoctorOnline));
@@ -204,11 +259,11 @@ public class SocketServiceProvider extends Service {
                         JSONArray arrayDoctor = object.getJSONArray("arrayDoctor");
                         for ( int i = 0 ; i< arrayDoctor.length();i++){
                             JSONObject obj = (JSONObject) arrayDoctor.get(i);
-                            int doctorID = obj.getInt("DoctorID");
+                            int doctorID = obj.getInt("Doctor_id");
                             String username = obj.getString("Username");
                             String status = obj.getString("status");
-                            String socketID = obj.getString("SocketID");
-                            String doctorName = obj.getString("Name");
+                            String socketID = obj.getString("Socket_id");
+                            String doctorName = obj.getString("Doctor_name");
                             arrayDoctorOnline.add(new DoctorOnline(doctorName,doctorID,username,status,socketID));
                         }
                         EventBus.getDefault().post(new EventReloadDoctorOnline1(arrayDoctorOnline));
@@ -232,11 +287,11 @@ public class SocketServiceProvider extends Service {
                         JSONArray arrayDoctor = object.getJSONArray("arrayDoctor");
                         for ( int i = 0 ; i< arrayDoctor.length();i++){
                             JSONObject obj = (JSONObject) arrayDoctor.get(i);
-                            int doctorID = obj.getInt("DoctorID");
+                            int doctorID = obj.getInt("Doctor_id");
                             String username = obj.getString("Username");
                             String status = obj.getString("status");
-                            String socketID = obj.getString("SocketID");
-                            String doctorName = obj.getString("Name");
+                            String socketID = obj.getString("Socket_id");
+                            String doctorName = obj.getString("Doctor_name");
                             arrayDoctorOnline.add(new DoctorOnline(doctorName,doctorID,username,status,socketID));
                         }
                         EventBus.getDefault().post(new EventReloadDoctorOnline2(arrayDoctorOnline));
@@ -260,42 +315,14 @@ public class SocketServiceProvider extends Service {
                         JSONArray arrayDoctor = object.getJSONArray("arrayDoctor");
                         for ( int i = 0 ; i< arrayDoctor.length();i++){
                             JSONObject obj = (JSONObject) arrayDoctor.get(i);
-                            int doctorID = obj.getInt("DoctorID");
+                            int doctorID = obj.getInt("Doctor_id");
                             String username = obj.getString("Username");
                             String status = obj.getString("status");
-                            String socketID = obj.getString("SocketID");
-                            String doctorName = obj.getString("Name");
+                            String socketID = obj.getString("Socket_id");
+                            String doctorName = obj.getString("Doctor_name");
                             arrayDoctorOnline.add(new DoctorOnline(doctorName,doctorID,username,status,socketID));
                         }
                         EventBus.getDefault().post(new EventReloadDoctorOnline3(arrayDoctorOnline));
-                    }catch (JSONException e) {
-                        e.printStackTrace();
-                    }
-                }
-            });
-        }
-    };
-    private Emitter.Listener onReloadDoctor4 = new Emitter.Listener() {
-        @Override
-        public void call(final Object... args) {
-            new Handler(Looper.getMainLooper()).post(new Runnable() {
-                @Override
-                public void run() {
-                    JSONObject object = (JSONObject) args[0];
-                    try {
-                        ArrayList<DoctorOnline> arrayDoctorOnline = new ArrayList<>();
-                        Log.d("Load Doctor 4","da nhan");
-                        JSONArray arrayDoctor = object.getJSONArray("arrayDoctor");
-                        for ( int i = 0 ; i< arrayDoctor.length();i++){
-                            JSONObject obj = (JSONObject) arrayDoctor.get(i);
-                            int doctorID = obj.getInt("DoctorID");
-                            String username = obj.getString("Username");
-                            String status = obj.getString("status");
-                            String socketID = obj.getString("SocketID");
-                            String doctorName = obj.getString("Name");
-                            arrayDoctorOnline.add(new DoctorOnline(doctorName,doctorID,username,status,socketID));
-                        }
-                        EventBus.getDefault().post(new EventReloadDoctorOnline4(arrayDoctorOnline));
                     }catch (JSONException e) {
                         e.printStackTrace();
                     }
@@ -322,11 +349,13 @@ public class SocketServiceProvider extends Service {
         signalApplication.getSocket().off(Socket.EVENT_CONNECT_ERROR, onConnectError);
         signalApplication.getSocket().off(Socket.EVENT_CONNECT_TIMEOUT, onConnectError);
         signalApplication.getSocket().off("server_check_login_patient",onLoginStatus);
-        signalApplication.getSocket().off("server_load_doctor_list",onLoadDoctor);
+        signalApplication.getSocket().off("server_load_doctor_disease",onLoadDoctor);
         signalApplication.getSocket().off("server_reload_doctor_1",onReloadDoctor1);
         signalApplication.getSocket().off("server_reload_doctor_2",onReloadDoctor2);
         signalApplication.getSocket().off("server_reload_doctor_3",onReloadDoctor3);
-        signalApplication.getSocket().off("server_reload_doctor_4",onReloadDoctor4);
+        signalApplication.getSocket().off("server_check_register_patient",onRegisterStatus);
+        signalApplication.getSocket().off("server_execute_call",onCall);
+        signalApplication.getSocket().off("server_send_acception",onAcceptCall);
 //        signalApplication.getSocket().on("server_server_reload_doctor",onReloadDoctor);
         EventBus.getDefault().unregister(this);
         Log.d("disconnected","true");

@@ -2,6 +2,7 @@ package project.fpt.edu.vn.registerscreen;
 
 import android.content.Context;
 import android.content.Intent;
+import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
@@ -16,7 +17,7 @@ import android.widget.Toast;
 import java.util.List;
 
 import project.fpt.edu.vn.registerscreen.Activity.ActivityAppoint;
-import project.fpt.edu.vn.registerscreen.Model.Doctor;
+import project.fpt.edu.vn.registerscreen.Activity.WaitingCallActivity;
 import project.fpt.edu.vn.registerscreen.Model.DoctorOnline;
 
 /**
@@ -42,14 +43,14 @@ public class ListAdapter extends ArrayAdapter<DoctorOnline> {
             vi = LayoutInflater.from(getContext());
             v = vi.inflate(R.layout.activity_line_doctor, null);
         }
-        DoctorOnline d = getItem(position);
+        final DoctorOnline d = getItem(position);
         final ImageButton ib = (ImageButton)v.findViewById(R.id.imgCall);
         final ImageView iv = (ImageView)v.findViewById(R.id.imgStatus);
         final ImageButton ib2 = (ImageButton) v.findViewById(R.id.imgAppoint);
 
         if(d != null){
             TextView tv1 = (TextView)v.findViewById(R.id.tvListDocName);
-            tv1.setText(d.getUsername());
+            tv1.setText("Bác sĩ "+d.getDoctorName());
             if(d.getStatus() == "online"){
                 iv.setColorFilter(getContext().getResources().getColor(R.color.colorAccent));
                 ib.setBackgroundResource(R.drawable.not_available_border);
@@ -68,6 +69,13 @@ public class ListAdapter extends ArrayAdapter<DoctorOnline> {
                 //Drawable thumb = ContextCompat.getDrawable(getContext(), R.drawable.green_button);
                 //ib.setBackgroundResource(R.drawable.green_button);
                 Toast.makeText(view.getContext(), "Button Working", Toast.LENGTH_SHORT).show();
+                Bundle bundle = new Bundle();
+                Intent intent = new Intent(getContext().getApplicationContext(), WaitingCallActivity.class);
+                bundle.putString("Socket_id",d.getSocketID());
+                bundle.putString("Doctor_name",d.getDoctorName());
+                intent.putExtra("Doctor_data",bundle);
+                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_MULTIPLE_TASK);
+                getContext().getApplicationContext().startActivity(intent);
             }
         });
 
