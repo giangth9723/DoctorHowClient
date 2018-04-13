@@ -176,7 +176,7 @@ public class FragmentSetting extends Fragment {
         mIsBound = true;
     }
     private void Logout(){
-        socketApplication.getSocket().emit("patient_logout",session.getName());
+        socketApplication.getSocket().emit("patient_logout",session.getUser_name());
         getActivity().stopService(new Intent(getActivity(),SocketServiceProvider.class));
         session.setLoggedIn(false);
         getActivity().finish();

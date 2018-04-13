@@ -37,7 +37,6 @@ import project.fpt.edu.vn.registerscreen.Session;
 public class LoginActivity extends AppCompatActivity implements View.OnClickListener {
     Button btnLog, btnReg;
     Session session;
-    String name, pass;
     EditText etUser, etPass;
     CheckBox cbBox;
     TextView forgetPass;
@@ -85,7 +84,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         if(session.LoggedIn()){
             JSONObject USP=new JSONObject();
             try {
-                USP.put("Username",session.getName());
+                USP.put("Username",session.getUser_name());
                 USP.put("Password",session.getPassword());
                 socketApplication.getSocket().emit("patient_login",USP.toString());
             } catch (JSONException e) {
@@ -155,10 +154,21 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     }
     @Subscribe
     public void onMessageEvent(EventCheckLogin event){
+        Log.d("Login status2","gived");
         if(event.isKet_qua()){
             if(!session.LoggedIn()) {
-                session.setName(etUser.getText().toString());
-                session.setPassword(etPass.getText().toString());
+                session.setUser_name(event.getUsername());
+                session.setPassword(event.getPassword());
+                session.setPatient_id(event.getPatient_id());
+                session.setProfile_picture(event.getProfile_picture());
+                session.setAddress(event.getAddress());
+                session.setBitrhday(event.getBirthday());
+                session.setHeight(event.getHeight());
+                session.setWeight(event.getWeight());
+                session.setGender(event.getGender());
+                session.setId_number(event.getId_number());
+                session.setPatient_name(event.getPatient_name());
+                session.setPhone_number(event.getPhone_number());
                 session.setLoggedIn(true);
             }
             Intent intent = new Intent(getBaseContext(),MenuActivity.class);

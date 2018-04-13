@@ -11,20 +11,30 @@
         android:layout_height="fill_parent">
 
         <FrameLayout
+            android:id="@+id/publisher_container"
             android:layout_width="90dp"
             android:layout_height="120dp"
-            android:id="@+id/publisher_container"
-            android:layout_gravity="bottom|end"
+            android:layout_gravity="top|end"
             android:layout_marginBottom="16dp"
             android:layout_marginEnd="16dp"
             android:layout_marginRight="16dp"
-            android:padding="2dp"
-            android:background="#FFFFFF" />
+            android:layout_marginTop="16dp"
+            android:background="#FFFFFF"
+            android:padding="2dp" />
 
         <FrameLayout
             android:id="@+id/subscriber_container"
             android:layout_width="fill_parent"
             android:layout_height="fill_parent" />
+
+        <android.support.design.widget.FloatingActionButton
+            android:id="@+id/fabCancel"
+            android:layout_width="55dp"
+            android:layout_height="match_parent"
+            android:layout_gravity="bottom|center"
+            app:backgroundTint="#ED0D0D"
+            android:layout_marginBottom="50dp"
+            app:srcCompat="@drawable/ic_end_call" />
     </FrameLayout>
 
 </android.support.constraint.ConstraintLayout>

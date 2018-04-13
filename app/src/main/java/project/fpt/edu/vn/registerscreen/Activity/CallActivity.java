@@ -3,13 +3,19 @@ package project.fpt.edu.vn.registerscreen.Activity;
 import android.Manifest;
 import android.content.ComponentName;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.ServiceConnection;
 import android.os.Bundle;
+import android.os.Handler;
 import android.os.IBinder;
 import android.support.annotation.NonNull;
+import android.support.design.widget.FloatingActionButton;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.view.View;
+import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.Toast;
 
@@ -24,9 +30,13 @@ import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
 
+import project.fpt.edu.vn.registerscreen.Activity.DoctorList.ActivityDoctorList1;
+import project.fpt.edu.vn.registerscreen.Activity.DoctorList.ActivityDoctorList2;
+import project.fpt.edu.vn.registerscreen.Activity.DoctorList.ActivityDoctorList3;
 import project.fpt.edu.vn.registerscreen.Application.SocketApplication;
 import project.fpt.edu.vn.registerscreen.BusEvent.EventChangeChatServerStateEvent;
 import project.fpt.edu.vn.registerscreen.BusEvent.EventConnectCall;
+import project.fpt.edu.vn.registerscreen.BusEvent.EventFinishCall;
 import project.fpt.edu.vn.registerscreen.R;
 import project.fpt.edu.vn.registerscreen.Service.SocketServiceProvider;
 import pub.devrel.easypermissions.AfterPermissionGranted;
@@ -44,6 +54,9 @@ public class CallActivity extends AppCompatActivity implements  Session.SessionL
     private FrameLayout mSubscriberViewContainer;
     private Publisher mPublisher;
     private Subscriber mSubscriber;
+    private String Activity_before = "";
+    private String Doctor_Socket_id = "";
+    FloatingActionButton fabCancel;
     Boolean mIsBound;
     SocketApplication socketApplication;
     SocketServiceProvider mBoundService;
@@ -66,6 +79,7 @@ public class CallActivity extends AppCompatActivity implements  Session.SessionL
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_call);
+        fabCancel = (FloatingActionButton)findViewById(R.id.fabCancel);
         socketApplication = (SocketApplication) getApplication();
         Log.d("Check", "Login created");
         if (socketApplication.getSocket() != null) {
@@ -73,8 +87,58 @@ public class CallActivity extends AppCompatActivity implements  Session.SessionL
             doBindService();
         } else {
         }
+        Intent intent = getIntent();
+        Bundle bundle = intent.getBundleExtra("dulieu");
+        SESSION_ID = bundle.getString("SESSION_ID");
+        TOKEN = bundle.getString("TOKEN");
+        Activity_before = bundle.getString("Activity_name");
+        Doctor_Socket_id = bundle.getString("Doctor_socket_id");
+        fabCancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                socketApplication.getSocket().emit("patient_finish_call",Doctor_Socket_id);
+                patient_finish_call();
+            }
+        });
+        requestPermissions();
     }
+    public void patient_finish_call(){
+        mSession.disconnect();
+        AlertDialog.Builder alertDialog = new AlertDialog.Builder(CallActivity.this);
+        alertDialog.setTitle("Thông báo !");
+        alertDialog.setMessage("Cuộc gọi kết thúc ! Bạn có muốn chia sẻ bệnh án cho bác sĩ không?");
+        alertDialog.setPositiveButton("Có", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                 socketApplication.getSocket().emit("patient_accept_request_emr",Doctor_Socket_id);
+                 finish();
+                 getBack_activity();
+            }
+        });
+        alertDialog.setNegativeButton("Không", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                socketApplication.getSocket().emit("patient_decline_request_emr",Doctor_Socket_id);
+                finish();
+                getBack_activity();
+            }
+        });
+        alertDialog.show();
 
+    }
+    public void getBack_activity(){
+        if(Activity_before.equalsIgnoreCase(ActivityDoctorList1.class.getSimpleName())) {
+            Intent intent = new Intent(CallActivity.this, ActivityDoctorList1.class);
+            startActivity(intent);
+        }
+        else if(Activity_before.equalsIgnoreCase(ActivityDoctorList2.class.getSimpleName())){
+            Intent intent = new Intent(CallActivity.this, ActivityDoctorList2.class);
+            startActivity(intent);
+        }else if(Activity_before.equalsIgnoreCase(ActivityDoctorList3.class.getSimpleName())){
+            Intent intent = new Intent(CallActivity.this, ActivityDoctorList3.class);
+            startActivity(intent);
+        }
+    }
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
@@ -184,13 +248,9 @@ public class CallActivity extends AppCompatActivity implements  Session.SessionL
     public void onMessageEvent(EventChangeChatServerStateEvent event) {
         Toast.makeText(getBaseContext(), event.getState(), Toast.LENGTH_SHORT).show();
     }
-    @Subscribe(sticky = true ,threadMode =  ThreadMode.MAIN)
-    public void onEvent(EventConnectCall event){
-        SESSION_ID = event.getSessionID();
-        TOKEN = event.getToken();
-        requestPermissions();
-
-        Toast.makeText(getBaseContext(), event.getSessionID(), Toast.LENGTH_SHORT).show();
-        EventBus.getDefault().removeAllStickyEvents();
+    @Subscribe
+    public void onMessageEvent(EventFinishCall event){
+        patient_finish_call();
     }
+
 }

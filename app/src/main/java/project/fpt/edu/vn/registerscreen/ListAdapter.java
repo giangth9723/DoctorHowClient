@@ -1,5 +1,6 @@
 package project.fpt.edu.vn.registerscreen;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -73,9 +74,11 @@ public class ListAdapter extends ArrayAdapter<DoctorOnline> {
                 Intent intent = new Intent(getContext().getApplicationContext(), WaitingCallActivity.class);
                 bundle.putString("Socket_id",d.getSocketID());
                 bundle.putString("Doctor_name",d.getDoctorName());
+                bundle.putString("Activity_name",getContext().getClass().getSimpleName());
                 intent.putExtra("Doctor_data",bundle);
                 intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_MULTIPLE_TASK);
                 getContext().getApplicationContext().startActivity(intent);
+                ((Activity)getContext()).finish();
             }
         });
 

@@ -16,16 +16,26 @@ import android.widget.Toast;
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import project.fpt.edu.vn.registerscreen.Application.SocketApplication;
 import project.fpt.edu.vn.registerscreen.BusEvent.EventAcceptCall;
+import project.fpt.edu.vn.registerscreen.BusEvent.EventCancelCall;
 import project.fpt.edu.vn.registerscreen.BusEvent.EventChangeChatServerStateEvent;
+import project.fpt.edu.vn.registerscreen.BusEvent.EventConnectCall;
 import project.fpt.edu.vn.registerscreen.R;
 import project.fpt.edu.vn.registerscreen.Service.SocketServiceProvider;
+import project.fpt.edu.vn.registerscreen.Session;
 
 public class WaitingCallActivity extends AppCompatActivity {
+    private String SESSION_ID = "";
+    private String TOKEN = "";
+    private String Activity_before="";
+    private String Doctor_Socket_id = "";
     TextView txtCallDoctorName;
     FloatingActionButton fabCancelCall;
+    Session session;
     Boolean mIsBound;
     SocketApplication socketApplication;
     SocketServiceProvider mBoundService;
@@ -51,24 +61,44 @@ public class WaitingCallActivity extends AppCompatActivity {
         fabCancelCall = (FloatingActionButton)findViewById(R.id.fabCancelCall);
         Intent intent = getIntent();
         Bundle bundle = intent.getBundleExtra("Doctor_data");
-        String Socket_id = bundle.getString("Socket_id");
+        Doctor_Socket_id = bundle.getString("Socket_id");
         String Doctor_name = bundle.getString("Doctor_name");
+        Activity_before = bundle.getString("Activity_name");
         txtCallDoctorName.setText(Doctor_name);
         socketApplication = (SocketApplication) getApplication();
         Log.d("Check", "Login created");
         if (socketApplication.getSocket() != null) {
             Log.d("Socket", " is not null");
-            startService(new Intent(getBaseContext(), SocketServiceProvider.class));
             doBindService();
         } else {
         }
-        socketApplication.getSocket().emit("patient_call", Socket_id);
+        session = new Session(this);
+
+        if(!session.LoggedIn()){
+            Logout();
+        }
         fabCancelCall.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                socketApplication.getSocket().emit("patient_cancel_call",Doctor_Socket_id);
                 finish();
             }
         });
+        Call();
+    }
+    private void Call(){
+        JSONObject obj = new JSONObject();
+        try {
+            obj.put("Patient_name",session.getPatient_name());
+            obj.put("Patient_id",session.getPatient_id());
+            obj.put("Doctor_socket_id",Doctor_Socket_id);
+            obj.put("Activity_name",Activity_before);
+            socketApplication.getSocket().emit("patient_call",obj.toString());
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+
     }
     private void doBindService() {
         bindService(new Intent(WaitingCallActivity.this, SocketServiceProvider.class), socketConnection, Context.BIND_AUTO_CREATE);
@@ -89,7 +119,11 @@ public class WaitingCallActivity extends AppCompatActivity {
         }
         super.onStop();
     }
-
+    private void Logout(){
+        session.setLoggedIn(false);
+        finish();
+        startActivity(new Intent(WaitingCallActivity.this, LoginActivity.class));
+    }
     @Override
     protected void onDestroy() {
         super.onDestroy();
@@ -98,9 +132,27 @@ public class WaitingCallActivity extends AppCompatActivity {
     public void onMessageEvent(EventChangeChatServerStateEvent event) {
         Toast.makeText(getBaseContext(), event.getState(), Toast.LENGTH_SHORT).show();
     }
-    @Subscribe(threadMode = ThreadMode.MAIN)
+    @Subscribe
     public void onMessageEvent(EventAcceptCall event) {
+        Bundle bundle = new Bundle();
+        bundle.putString("SESSION_ID",SESSION_ID);
+        bundle.putString("TOKEN",TOKEN);
+        bundle.putString("Activity_name",Activity_before);
+        bundle.putString("Doctor_socket_id",Doctor_Socket_id);
         Intent intent = new Intent(WaitingCallActivity.this,CallActivity.class);
+        finish();
+        intent.putExtra("dulieu",bundle);
         startActivity(intent);
+    }
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void onEvent(EventConnectCall event){
+        SESSION_ID = event.getSessionID();
+        TOKEN = event.getToken();
+        Toast.makeText(getBaseContext(), event.getSessionID(), Toast.LENGTH_SHORT).show();
+        EventBus.getDefault().removeAllStickyEvents();
+    }
+    @Subscribe
+    public void onMessageEvent(EventCancelCall event) {
+        finish();
     }
 }

@@ -22,10 +22,12 @@ import io.socket.client.Socket;
 import io.socket.emitter.Emitter;
 import project.fpt.edu.vn.registerscreen.Application.SocketApplication;
 import project.fpt.edu.vn.registerscreen.BusEvent.EventAcceptCall;
+import project.fpt.edu.vn.registerscreen.BusEvent.EventCancelCall;
 import project.fpt.edu.vn.registerscreen.BusEvent.EventChangeChatServerStateEvent;
 import project.fpt.edu.vn.registerscreen.BusEvent.EventCheckLogin;
 import project.fpt.edu.vn.registerscreen.BusEvent.EventCheckRegister;
 import project.fpt.edu.vn.registerscreen.BusEvent.EventConnectCall;
+import project.fpt.edu.vn.registerscreen.BusEvent.EventFinishCall;
 import project.fpt.edu.vn.registerscreen.BusEvent.EventLoadDoctorOnline;
 import project.fpt.edu.vn.registerscreen.BusEvent.EventReloadDoctorOnline1;
 import project.fpt.edu.vn.registerscreen.BusEvent.EventReloadDoctorOnline2;
@@ -87,7 +89,9 @@ public class SocketServiceProvider extends Service {
         signalApplication.getSocket().on("server_reload_doctor_3",onReloadDoctor3);
         signalApplication.getSocket().on("server_check_register_patient",onRegisterStatus);
         signalApplication.getSocket().on("server_execute_call",onCall);
-        signalApplication.getSocket().on("server_send_acception",onAcceptCall);
+        signalApplication.getSocket().on("server_send_acception_call_to_patient",onAcceptCall);
+        signalApplication.getSocket().on("server_send_cancelation_call_to_patient",onCancelCall);
+        signalApplication.getSocket().on("server_send_finish_call_to_patient",onFinishCall);
 //        signalApplication.getSocket().on("server_reload_doctor",onReloadDoctor);
 
         //@formatter:off
@@ -95,6 +99,28 @@ public class SocketServiceProvider extends Service {
 
         EventBus.getDefault().register(this);
     }
+    private Emitter.Listener onFinishCall = new Emitter.Listener() {
+        @Override
+        public void call( final Object... args) {
+            new Handler(Looper.getMainLooper()).post(new Runnable() {
+                @Override
+                public void run() {
+                    EventBus.getDefault().post(new EventFinishCall("AcceptCall"));
+                }
+            });
+        }
+    };
+    private Emitter.Listener onCancelCall = new Emitter.Listener() {
+        @Override
+        public void call( final Object... args) {
+            new Handler(Looper.getMainLooper()).post(new Runnable() {
+                @Override
+                public void run() {
+                    EventBus.getDefault().post(new EventCancelCall("AcceptCall"));
+                }
+            });
+        }
+    };
     private Emitter.Listener onAcceptCall = new Emitter.Listener() {
         @Override
         public void call( final Object... args) {
@@ -208,8 +234,29 @@ public class SocketServiceProvider extends Service {
                     JSONObject object = (JSONObject) args[0];
                     try {
                         Log.d("Login status","da nhan");
-                        boolean pass = object.getBoolean("ket_qua");
-                        EventBus.getDefault().post(new EventCheckLogin(pass));
+                        JSONArray patient_check = object.getJSONArray("ket_qua");
+                        JSONObject patient_info = (JSONObject)patient_check.get(0);
+                        int patient_id = patient_info.getInt("Patient_id");
+                        String username = patient_info.getString("Username");
+                        String password = patient_info.getString("Password");
+                        String patient_name = patient_info.getString("Patient_name");
+                        String profile_picture = patient_info.getString("Profile_picture");
+                        int gender = patient_info.getInt("Gender");
+                        String sGender = "";
+                        if(gender == 0) {
+                             sGender = "Nữ";
+                        }else if(gender == 1){
+                             sGender = "Nam";
+                        }
+                        String birthday = patient_info.getString("Birthday");
+                        String phone_number = patient_info.getString("Phone_number");
+                        String address = patient_info.getString("Address");
+                        float weight = Float.parseFloat(String.valueOf(patient_info.getDouble("Weight")));
+                        float height = Float.parseFloat(String.valueOf(patient_info.getDouble("Height")));
+                        String id_number = patient_info.getString("Id_number");
+                        Log.d("Weight",String.valueOf(weight));
+                        boolean pass = (Boolean)patient_check.get(1);
+                        EventBus.getDefault().post(new EventCheckLogin(pass,patient_id,username,password,patient_name,profile_picture,sGender,birthday,phone_number,address,height,weight,id_number));
                     }catch (JSONException e) {
                         e.printStackTrace();
                     }
@@ -355,7 +402,9 @@ public class SocketServiceProvider extends Service {
         signalApplication.getSocket().off("server_reload_doctor_3",onReloadDoctor3);
         signalApplication.getSocket().off("server_check_register_patient",onRegisterStatus);
         signalApplication.getSocket().off("server_execute_call",onCall);
-        signalApplication.getSocket().off("server_send_acception",onAcceptCall);
+        signalApplication.getSocket().off("server_send_acception_call_to_patient",onAcceptCall);
+        signalApplication.getSocket().off("server_send_cancelation_call_to_patient",onCancelCall);
+        signalApplication.getSocket().off("server_send_finish_call_to_patient",onFinishCall);
 //        signalApplication.getSocket().on("server_server_reload_doctor",onReloadDoctor);
         EventBus.getDefault().unregister(this);
         Log.d("disconnected","true");

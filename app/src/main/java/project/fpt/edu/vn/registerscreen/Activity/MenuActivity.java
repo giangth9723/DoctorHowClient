@@ -119,6 +119,8 @@ public class MenuActivity extends AppCompatActivity {
             Logout();
         }
         tvShowName = (TextView)findViewById(R.id.txtShowName);
+        String patient_name = session.getPatient_name();
+        tvShowName.setText(patient_name);
     }
 
     private void Logout(){
