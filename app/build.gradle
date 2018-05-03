@@ -45,4 +45,11 @@ dependencies {
     }
     compile 'com.opentok.android:opentok-android-sdk:2.13.0'
     compile 'pub.devrel:easypermissions:0.4.0'
+    implementation 'com.android.support:cardview-v7:26.0.0-alpha1'
+    implementation 'com.google.code.gson:gson:2.8.2'
+    //material calendar
+    compile 'com.prolificinteractive:material-calendarview:1.4.3'
+    //compact calendar
+    compile 'com.github.sundeepk:compact-calendar-view:2.0.2.3'
+
 }

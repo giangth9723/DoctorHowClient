@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="project.fpt.edu.vn.registerscreen.Activity.Medical.ActivityMentalExaminationHistory">
+
+    <!-- top -->
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:background="@drawable/border_top"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize">
+
+        <ImageButton
+            android:id="@+id/imgBtnBack"
+            app:srcCompat="@drawable/ic_chevron_left"
+            android:background="@null"
+            android:layout_width="50dp"
+            android:layout_height="match_parent"
+            tools:ignore="VectorDrawableCompat" />
+
+        <TextView
+            android:id="@+id/txtBack"
+            android:layout_width="wrap_content"
+            android:layout_height="30dp"
+            android:layout_centerVertical="true"
+            android:layout_marginStart="0dp"
+            android:layout_toEndOf="@+id/ImgBtnBack"
+            android:text="Trở về"
+            android:textColor="@color/black"
+            android:textSize="20dp" />
+
+        <!-- <TextView
+            android:id="@+id/txtNew"
+            android:layout_width="wrap_content"
+            android:layout_height="30dp"
+            android:layout_centerVertical="true"
+            android:text="Tạo mới"
+            android:textColor="@color/black"
+            android:layout_gravity="right"
+            android:layout_marginRight="30dp"
+            android:textSize="20dp" /> -->
+
+    </android.support.v7.widget.Toolbar>
+
+    <!-- Middle -->
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <!-- inside -->
+        <TextView
+            android:text="Lịch sử khám bệnh"
+            android:textSize="25dp"
+            android:textColor="@color/black"
+            android:layout_marginTop="5dp"
+            android:layout_gravity="center_horizontal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <android.support.v7.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp">
+
+            <ListView
+                android:id="@+id/lstExamination"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+            </ListView>
+
+        </android.support.v7.widget.CardView>
+
+    </LinearLayout>
+
+</LinearLayout>

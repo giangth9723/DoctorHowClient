@@ -2,11 +2,12 @@ package project.fpt.edu.vn.registerscreen.Activity;
 
 import android.content.ComponentName;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.ServiceConnection;
 import android.content.SharedPreferences;
-import android.graphics.Color;
 import android.os.IBinder;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -17,33 +18,30 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.gson.Gson;
+
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.net.URISyntaxException;
-
-import io.socket.client.IO;
-import io.socket.emitter.Emitter;
 import project.fpt.edu.vn.registerscreen.Application.SocketApplication;
 import project.fpt.edu.vn.registerscreen.BusEvent.EventChangeChatServerStateEvent;
 import project.fpt.edu.vn.registerscreen.BusEvent.EventCheckLogin;
+import project.fpt.edu.vn.registerscreen.Model.Patient;
 import project.fpt.edu.vn.registerscreen.R;
 import project.fpt.edu.vn.registerscreen.Service.SocketServiceProvider;
 import project.fpt.edu.vn.registerscreen.Session;
 
 public class LoginActivity extends AppCompatActivity implements View.OnClickListener {
+    Gson gson = new Gson();
     Button btnLog, btnReg;
-    Session session;
+
     EditText etUser, etPass;
     CheckBox cbBox;
     TextView forgetPass;
-    SharedPreferences sharedPreferences;
-    SharedPreferences.Editor editor;
-    String USERNAME_KEY = "user";
-    String PASSWORD_KEY = "password";
+    Session session;
     Boolean mIsBound;
     SocketApplication socketApplication;
     SocketServiceProvider mBoundService;
@@ -65,32 +63,22 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-        btnLog = (Button) findViewById(R.id.BtnLog);
-        btnReg= (Button) findViewById(R.id.BtnReg);
-        etUser = (EditText)findViewById(R.id.EtUser);
-        etPass = (EditText)findViewById(R.id.EtPass);
-        cbBox = (CheckBox)findViewById(R.id.CbBox);
-        forgetPass = (TextView)findViewById(R.id.TvForgetPass);
-
-        sharedPreferences = getSharedPreferences("loginPrefs", MODE_PRIVATE);
-
-        btnLog.setOnClickListener(this);
-        btnReg.setOnClickListener(this);
-        forgetPass.setOnClickListener(this);
-
-
-        session = new Session(this);
-
-        if(session.LoggedIn()){
-            JSONObject USP=new JSONObject();
-            try {
-                USP.put("Username",session.getUser_name());
-                USP.put("Password",session.getPassword());
-                socketApplication.getSocket().emit("patient_login",USP.toString());
-            } catch (JSONException e) {
-                e.printStackTrace();
+        onCreateSocket();
+        createControl();
+        if (session.LoggedIn()) {
+                JSONObject USP = new JSONObject();
+                try {
+                    USP.put("Username", session.getPatient().getUsername());
+                    USP.put("Password", session.getPatient().getPassword());
+                    socketApplication.getSocket().emit("patient_login", USP.toString());
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
             }
-        }
+
+
+    }
+    private void onCreateSocket(){
         socketApplication = (SocketApplication) getApplication();
         Log.d("Check", "Login created");
         if (socketApplication.getSocket() != null) {
@@ -100,26 +88,34 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         } else {
         }
     }
-
-
+    private void createControl(){
+        btnLog = (Button) findViewById(R.id.BtnLog);
+        btnReg= (Button) findViewById(R.id.BtnReg);
+        etUser = (EditText)findViewById(R.id.EtUser);
+        etPass = (EditText)findViewById(R.id.EtPass);
+        cbBox = (CheckBox)findViewById(R.id.CbBox);
+        btnLog.setOnClickListener(this);
+        btnReg.setOnClickListener(this);
+        session = new Session(this);
+    }
+    private void Login(){
+        JSONObject USP=new JSONObject();
+        try {
+            USP.put("Username",etUser.getText().toString());
+            USP.put("Password",etPass.getText().toString());
+            socketApplication.getSocket().emit("patient_login",USP.toString());
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+    }
     @Override
     public void onClick(View view) {
         switch (view.getId()){
             case R.id.BtnLog:
-                JSONObject USP=new JSONObject();
-                try {
-                    USP.put("Username",etUser.getText().toString());
-                    USP.put("Password",etPass.getText().toString());
-                    socketApplication.getSocket().emit("patient_login",USP.toString());
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
+                Login();
                 break;
             case R.id.BtnReg:
                 startActivity(new Intent(LoginActivity.this, RegisterActivity.class));
-                break;
-            case R.id.TvForgetPass:
-                startActivity(new Intent(LoginActivity.this, ActivityForgotPass.class));
                 break;
             default:
         }
@@ -153,27 +149,28 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         Toast.makeText(getBaseContext(), event.getState(), Toast.LENGTH_SHORT).show();
     }
     @Subscribe
-    public void onMessageEvent(EventCheckLogin event){
+    public void onLoginEvent(EventCheckLogin event){
         Log.d("Login status2","gived");
-        if(event.isKet_qua()){
+        Patient patient = event.getPatient();
+        if(event.isCheck()){
+            session.setPatient(patient);
             if(!session.LoggedIn()) {
-                session.setUser_name(event.getUsername());
-                session.setPassword(event.getPassword());
-                session.setPatient_id(event.getPatient_id());
-                session.setProfile_picture(event.getProfile_picture());
-                session.setAddress(event.getAddress());
-                session.setBitrhday(event.getBirthday());
-                session.setHeight(event.getHeight());
-                session.setWeight(event.getWeight());
-                session.setGender(event.getGender());
-                session.setId_number(event.getId_number());
-                session.setPatient_name(event.getPatient_name());
-                session.setPhone_number(event.getPhone_number());
                 session.setLoggedIn(true);
             }
-            Intent intent = new Intent(getBaseContext(),MenuActivity.class);
+            Intent intent = new Intent(LoginActivity.this,MenuActivity.class);
             startActivity(intent);
             finish();
+        }
+        else if(!event.isCheck()){
+            AlertDialog.Builder builder = new AlertDialog.Builder(this);
+            builder.setTitle("Thông báo !");
+            builder.setMessage("Tài khoản hoặc mật khẩu không đúng ");
+            builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                }
+            });
+            builder.show();
         }
     }
 }

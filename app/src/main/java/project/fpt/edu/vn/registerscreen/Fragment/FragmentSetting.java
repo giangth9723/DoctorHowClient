@@ -2,7 +2,6 @@ package project.fpt.edu.vn.registerscreen.Fragment;
 
 
 import android.app.AlertDialog;
-import android.app.Dialog;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -30,11 +29,11 @@ import android.widget.Toast;
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
-import org.json.JSONException;
-import org.json.JSONObject;
 
+import project.fpt.edu.vn.registerscreen.Activity.UserPasswordChangeActivity;
+import project.fpt.edu.vn.registerscreen.Activity.UserProfileActivity;
 import project.fpt.edu.vn.registerscreen.Activity.LoginActivity;
-import project.fpt.edu.vn.registerscreen.Activity.ActivityUserProfileChange;
+import project.fpt.edu.vn.registerscreen.Activity.UserProfileChangeActivity;
 import project.fpt.edu.vn.registerscreen.Application.SocketApplication;
 import project.fpt.edu.vn.registerscreen.BusEvent.EventChangeChatServerStateEvent;
 import project.fpt.edu.vn.registerscreen.R;
@@ -103,7 +102,8 @@ public class FragmentSetting extends Fragment {
             }
         });*/
         listView = (ListView)view.findViewById(R.id.ListSetting);
-        final String[] option = {"Thông tin cá nhân", "Chỉnh sửa thông tin cá nhân", "Điều khoản", "Hỏi đáp", "Đăng xuất"};
+        final String[] option = {"Thông tin cá nhân", "Chỉnh sửa thông tin cá nhân","Đổi mật khẩu",
+                "Điều khoản", "Hỏi đáp", "Đăng xuất"};
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(getContext(), R.layout.my_simple_list_item01, option);
         listView.setAdapter(adapter);
 
@@ -112,25 +112,19 @@ public class FragmentSetting extends Fragment {
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 switch (i){
                     case 0:
-                        FragmentUserProfile fragmentUserProfile = new FragmentUserProfile();
-                        android.support.v4.app.FragmentManager fragmentManager = getFragmentManager();
-                        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-                        fragmentTransaction.replace(R.id.RelLayoutMid, fragmentUserProfile, "Fragment User Profile");
-                        fragmentTransaction.commit();
+                        startActivity(new Intent(getContext(), UserProfileActivity.class));
                         break;
                     case 1:
-                        /*FragmentUserProfileChange fragmentUserProfileChange = new FragmentUserProfileChange();
-                        android.support.v4.app.FragmentManager fragmentManager1 = getFragmentManager();
-                        FragmentTransaction fragmentTransaction1 = fragmentManager1.beginTransaction();
-                        fragmentTransaction1.replace(R.id.RelLayoutMid, fragmentUserProfileChange, "Fragment User Profile Change");
-                        fragmentTransaction1.commit();*/
-                        startActivity(new Intent(getContext(), ActivityUserProfileChange.class));
+                        startActivity(new Intent(getContext(), UserProfileChangeActivity.class));
                         break;
                     case 2:
+                        startActivity(new Intent(getContext(), UserPasswordChangeActivity.class));
                         break;
                     case 3:
                         break;
                     case 4:
+                        break;
+                    case 5:
                         AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
                         builder.setTitle("Đăng xuất");
                         builder.setMessage("Bạn muốn đăng xuất không?");
@@ -176,7 +170,7 @@ public class FragmentSetting extends Fragment {
         mIsBound = true;
     }
     private void Logout(){
-        socketApplication.getSocket().emit("patient_logout",session.getUser_name());
+        socketApplication.getSocket().emit("patient_logout",session.getPatient().getUsername());
         getActivity().stopService(new Intent(getActivity(),SocketServiceProvider.class));
         session.setLoggedIn(false);
         getActivity().finish();

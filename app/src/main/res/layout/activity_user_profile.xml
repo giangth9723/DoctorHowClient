@@ -1,0 +1,474 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.design.widget.CoordinatorLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="project.fpt.edu.vn.registerscreen.Activity.UserProfileActivity">
+
+    <!-- Top -->
+    <android.support.design.widget.AppBarLayout
+        android:id="@+id/appBar"
+        android:layout_width="match_parent"
+        android:layout_height="220dp"
+        android:background="@color/pink">
+
+        <android.support.design.widget.CollapsingToolbarLayout
+            android:id="@+id/collapToolbar"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+
+            app:contentScrim="?attr/colorAccent"
+            app:expandedTitleMarginStart="48dp"
+            app:title="Thông tin cá nhân"
+            app:layout_scrollFlags="exitUntilCollapsed|scroll">
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/profileImageView"
+                android:layout_gravity="right"
+                android:layout_width="130dp"
+                android:layout_height="130dp"
+                android:layout_marginRight="25dp"
+                android:layout_marginTop="30dp"
+                android:src="@drawable/user_default_avatar"
+                app:civ_border_color="#363632"
+                app:civ_border_width="0dp" />
+
+            <android.support.v7.widget.Toolbar
+                android:id="@+id/toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="?attr/actionBarSize"
+                android:theme="@style/ThemeOverlay.AppCompat.Light"
+                app:layout_collapseMode="pin">
+
+                <ImageButton
+                    android:id="@+id/imgBtnBack"
+                    app:srcCompat="@drawable/ic_chevron_white_left"
+                    android:background="@null"
+                    android:layout_width="50dp"
+                    android:layout_height="match_parent"
+                    tools:ignore="VectorDrawableCompat" />
+
+            </android.support.v7.widget.Toolbar>
+
+        </android.support.design.widget.CollapsingToolbarLayout>
+
+    </android.support.design.widget.AppBarLayout>
+
+    <!-- Middle -->
+    <android.support.v4.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:clipToPadding="false"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <!-- Name -->
+            <android.support.v7.widget.CardView
+                android:layout_marginTop="8dp"
+                android:layout_marginLeft="8dp"
+                android:layout_marginRight="8dp"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                    <TextView
+                        android:text="Tên"
+                        android:layout_marginLeft="5dp"
+                        android:textColor="#808080"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+                    <TextView
+                        android:text="Vũ Hải Đăng"
+                        android:id="@+id/txtUserName"
+                        android:textSize="20dp"
+                        android:textColor="#000000"
+                        android:layout_marginLeft="5dp"
+                        android:layout_marginBottom="5dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:background="@color/lightgray"/>
+
+                </LinearLayout>
+
+            </android.support.v7.widget.CardView>
+
+            <!-- Gender -->
+            <android.support.v7.widget.CardView
+                android:layout_marginLeft="8dp"
+                android:layout_marginRight="8dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                    <TextView
+                        android:text="Giới tính"
+                        android:layout_marginLeft="5dp"
+                        android:textColor="#808080"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+                    <TextView
+                        android:text="Nam"
+                        android:id="@+id/txtProfileGender"
+                        android:textSize="20dp"
+                        android:textColor="#000000"
+                        android:layout_marginLeft="5dp"
+                        android:layout_marginBottom="5dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:background="@color/lightgray"/>
+
+                </LinearLayout>
+            </android.support.v7.widget.CardView>
+
+            <!-- Birthday -->
+            <android.support.v7.widget.CardView
+                android:layout_marginLeft="8dp"
+                android:layout_marginRight="8dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                    <TextView
+                        android:text="Ngày sinh"
+                        android:layout_marginLeft="5dp"
+                        android:textColor="#808080"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+                    <TextView
+                        android:text="14/04/1996"
+                        android:id="@+id/txtProfileBirthday"
+                        android:textSize="20dp"
+                        android:textColor="#000000"
+                        android:layout_marginLeft="5dp"
+                        android:layout_marginBottom="5dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:background="@color/lightgray"/>
+
+                </LinearLayout>
+
+            </android.support.v7.widget.CardView>
+
+            <!-- Phone -->
+            <android.support.v7.widget.CardView
+                android:layout_marginLeft="8dp"
+                android:layout_marginRight="8dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                    <TextView
+                        android:text="Số điện thoại"
+                        android:layout_marginLeft="5dp"
+                        android:textColor="#808080"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+                    <TextView
+                        android:text="0975414496"
+                        android:id="@+id/txtProfilePhone"
+                        android:textSize="20dp"
+                        android:textColor="#000000"
+                        android:layout_marginLeft="5dp"
+                        android:layout_marginBottom="5dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:background="@color/lightgray"/>
+
+                </LinearLayout>
+
+            </android.support.v7.widget.CardView>
+
+            <!-- Weight -->
+            <android.support.v7.widget.CardView
+                android:layout_marginLeft="8dp"
+                android:layout_marginRight="8dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                    <TextView
+                        android:text="Cân nặng"
+                        android:layout_marginLeft="5dp"
+                        android:textColor="#808080"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+                    <TextView
+                        android:text="51 Kg"
+                        android:id="@+id/txtWeight"
+                        android:textSize="20dp"
+                        android:textColor="#000000"
+                        android:layout_marginLeft="5dp"
+                        android:layout_marginBottom="5dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:background="@color/lightgray"/>
+
+                </LinearLayout>
+
+            </android.support.v7.widget.CardView>
+            <!-- Height -->
+            <android.support.v7.widget.CardView
+                android:layout_marginLeft="8dp"
+                android:layout_marginRight="8dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                    <TextView
+                        android:text="Chiều cao"
+                        android:layout_marginLeft="5dp"
+                        android:textColor="#808080"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+                    <TextView
+                        android:text="51 Kg"
+                        android:id="@+id/txtHeight"
+                        android:textSize="20dp"
+                        android:textColor="#000000"
+                        android:layout_marginLeft="5dp"
+                        android:layout_marginBottom="5dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:background="@color/lightgray"/>
+
+                </LinearLayout>
+
+            </android.support.v7.widget.CardView>
+            <!-- Phone -->
+            <android.support.v7.widget.CardView
+                android:layout_marginLeft="8dp"
+                android:layout_marginRight="8dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                    <TextView
+                        android:text="Chứng minh thư"
+                        android:layout_marginLeft="5dp"
+                        android:textColor="#808080"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+                    <TextView
+                        android:text="123456789"
+                        android:id="@+id/txtCMT"
+                        android:textSize="20dp"
+                        android:textColor="#000000"
+                        android:layout_marginLeft="5dp"
+                        android:layout_marginBottom="5dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:background="@color/lightgray"/>
+
+                </LinearLayout>
+
+            </android.support.v7.widget.CardView>
+
+            <!-- Address -->
+            <android.support.v7.widget.CardView
+                android:layout_marginLeft="8dp"
+                android:layout_marginRight="8dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                    <TextView
+                        android:text="Địa chỉ"
+                        android:layout_marginLeft="5dp"
+                        android:textColor="#808080"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+
+                    <!-- So nha -->
+                    <LinearLayout
+                        android:orientation="horizontal"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <TextView
+                            android:text="Số "
+                            android:textSize="20dp"
+                            android:textColor="#000000"
+                            android:layout_marginLeft="5dp"
+                            android:layout_marginBottom="5dp"
+                            android:layout_width="0dp"
+                            android:layout_weight="0.3"
+                            android:layout_height="wrap_content" />
+
+                        <TextView
+                            android:text="2 "
+                            android:id="@+id/txtAddressNumber"
+                            android:textSize="20dp"
+                            android:textColor="#000000"
+                            android:layout_marginLeft="5dp"
+                            android:layout_marginBottom="5dp"
+                            android:layout_width="0dp"
+                            android:layout_weight="0.7"
+                            android:layout_height="wrap_content" />
+
+                    </LinearLayout>
+
+                    <!-- ten duong -->
+                    <LinearLayout
+                        android:orientation="horizontal"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <TextView
+                            android:text="Đường "
+                            android:textSize="20dp"
+                            android:textColor="#000000"
+                            android:layout_marginLeft="5dp"
+                            android:layout_marginBottom="5dp"
+                            android:layout_width="0dp"
+                            android:layout_weight="0.3"
+                            android:layout_height="wrap_content" />
+
+                        <TextView
+                            android:id="@+id/txtAddressRoad"
+                            android:text="Nguyễn Khánh Toàn "
+                            android:textSize="20dp"
+                            android:textColor="#000000"
+                            android:layout_marginLeft="5dp"
+                            android:layout_marginBottom="5dp"
+                            android:layout_width="0dp"
+                            android:layout_weight="0.7"
+                            android:layout_height="wrap_content" />
+
+                    </LinearLayout>
+
+                    <!-- quan -->
+                    <LinearLayout
+                        android:orientation="horizontal"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <TextView
+                            android:text="Quận "
+                            android:textSize="20dp"
+                            android:textColor="#000000"
+                            android:layout_marginLeft="5dp"
+                            android:layout_marginBottom="5dp"
+                            android:layout_width="0dp"
+                            android:layout_weight="0.3"
+                            android:layout_height="wrap_content" />
+
+                        <TextView
+                            android:id="@+id/txtAddressQuan"
+                            android:text="Cầu Giấy"
+                            android:textSize="20dp"
+                            android:textColor="#000000"
+                            android:layout_marginLeft="5dp"
+                            android:layout_marginBottom="5dp"
+                            android:layout_width="0dp"
+                            android:layout_weight="0.7"
+                            android:layout_height="wrap_content" />
+
+                    </LinearLayout>
+
+                    <!-- thanh pho -->
+                    <LinearLayout
+                        android:orientation="horizontal"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <TextView
+                            android:text="Thành phố "
+                            android:textSize="20dp"
+                            android:textColor="#000000"
+                            android:layout_marginLeft="5dp"
+                            android:layout_marginBottom="5dp"
+                            android:layout_width="0dp"
+                            android:layout_weight="0.3"
+                            android:layout_height="wrap_content" />
+
+                        <TextView
+                            android:id="@+id/txtAddressCity"
+                            android:text="Hà Nội "
+                            android:textSize="20dp"
+                            android:textColor="#000000"
+                            android:layout_marginLeft="5dp"
+                            android:layout_marginBottom="5dp"
+                            android:layout_width="0dp"
+                            android:layout_weight="0.7"
+                            android:layout_height="wrap_content" />
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+            </android.support.v7.widget.CardView>
+
+        </LinearLayout>
+
+    </android.support.v4.widget.NestedScrollView>
+
+</android.support.design.widget.CoordinatorLayout>

@@ -1,0 +1,1516 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="project.fpt.edu.vn.registerscreen.Activity.Medical.ActivityDermaContent">
+
+    <!-- top -->
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:background="@drawable/border_top"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize">
+
+        <ImageButton
+            android:id="@+id/imgBtnBack"
+            app:srcCompat="@drawable/ic_chevron_left"
+            android:background="@null"
+            android:layout_width="50dp"
+            android:layout_height="match_parent"
+            tools:ignore="VectorDrawableCompat" />
+
+        <TextView
+            android:id="@+id/txtBack"
+            android:layout_width="wrap_content"
+            android:layout_height="30dp"
+            android:layout_centerVertical="true"
+            android:layout_marginStart="0dp"
+            android:layout_toEndOf="@+id/ImgBtnBack"
+            android:text="Trở về"
+            android:textColor="@color/black"
+            android:textSize="20dp" />
+
+        <!-- <TextView
+            android:id="@+id/txtSave"
+            android:layout_width="wrap_content"
+            android:layout_height="30dp"
+            android:layout_centerVertical="true"
+            android:text="Lưu"
+            android:textColor="@color/black"
+            android:layout_gravity="right"
+            android:layout_marginRight="30dp"
+            android:textSize="20dp" /> -->
+
+    </android.support.v7.widget.Toolbar>
+
+    <!-- Middle -->
+    <ScrollView
+        android:id="@+id/ScrMid"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/lightgray">
+        <!-- Inside -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:text="Bệnh da liễu"
+                android:textColor="@color/black"
+                android:textSize="40dp" />
+
+           <LinearLayout
+               android:gravity="center"
+               android:orientation="horizontal"
+               android:layout_width="match_parent"
+               android:layout_height="wrap_content">
+
+               <TextView
+                   android:layout_width="wrap_content"
+                   android:layout_height="wrap_content"
+                   android:layout_gravity="center_horizontal"
+                   android:text="Bác sỹ: "
+                   android:textColor="@color/black"
+                   android:textSize="20dp" />
+               <TextView
+                   android:id="@+id/txtDoctorName"
+                   android:layout_width="wrap_content"
+                   android:layout_height="wrap_content"
+                   android:layout_gravity="center_horizontal"
+                   android:text="Vu Hai Dang"
+                   android:textColor="@color/black"
+                   android:textSize="20dp" />
+           </LinearLayout>
+            <LinearLayout
+                android:gravity="center"
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:text="Bệnh nhân : "
+                    android:textColor="@color/black"
+                    android:textSize="20dp" />
+                <TextView
+                    android:id="@+id/txtPatientName"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:text="Vu Hai Dang"
+                    android:textColor="@color/black"
+                    android:textSize="20dp" />
+            </LinearLayout>
+            <LinearLayout
+                android:gravity="center"
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:text="Ngày Khám : "
+                    android:textColor="@color/black"
+                    android:textSize="20dp" />
+                <TextView
+                    android:id="@+id/txtEmrDate"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:text="Vu Hai Dang"
+                    android:textColor="@color/black"
+                    android:textSize="20dp" />
+            </LinearLayout>
+
+            <android.support.v7.widget.CardView
+                android:id="@+id/cvAsk"
+                android:layout_margin="5dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <!-- Hoi Benh -->
+                <LinearLayout
+                    android:id="@+id/lineMedicalRecordA"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="10dp"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/txtMedicalRecordII"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginTop="5dp"
+                        android:textStyle="bold"
+                        android:drawableRight="@drawable/ic_down"
+                        android:text="I - Hỏi bệnh"
+                        android:textColor="@color/black"
+                        android:textSize="25dp" />
+
+                    <LinearLayout
+                        android:id="@+id/lineHidden02"
+                        android:visibility="gone"
+                        android:layout_marginLeft="5dp"
+                        android:layout_marginRight="5dp"
+                        android:orientation="vertical"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <!-- Qua trinh benh ly -->
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_marginBottom="10dp"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="5dp"
+                                android:layout_marginTop="5dp"
+                                android:text="1. Quá trình bệnh lý:"
+                                android:textColor="@color/black"
+                                android:textSize="20dp" />
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="5dp"
+                                android:layout_marginTop="5dp"
+                                android:text="(Khởi phát, diễn biến, chẩn đoán...)"
+                                android:textSize="20dp" />
+
+                            <EditText
+                                android:id="@+id/edtProcess"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:background="@drawable/edittext_border02"
+                                android:ems="10"
+                                android:focusable="false"
+                                android:inputType="textMultiLine"
+                                android:paddingLeft="5dp"
+                                android:paddingRight="5dp"
+                                android:paddingTop="5dp" />
+                        </LinearLayout>
+
+                        <!-- tien su benh -->
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_marginBottom="20dp"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="5dp"
+                                android:layout_marginTop="5dp"
+                                android:text="2. Tiền sử bệnh:"
+                                android:textColor="@color/black"
+                                android:textSize="20dp" />
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="5dp"
+                                android:layout_marginTop="5dp"
+                                android:text="(Những bệnh đã mắc, phương pháp điều trị, tiêm phòng...) "
+                                android:textSize="20dp" />
+
+                            <EditText
+                                android:id="@+id/edtAnamnesis"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:background="@drawable/edittext_border02"
+                                android:ems="10"
+                                android:focusable="false"
+                                android:inputType="textMultiLine"
+                                android:paddingLeft="5dp"
+                                android:paddingRight="5dp"
+                                android:paddingTop="5dp" />
+                        </LinearLayout>
+
+                        <!-- Dac diem lien quan den benh -->
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_marginBottom="20dp"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="5dp"
+                                android:layout_marginTop="5dp"
+                                android:text="3. Đặc điểm liên quan đến bệnh:"
+                                android:textColor="@color/black"
+                                android:textSize="20dp" />
+
+                            <!-- Table -->
+                            <LinearLayout
+                                android:orientation="horizontal"
+                                android:layout_marginLeft="5dp"
+                                android:layout_marginBottom="3dp"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content">
+                                <TextView
+                                    android:text="Ký hiệu"
+                                    android:textSize="20dp"
+                                    android:gravity="center_horizontal"
+                                    android:textColor="@color/black"
+                                    android:layout_width="0dp"
+                                    android:layout_weight="0.3"
+                                    android:layout_height="wrap_content" />
+                                <TextView
+                                    android:text="Thời gian (tính theo tháng)"
+                                    android:textSize="20dp"
+                                    android:gravity="center_horizontal"
+                                    android:textColor="@color/black"
+                                    android:layout_width="0dp"
+                                    android:layout_weight="0.7"
+                                    android:layout_height="wrap_content" />
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:orientation="horizontal"
+                                android:layout_marginLeft="5dp"
+                                android:layout_marginBottom="5dp"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content">
+                                <CheckBox
+                                    android:id="@+id/cbDiUng"
+                                    android:clickable="false"
+                                    android:text="Dị ứng"
+                                    android:textSize="20dp"
+                                    android:gravity="center_horizontal"
+                                    android:textColor="@color/black"
+                                    android:layout_width="0dp"
+                                    android:layout_weight="0.4"
+                                    android:layout_height="wrap_content" />
+                                <EditText
+                                    android:id="@+id/edtDiUng"
+                                    android:background="@drawable/edittext_border02"
+                                    android:textSize="20dp"
+                                    android:focusable="false"
+                                    android:gravity="center_horizontal"
+                                    android:textColor="@color/black"
+                                    android:inputType="textMultiLine"
+                                    android:layout_width="0dp"
+                                    android:layout_weight="0.6"
+                                    android:layout_height="wrap_content" />
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:orientation="horizontal"
+                                android:layout_marginLeft="5dp"
+                                android:layout_marginBottom="5dp"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content">
+                                <CheckBox
+                                    android:id="@+id/cbMaTuy"
+                                    android:clickable="false"
+                                    android:text="Ma túy"
+                                    android:textSize="20dp"
+                                    android:gravity="center_horizontal"
+                                    android:textColor="@color/black"
+                                    android:layout_width="0dp"
+                                    android:layout_weight="0.4"
+                                    android:layout_height="wrap_content" />
+                                <EditText
+                                    android:id="@+id/edtMaTuy"
+                                    android:background="@drawable/edittext_border02"
+                                    android:textSize="20dp"
+                                    android:focusable="false"
+                                    android:gravity="center_horizontal"
+                                    android:textColor="@color/black"
+                                    android:inputType="textMultiLine"
+                                    android:layout_width="0dp"
+                                    android:layout_weight="0.6"
+                                    android:layout_height="wrap_content" />
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:orientation="horizontal"
+                                android:layout_marginLeft="5dp"
+                                android:layout_marginBottom="5dp"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content">
+                                <CheckBox
+                                    android:id="@+id/cbRuouBia"
+                                    android:clickable="false"
+                                    android:text="Rượu bia"
+                                    android:textSize="20dp"
+                                    android:gravity="center_horizontal"
+                                    android:textColor="@color/black"
+                                    android:layout_width="0dp"
+                                    android:layout_weight="0.4"
+                                    android:layout_height="wrap_content" />
+                                <EditText
+                                    android:id="@+id/edtRuouBia"
+                                    android:background="@drawable/edittext_border02"
+                                    android:textSize="20dp"
+                                    android:focusable="false"
+                                    android:gravity="center_horizontal"
+                                    android:textColor="@color/black"
+                                    android:inputType="textMultiLine"
+                                    android:layout_width="0dp"
+                                    android:layout_weight="0.6"
+                                    android:layout_height="wrap_content" />
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:orientation="horizontal"
+                                android:layout_marginLeft="5dp"
+                                android:layout_marginBottom="5dp"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content">
+                                <CheckBox
+                                    android:id="@+id/cbThuocLa"
+                                    android:clickable="false"
+                                    android:text="Thuốc lá"
+                                    android:textSize="20dp"
+                                    android:gravity="center_horizontal"
+                                    android:textColor="@color/black"
+                                    android:layout_width="0dp"
+                                    android:layout_weight="0.4"
+                                    android:layout_height="wrap_content" />
+                                <EditText
+                                    android:id="@+id/edtThuocLa"
+                                    android:background="@drawable/edittext_border02"
+                                    android:textSize="20dp"
+                                    android:focusable="false"
+                                    android:gravity="center_horizontal"
+                                    android:textColor="@color/black"
+                                    android:inputType="textMultiLine"
+                                    android:layout_width="0dp"
+                                    android:layout_weight="0.6"
+                                    android:layout_height="wrap_content" />
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:orientation="horizontal"
+                                android:layout_marginLeft="5dp"
+                                android:layout_marginBottom="5dp"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content">
+                                <CheckBox
+                                    android:id="@+id/cbThuocLao"
+                                    android:clickable="false"
+                                    android:text="Thuốc lào"
+                                    android:textSize="20dp"
+                                    android:gravity="center_horizontal"
+                                    android:textColor="@color/black"
+                                    android:layout_width="0dp"
+                                    android:layout_weight="0.4"
+                                    android:layout_height="wrap_content" />
+                                <EditText
+                                    android:id="@+id/edtThuocLao"
+                                    android:background="@drawable/edittext_border02"
+                                    android:textSize="20dp"
+                                    android:focusable="false"
+                                    android:gravity="center_horizontal"
+                                    android:textColor="@color/black"
+                                    android:inputType="textMultiLine"
+                                    android:layout_width="0dp"
+                                    android:layout_weight="0.6"
+                                    android:layout_height="wrap_content" />
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:orientation="horizontal"
+                                android:layout_marginLeft="5dp"
+                                android:layout_marginBottom="5dp"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content">
+                                <CheckBox
+                                    android:id="@+id/cbKhac"
+                                    android:clickable="false"
+                                    android:text="Khác"
+                                    android:textSize="20dp"
+                                    android:gravity="center_horizontal"
+                                    android:textColor="@color/black"
+                                    android:layout_width="0dp"
+                                    android:layout_weight="0.4"
+                                    android:layout_height="wrap_content" />
+                                <EditText
+                                    android:id="@+id/edtKhac"
+                                    android:background="@drawable/edittext_border02"
+                                    android:textSize="20dp"
+                                    android:focusable="false"
+                                    android:gravity="center_horizontal"
+                                    android:textColor="@color/black"
+                                    android:inputType="textMultiLine"
+                                    android:layout_width="0dp"
+                                    android:layout_weight="0.6"
+                                    android:layout_height="wrap_content" />
+                            </LinearLayout>
+
+                        </LinearLayout>
+
+                        <!-- Gia dinh -->
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_marginBottom="10dp"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="5dp"
+                                android:layout_marginTop="5dp"
+                                android:text="4. Gia đình:"
+                                android:textColor="@color/black"
+                                android:textSize="20dp" />
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="5dp"
+                                android:layout_marginTop="5dp"
+                                android:text="(Người trong gia đình, bệnh đã mắc, đời sống tinh thần...) "
+                                android:textSize="20dp" />
+
+                            <EditText
+                                android:id="@+id/edtFamily"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:background="@drawable/edittext_border02"
+                                android:ems="10"
+                                android:focusable="false"
+                                android:inputType="textMultiLine"
+                                android:paddingLeft="5dp"
+                                android:paddingRight="5dp"
+                                android:paddingTop="5dp" />
+                        </LinearLayout>
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+            </android.support.v7.widget.CardView>
+
+            <android.support.v7.widget.CardView
+                android:id="@+id/cvExamination"
+                android:layout_margin="5dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <!-- Kham benh -->
+                <LinearLayout
+                    android:id="@+id/lineMedicalRecordB"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="10dp"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/txtMedicalRecordIII"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginTop="5dp"
+                        android:textStyle="bold"
+                        android:drawableRight="@drawable/ic_down"
+                        android:text="II - Khám bệnh"
+                        android:textColor="@color/black"
+                        android:textSize="25dp" />
+
+                    <LinearLayout
+                        android:id="@+id/lineHidden03"
+                        android:visibility="gone"
+                        android:orientation="vertical"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <!-- Mach -->
+                        <LinearLayout
+                            android:orientation="horizontal"
+                            android:layout_marginBottom="3dp"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
+
+                            <TextView
+                                android:text="Mạch"
+                                android:textSize="20dp"
+                                android:textColor="@color/black"
+                                android:gravity="center_horizontal"
+                                android:layout_width="0dp"
+                                android:layout_weight="0.3"
+                                android:layout_height="wrap_content" />
+                            <EditText
+                                android:id="@+id/edtCircuit"
+                                android:textSize="20dp"
+                                android:background="@drawable/edittext_border02"
+                                android:textColor="@color/black"
+                                android:layout_width="0dp"
+                                android:layout_weight="0.2"
+                                android:inputType="number"
+                                android:focusable="false"
+                                android:layout_height="wrap_content" />
+                            <TextView
+                                android:text="Lần/phút"
+                                android:gravity="center_horizontal"
+                                android:textSize="20dp"
+                                android:textColor="@color/black"
+                                android:layout_width="0dp"
+                                android:layout_weight="0.3"
+                                android:layout_height="wrap_content" />
+
+                        </LinearLayout>
+
+                        <!-- Nhiet do -->
+                        <LinearLayout
+                            android:orientation="horizontal"
+                            android:layout_marginBottom="3dp"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
+
+                            <TextView
+                                android:text="Nhiệt độ"
+                                android:textSize="20dp"
+                                android:textColor="@color/black"
+                                android:gravity="center_horizontal"
+                                android:layout_width="0dp"
+                                android:layout_weight="0.3"
+                                android:layout_height="wrap_content" />
+                            <EditText
+                                android:id="@+id/edtTemperature"
+                                android:textSize="20dp"
+                                android:background="@drawable/edittext_border02"
+                                android:textColor="@color/black"
+                                android:layout_width="0dp"
+                                android:layout_weight="0.2"
+                                android:inputType="number"
+                                android:focusable="false"
+                                android:layout_height="wrap_content" />
+                            <TextView
+                                android:text="C"
+                                android:gravity="center_horizontal"
+                                android:textSize="20dp"
+                                android:textColor="@color/black"
+                                android:layout_width="0dp"
+                                android:layout_weight="0.3"
+                                android:layout_height="wrap_content" />
+
+                        </LinearLayout>
+
+                        <!-- Huyet ap -->
+                        <LinearLayout
+                            android:orientation="horizontal"
+                            android:layout_marginBottom="3dp"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
+
+                            <TextView
+                                android:text="Huyết áp"
+                                android:textSize="20dp"
+                                android:textColor="@color/black"
+                                android:gravity="center_horizontal"
+                                android:layout_width="0dp"
+                                android:layout_weight="0.3"
+                                android:layout_height="wrap_content" />
+                            <EditText
+                                android:id="@+id/edtPressure"
+                                android:textSize="20dp"
+                                android:background="@drawable/edittext_border02"
+                                android:textColor="@color/black"
+                                android:layout_width="0dp"
+                                android:layout_weight="0.2"
+                                android:inputType="number"
+                                android:focusable="false"
+                                android:layout_height="wrap_content" />
+                            <TextView
+                                android:text="mmHg"
+                                android:gravity="center_horizontal"
+                                android:textSize="20dp"
+                                android:textColor="@color/black"
+                                android:layout_width="0dp"
+                                android:layout_weight="0.3"
+                                android:layout_height="wrap_content" />
+                        </LinearLayout>
+
+                        <!-- Nhip tho -->
+                        <LinearLayout
+                            android:orientation="horizontal"
+                            android:layout_marginBottom="3dp"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
+
+                            <TextView
+                                android:text="Nhịp thở"
+                                android:textSize="20dp"
+                                android:textColor="@color/black"
+                                android:gravity="center_horizontal"
+                                android:layout_width="0dp"
+                                android:layout_weight="0.3"
+                                android:layout_height="wrap_content" />
+                            <EditText
+                                android:id="@+id/edtBreath"
+                                android:textSize="20dp"
+                                android:background="@drawable/edittext_border02"
+                                android:textColor="@color/black"
+                                android:layout_width="0dp"
+                                android:layout_weight="0.2"
+                                android:inputType="number"
+                                android:focusable="false"
+                                android:layout_height="wrap_content" />
+                            <TextView
+                                android:text="Lần/phút"
+                                android:gravity="center_horizontal"
+                                android:textSize="20dp"
+                                android:textColor="@color/black"
+                                android:layout_width="0dp"
+                                android:layout_weight="0.3"
+                                android:layout_height="wrap_content" />
+                        </LinearLayout>
+
+                        <!-- Can nang -->
+                        <LinearLayout
+                            android:orientation="horizontal"
+                            android:layout_marginBottom="10dp"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
+
+                            <TextView
+                                android:text="Cân nặng"
+                                android:textSize="20dp"
+                                android:textColor="@color/black"
+                                android:gravity="center_horizontal"
+                                android:layout_width="0dp"
+                                android:layout_weight="0.3"
+                                android:layout_height="wrap_content" />
+                            <EditText
+                                android:id="@+id/edtWeight"
+                                android:textSize="20dp"
+                                android:background="@drawable/edittext_border02"
+                                android:textColor="@color/black"
+                                android:layout_width="0dp"
+                                android:layout_weight="0.2"
+                                android:inputType="number"
+                                android:focusable="false"
+                                android:layout_height="wrap_content" />
+                            <TextView
+                                android:text="Kg"
+                                android:gravity="center_horizontal"
+                                android:textSize="20dp"
+                                android:textColor="@color/black"
+                                android:layout_width="0dp"
+                                android:layout_weight="0.3"
+                                android:layout_height="wrap_content" />
+                        </LinearLayout>
+
+                        <!-- Toan than -->
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_marginRight="5dp"
+                            android:layout_marginLeft="5dp"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="5dp"
+                                android:layout_marginTop="5dp"
+                                android:text="1. Toàn thân"
+                                android:textColor="@color/black"
+                                android:textSize="20dp" />
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="5dp"
+                                android:layout_marginTop="5dp"
+                                android:text="(Ý thức, da niêm mạc, hệ thống mạch, tuyến giáp, vị trí, kích thước...)"
+                                android:textSize="20dp" />
+                            <EditText
+                                android:id="@+id/edtBody"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:background="@drawable/edittext_border02"
+                                android:ems="10"
+                                android:focusable="false"
+                                android:inputType="textMultiLine"
+                                android:paddingLeft="5dp"
+                                android:paddingRight="5dp"
+                                android:paddingTop="5dp" />
+                        </LinearLayout>
+
+                        <!-- Trieu chung co nang -->
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_marginRight="5dp"
+                            android:layout_marginLeft="5dp"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="5dp"
+                                android:layout_marginTop="5dp"
+                                android:text="2. Triệu chứng cơ năng"
+                                android:textColor="@color/black"
+                                android:textSize="20dp" />
+                            <EditText
+                                android:id="@+id/edtSymptoms"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:background="@drawable/edittext_border02"
+                                android:ems="10"
+                                android:focusable="false"
+                                android:inputType="textMultiLine"
+                                android:paddingLeft="5dp"
+                                android:paddingRight="5dp"
+                                android:paddingTop="5dp" />
+                        </LinearLayout>
+
+                        <!-- Ton thuong can ban -->
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_marginRight="5dp"
+                            android:layout_marginLeft="5dp"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="5dp"
+                                android:layout_marginTop="5dp"
+                                android:text="3. Tổn thương cơ bản"
+                                android:textColor="@color/black"
+                                android:textSize="20dp" />
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="5dp"
+                                android:layout_marginTop="5dp"
+                                android:text="(sơ phát, thứ phát, tính chất, loại phân bố, kích thước, hình dáng, mầu sắc...)"
+                                android:textSize="20dp" />
+                            <EditText
+                                android:id="@+id/edtInjury"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:background="@drawable/edittext_border02"
+                                android:ems="10"
+                                android:focusable="false"
+                                android:inputType="textMultiLine"
+                                android:paddingLeft="5dp"
+                                android:paddingRight="5dp"
+                                android:paddingTop="5dp" />
+                        </LinearLayout>
+
+                        <!-- Cac co quan -->
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_marginRight="5dp"
+                            android:layout_marginLeft="5dp"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:text="4. Các cơ quan"
+                                android:textSize="20dp"
+                                android:textColor="@color/black"
+                                android:layout_marginLeft="5dp"
+                                android:layout_marginTop="5dp"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content" />
+
+                            <!-- Tuan hoan -->
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+
+                                android:layout_marginBottom="3dp"
+                                android:orientation="vertical">
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginLeft="5dp"
+                                    android:layout_marginTop="5dp"
+                                    android:text="+ Tuần hoàn:"
+                                    android:textColor="@color/black"
+                                    android:textSize="20dp" />
+
+                                <EditText
+                                    android:id="@+id/edtCyclic"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:background="@drawable/edittext_border02"
+                                    android:ems="10"
+                                    android:focusable="false"
+                                    android:inputType="textMultiLine"
+                                    android:paddingLeft="5dp"
+                                    android:paddingRight="5dp"
+                                    android:paddingTop="5dp" />
+                            </LinearLayout>
+
+                            <!-- Ho hap -->
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:layout_marginBottom="3dp"
+                                android:orientation="vertical">
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginLeft="5dp"
+                                    android:layout_marginTop="5dp"
+                                    android:text="+ Hô hấp:"
+                                    android:textColor="@color/black"
+                                    android:textSize="20dp" />
+
+                                <EditText
+                                    android:id="@+id/edtRespiratory"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:background="@drawable/edittext_border02"
+                                    android:ems="10"
+                                    android:focusable="false"
+                                    android:inputType="textMultiLine"
+                                    android:paddingLeft="5dp"
+                                    android:paddingRight="5dp"
+                                    android:paddingTop="5dp" />
+                            </LinearLayout>
+
+                            <!-- Tieu hoa -->
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:layout_marginBottom="3dp"
+                                android:orientation="vertical">
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginLeft="5dp"
+                                    android:layout_marginTop="5dp"
+                                    android:text="+ Tiêu hóa:"
+                                    android:textColor="@color/black"
+                                    android:textSize="20dp" />
+
+                                <EditText
+                                    android:id="@+id/edtDigest"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:background="@drawable/edittext_border02"
+                                    android:ems="10"
+                                    android:focusable="false"
+                                    android:inputType="textMultiLine"
+                                    android:paddingLeft="5dp"
+                                    android:paddingRight="5dp"
+                                    android:paddingTop="5dp" />
+                            </LinearLayout>
+
+                            <!-- Than -->
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:layout_marginBottom="3dp"
+                                android:orientation="vertical">
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginLeft="5dp"
+                                    android:layout_marginTop="5dp"
+                                    android:text="+ Thận - niệu tiết - sinh dục:"
+                                    android:textColor="@color/black"
+                                    android:textSize="20dp" />
+
+                                <EditText
+                                    android:id="@+id/edtKidney"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:background="@drawable/edittext_border02"
+                                    android:ems="10"
+                                    android:focusable="false"
+                                    android:inputType="textMultiLine"
+                                    android:paddingLeft="5dp"
+                                    android:paddingRight="5dp"
+                                    android:paddingTop="5dp" />
+                            </LinearLayout>
+
+                            <!-- Than kinh -->
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:layout_marginBottom="3dp"
+                                android:orientation="vertical">
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginLeft="5dp"
+                                    android:layout_marginTop="5dp"
+                                    android:text="+ Thần kinh ngoại biên:"
+                                    android:textColor="@color/black"
+                                    android:textSize="20dp" />
+
+                                <EditText
+                                    android:id="@+id/edtNerve"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:background="@drawable/edittext_border02"
+                                    android:ems="10"
+                                    android:focusable="false"
+                                    android:inputType="textMultiLine"
+                                    android:paddingLeft="5dp"
+                                    android:paddingRight="5dp"
+                                    android:paddingTop="5dp" />
+                            </LinearLayout>
+
+                            <!-- Co quan khac -->
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:layout_marginBottom="3dp"
+                                android:orientation="vertical">
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginLeft="5dp"
+                                    android:layout_marginTop="5dp"
+                                    android:text="+ Cơ quan khác:"
+                                    android:textColor="@color/black"
+                                    android:textSize="20dp" />
+
+                                <EditText
+                                    android:id="@+id/edtOtherPart"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:background="@drawable/edittext_border02"
+                                    android:ems="10"
+                                    android:focusable="false"
+                                    android:inputType="textMultiLine"
+                                    android:paddingLeft="5dp"
+                                    android:paddingRight="5dp"
+                                    android:paddingTop="5dp" />
+                            </LinearLayout>
+
+                        </LinearLayout>
+
+                        <!-- Xet nghiem lam san -->
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_marginBottom="3dp"
+                            android:layout_marginRight="5dp"
+                            android:layout_marginLeft="5dp"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="5dp"
+                                android:layout_marginTop="5dp"
+                                android:text="5. Các xét nghiệm lâm sàng cần làm: "
+                                android:textColor="@color/black"
+                                android:textSize="20dp" />
+
+                            <EditText
+                                android:id="@+id/edtClinical"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:background="@drawable/edittext_border02"
+                                android:ems="10"
+                                android:focusable="false"
+                                android:inputType="textMultiLine"
+                                android:paddingLeft="5dp"
+                                android:paddingRight="5dp"
+                                android:paddingTop="5dp" />
+                        </LinearLayout>
+
+                        <!-- Tóm tắt bệnh án -->
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_marginBottom="10dp"
+                            android:layout_marginRight="5dp"
+                            android:layout_marginLeft="5dp"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="5dp"
+                                android:layout_marginTop="5dp"
+                                android:text="6. Tóm tắt bệnh án "
+                                android:textColor="@color/black"
+                                android:textSize="20dp" />
+
+                            <EditText
+                                android:id="@+id/edtMedicalSum"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:background="@drawable/edittext_border02"
+                                android:ems="10"
+                                android:focusable="false"
+                                android:inputType="textMultiLine"
+                                android:paddingLeft="5dp"
+                                android:paddingRight="5dp"
+                                android:paddingTop="5dp" />
+                        </LinearLayout>
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+            </android.support.v7.widget.CardView>
+
+            <android.support.v7.widget.CardView
+                android:id="@+id/cvDiagnose"
+                android:layout_margin="5dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <!-- Chan doan khi vao khoa dieu tri-->
+                <LinearLayout
+                    android:id="@+id/lineMedicalRecordC"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="10dp"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/txtMedicalRecordIV"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginTop="5dp"
+                        android:textStyle="bold"
+                        android:drawableRight="@drawable/ic_down"
+                        android:text="III - Chẩn đoán và điều trị"
+                        android:textColor="@color/black"
+                        android:textSize="25dp" />
+
+                    <LinearLayout
+                        android:id="@+id/lineHidden04"
+                        android:visibility="gone"
+                        android:layout_marginLeft="5dp"
+                        android:layout_marginRight="5dp"
+                        android:orientation="vertical"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <!-- benh chinh -->
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_marginBottom="3dp"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="5dp"
+                                android:layout_marginTop="5dp"
+                                android:text="+ Bệnh chính:"
+                                android:textColor="@color/black"
+                                android:textSize="20dp" />
+
+                            <EditText
+                                android:id="@+id/edtMainSickness"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:background="@drawable/edittext_border02"
+                                android:ems="10"
+                                android:focusable="false"
+                                android:inputType="textMultiLine"
+                                android:paddingLeft="5dp"
+                                android:paddingRight="5dp"
+                                android:paddingTop="5dp" />
+                        </LinearLayout>
+
+                        <!-- Benh kem theo -->
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_marginBottom="3dp"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="5dp"
+                                android:layout_marginTop="5dp"
+                                android:text="+ Bệnh kèm theo (nếu có):"
+                                android:textColor="@color/black"
+                                android:textSize="20dp" />
+
+                            <EditText
+                                android:id="@+id/edtSubSickness"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:background="@drawable/edittext_border02"
+                                android:ems="10"
+                                android:focusable="false"
+                                android:inputType="textMultiLine"
+                                android:paddingLeft="5dp"
+                                android:paddingRight="5dp"
+                                android:paddingTop="5dp" />
+                        </LinearLayout>
+
+                        <!-- Phan biet -->
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_marginBottom="3dp"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="5dp"
+                                android:layout_marginTop="5dp"
+                                android:text="+ Phân biệt:"
+                                android:textColor="@color/black"
+                                android:textSize="20dp" />
+
+                            <EditText
+                                android:id="@+id/edtDisting"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:background="@drawable/edittext_border02"
+                                android:ems="10"
+                                android:focusable="false"
+                                android:inputType="textMultiLine"
+                                android:paddingLeft="5dp"
+                                android:paddingRight="5dp"
+                                android:paddingTop="5dp" />
+                        </LinearLayout>
+
+                        <!-- Tien luong-->
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_marginBottom="3dp"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="5dp"
+                                android:layout_marginTop="5dp"
+                                android:text="+ Tiên lượng:"
+                                android:textColor="@color/black"
+                                android:textSize="20dp" />
+
+                            <EditText
+                                android:id="@+id/edtPrognosis"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:background="@drawable/edittext_border02"
+                                android:ems="10"
+                                android:focusable="false"
+                                android:inputType="textMultiLine"
+                                android:paddingLeft="5dp"
+                                android:paddingRight="5dp"
+                                android:paddingTop="5dp" />
+                        </LinearLayout>
+
+                        <!-- Huong dieu tri -->
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_marginBottom="10dp"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="5dp"
+                                android:layout_marginTop="5dp"
+                                android:text="+ Hướng điều trị:"
+                                android:textColor="@color/black"
+                                android:textSize="20dp" />
+
+                            <EditText
+                                android:id="@+id/edtDirection"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:background="@drawable/edittext_border02"
+                                android:ems="10"
+                                android:focusable="false"
+                                android:inputType="textMultiLine"
+                                android:paddingLeft="5dp"
+                                android:paddingRight="5dp"
+                                android:paddingTop="5dp" />
+                        </LinearLayout>
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+            </android.support.v7.widget.CardView>
+
+            <android.support.v7.widget.CardView
+                android:id="@+id/cvBrief"
+                android:layout_margin="5dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <!-- Tom tat benh an -->
+                <LinearLayout
+                    android:id="@+id/lineMedicalRecordD"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="10dp"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/txtMedicalRecordV"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginTop="5dp"
+                        android:textStyle="bold"
+                        android:drawableRight="@drawable/ic_down"
+                        android:text="IV - Tổng kết bệnh án"
+                        android:textColor="@color/black"
+                        android:textSize="25dp" />
+
+                    <LinearLayout
+                        android:id="@+id/lineHidden05"
+                        android:visibility="gone"
+                        android:layout_marginLeft="5dp"
+                        android:layout_marginRight="5dp"
+                        android:orientation="vertical"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <!-- Qua trinh benh -->
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_marginBottom="10dp"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="5dp"
+                                android:layout_marginTop="5dp"
+                                android:text="1. Quá trình bệnh và diễn biến lâm sàn:"
+                                android:textColor="@color/black"
+                                android:textSize="20dp" />
+
+                            <EditText
+                                android:id="@+id/edtProAndClin"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:background="@drawable/edittext_border02"
+                                android:ems="10"
+                                android:focusable="false"
+                                android:inputType="textMultiLine"
+                                android:paddingLeft="5dp"
+                                android:paddingRight="5dp"
+                                android:paddingTop="5dp" />
+                        </LinearLayout>
+
+                        <!-- ket qua xet nghiem -->
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_marginBottom="10dp"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="5dp"
+                                android:layout_marginTop="5dp"
+                                android:text="2. Kết quả xét nghiệm cận lâm sàn có giá trị chuẩn đoán:"
+                                android:textColor="@color/black"
+                                android:textSize="20dp" />
+
+                            <EditText
+                                android:id="@+id/edtResult"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:background="@drawable/edittext_border02"
+                                android:ems="10"
+                                android:focusable="false"
+                                android:inputType="textMultiLine"
+                                android:paddingLeft="5dp"
+                                android:paddingRight="5dp"
+                                android:paddingTop="5dp" />
+                        </LinearLayout>
+
+                        <!-- phuong an dieu tri -->
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_marginBottom="10dp"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="5dp"
+                                android:layout_marginTop="5dp"
+                                android:text="3. Phương án điều trị:"
+                                android:textColor="@color/black"
+                                android:textSize="20dp" />
+
+                            <EditText
+                                android:id="@+id/edtCureDirection"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:background="@drawable/edittext_border02"
+                                android:ems="10"
+                                android:focusable="false"
+                                android:inputType="textMultiLine"
+                                android:paddingLeft="5dp"
+                                android:paddingRight="5dp"
+                                android:paddingTop="5dp" />
+                        </LinearLayout>
+
+                        <!-- Tinh trang nguoi ra vien -->
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_marginBottom="10dp"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="5dp"
+                                android:layout_marginTop="5dp"
+                                android:text="4. Tình trạng người ra viên:"
+                                android:textColor="@color/black"
+                                android:textSize="20dp" />
+
+                            <EditText
+                                android:id="@+id/edtStatus"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:background="@drawable/edittext_border02"
+                                android:ems="10"
+                                android:focusable="false"
+                                android:inputType="textMultiLine"
+                                android:paddingLeft="5dp"
+                                android:paddingRight="5dp"
+                                android:paddingTop="5dp" />
+                        </LinearLayout>
+
+                        <!-- huong dieu tri va che do tiep theo -->
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_marginBottom="10dp"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="5dp"
+                                android:layout_marginTop="5dp"
+                                android:text="5. Hướng điều trị và chế độ tiếp theo:"
+                                android:textColor="@color/black"
+                                android:textSize="20dp" />
+
+                            <EditText
+                                android:id="@+id/edtNextDirection"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:background="@drawable/edittext_border02"
+                                android:ems="10"
+                                android:focusable="false"
+                                android:inputType="textMultiLine"
+                                android:paddingLeft="5dp"
+                                android:paddingRight="5dp"
+                                android:paddingTop="5dp" />
+                        </LinearLayout>
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+            </android.support.v7.widget.CardView>
+
+            <android.support.v7.widget.CardView
+                android:id="@+id/cvImage"
+                android:layout_margin="5dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <!-- Anh -->
+                <LinearLayout
+                    android:id="@+id/lineMedicalRecordE"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="10dp"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/txtMedicalRecordVI"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginTop="5dp"
+                        android:textStyle="bold"
+                        android:drawableRight="@drawable/ic_down"
+                        android:text="VI - Hồ sơ, phim, ảnh"
+                        android:textColor="@color/black"
+                        android:textSize="25dp" />
+
+                    <LinearLayout
+                        android:id="@+id/lineHidden06"
+                        android:visibility="gone"
+                        android:orientation="horizontal"
+                        android:layout_marginBottom="10dp"
+                        android:layout_marginLeft="5dp"
+                        android:layout_marginRight="5dp"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <LinearLayout
+                            android:orientation="vertical"
+                            android:layout_width="0dp"
+                            android:layout_weight="0.3"
+                            android:layout_height="wrap_content">
+                            <ImageView
+                                android:id="@+id/imgPic01"
+                                android:layout_gravity="center_horizontal"
+                                android:src="@drawable/no_image"
+                                android:layout_width="100dp"
+                                android:layout_height="100dp" />
+
+                            <!-- <Button
+                                android:layout_gravity="center_horizontal"
+                                android:text="Chọn ảnh"
+                                android:id="@+id/btnPic01"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content" /> -->
+
+                        </LinearLayout>
+
+                    </LinearLayout>
+
+
+                </LinearLayout>
+
+            </android.support.v7.widget.CardView>
+
+        </LinearLayout>
+
+    </ScrollView>
+
+</LinearLayout>

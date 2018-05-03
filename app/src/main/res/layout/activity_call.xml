@@ -22,11 +22,6 @@
             android:background="#FFFFFF"
             android:padding="2dp" />
 
-        <FrameLayout
-            android:id="@+id/subscriber_container"
-            android:layout_width="fill_parent"
-            android:layout_height="fill_parent" />
-
         <android.support.design.widget.FloatingActionButton
             android:id="@+id/fabCancel"
             android:layout_width="55dp"
@@ -35,6 +30,11 @@
             app:backgroundTint="#ED0D0D"
             android:layout_marginBottom="50dp"
             app:srcCompat="@drawable/ic_end_call" />
+
+        <FrameLayout
+            android:id="@+id/subscriber_container"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent" />
     </FrameLayout>
 
 </android.support.constraint.ConstraintLayout>

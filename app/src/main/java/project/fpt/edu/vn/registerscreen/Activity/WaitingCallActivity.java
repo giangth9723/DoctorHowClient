@@ -13,12 +13,17 @@ import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.gson.Gson;
+
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import project.fpt.edu.vn.registerscreen.Activity.DoctorList.ActivityDoctorListFemale;
+import project.fpt.edu.vn.registerscreen.Activity.DoctorList.ActivityDoctorListDermatology;
+import project.fpt.edu.vn.registerscreen.Activity.DoctorList.ActivityDoctorListMental;
 import project.fpt.edu.vn.registerscreen.Application.SocketApplication;
 import project.fpt.edu.vn.registerscreen.BusEvent.EventAcceptCall;
 import project.fpt.edu.vn.registerscreen.BusEvent.EventCancelCall;
@@ -33,6 +38,7 @@ public class WaitingCallActivity extends AppCompatActivity {
     private String TOKEN = "";
     private String Activity_before="";
     private String Doctor_Socket_id = "";
+    Gson gson = new Gson();
     TextView txtCallDoctorName;
     FloatingActionButton fabCancelCall;
     Session session;
@@ -56,15 +62,41 @@ public class WaitingCallActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_waiting_screen);
+        setContentView(R.layout.activity_waiting_call);
         txtCallDoctorName = (TextView)findViewById(R.id.txtCallDoctorName);
         fabCancelCall = (FloatingActionButton)findViewById(R.id.fabCancelCall);
+        onConnectSocket();
+        session = new Session(this);
         Intent intent = getIntent();
-        Bundle bundle = intent.getBundleExtra("Doctor_data");
-        Doctor_Socket_id = bundle.getString("Socket_id");
-        String Doctor_name = bundle.getString("Doctor_name");
-        Activity_before = bundle.getString("Activity_name");
-        txtCallDoctorName.setText(Doctor_name);
+        Bundle bundle = intent.getBundleExtra("activity_name");
+//        Doctor_Socket_id = bundle.getString("Socket_id");
+//        String Doctor_name = bundle.getString("Doctor_name");
+        Activity_before = bundle.getString("activity_name");
+        txtCallDoctorName.setText(session.getDoctorOpp().getDoctor_name());
+        if(!session.LoggedIn()){
+            Logout();
+        }
+        fabCancelCall.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                socketApplication.getSocket().emit("patient_cancel_call",session.getDoctorOpp());
+                if(Activity_before.equalsIgnoreCase(ActivityDoctorListFemale.class.getSimpleName())) {
+                    Intent intent = new Intent(WaitingCallActivity.this, ActivityDoctorListFemale.class);
+                    startActivity(intent);
+                }
+                else if(Activity_before.equalsIgnoreCase(ActivityDoctorListDermatology.class.getSimpleName())){
+                    Intent intent = new Intent(WaitingCallActivity.this, ActivityDoctorListDermatology.class);
+                    startActivity(intent);
+                }else if(Activity_before.equalsIgnoreCase(ActivityDoctorListMental.class.getSimpleName())){
+                    Intent intent = new Intent(WaitingCallActivity.this, ActivityDoctorListMental.class);
+                    startActivity(intent);
+                }
+                finish();
+            }
+        });
+        Call();
+    }
+    private void onConnectSocket(){
         socketApplication = (SocketApplication) getApplication();
         Log.d("Check", "Login created");
         if (socketApplication.getSocket() != null) {
@@ -72,26 +104,12 @@ public class WaitingCallActivity extends AppCompatActivity {
             doBindService();
         } else {
         }
-        session = new Session(this);
-
-        if(!session.LoggedIn()){
-            Logout();
-        }
-        fabCancelCall.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                socketApplication.getSocket().emit("patient_cancel_call",Doctor_Socket_id);
-                finish();
-            }
-        });
-        Call();
     }
     private void Call(){
         JSONObject obj = new JSONObject();
         try {
-            obj.put("Patient_name",session.getPatient_name());
-            obj.put("Patient_id",session.getPatient_id());
-            obj.put("Doctor_socket_id",Doctor_Socket_id);
+            obj.put("Patient_info",gson.toJson(session.getPatient()));
+            obj.put("Doctor_socket_id",session.getDoctorOpp().getSocket_id());
             obj.put("Activity_name",Activity_before);
             socketApplication.getSocket().emit("patient_call",obj.toString());
         } catch (JSONException e) {
@@ -132,13 +150,13 @@ public class WaitingCallActivity extends AppCompatActivity {
     public void onMessageEvent(EventChangeChatServerStateEvent event) {
         Toast.makeText(getBaseContext(), event.getState(), Toast.LENGTH_SHORT).show();
     }
-    @Subscribe
+    @Subscribe(threadMode = ThreadMode.MAIN)
     public void onMessageEvent(EventAcceptCall event) {
         Bundle bundle = new Bundle();
         bundle.putString("SESSION_ID",SESSION_ID);
         bundle.putString("TOKEN",TOKEN);
         bundle.putString("Activity_name",Activity_before);
-        bundle.putString("Doctor_socket_id",Doctor_Socket_id);
+        bundle.putString("Doctor_socket_id",session.getDoctorOpp().getSocket_id());
         Intent intent = new Intent(WaitingCallActivity.this,CallActivity.class);
         finish();
         intent.putExtra("dulieu",bundle);
@@ -149,10 +167,21 @@ public class WaitingCallActivity extends AppCompatActivity {
         SESSION_ID = event.getSessionID();
         TOKEN = event.getToken();
         Toast.makeText(getBaseContext(), event.getSessionID(), Toast.LENGTH_SHORT).show();
-        EventBus.getDefault().removeAllStickyEvents();
     }
-    @Subscribe
+    @Subscribe(threadMode = ThreadMode.MAIN)
     public void onMessageEvent(EventCancelCall event) {
         finish();
+        if(Activity_before.equalsIgnoreCase(ActivityDoctorListFemale.class.getSimpleName())) {
+            Intent intent = new Intent(WaitingCallActivity.this, ActivityDoctorListFemale.class);
+            startActivity(intent);
+        }
+        else if(Activity_before.equalsIgnoreCase(ActivityDoctorListDermatology.class.getSimpleName())){
+            Intent intent = new Intent(WaitingCallActivity.this, ActivityDoctorListDermatology.class);
+            startActivity(intent);
+        }else if(Activity_before.equalsIgnoreCase(ActivityDoctorListMental.class.getSimpleName())){
+            Intent intent = new Intent(WaitingCallActivity.this, ActivityDoctorListMental.class);
+            startActivity(intent);
+        }
+
     }
 }

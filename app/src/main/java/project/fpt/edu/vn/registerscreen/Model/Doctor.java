@@ -7,36 +7,78 @@ import java.io.Serializable;
  */
 
 public class Doctor implements Serializable {
-    private int doctorID;
+    private int doctor_id;
     private String username;
     private String password;
-    private String name;
-    private int gender;
+    private String doctor_name;
+    private String profile_picture;
+    private String gender;
     private String clinic;
     private String degree;
     private String birthday;
-    private String id_card;
-    private String address;
+    private String phone_number;
+    private String id_number;
+    private String address_number;
+    private String address_street;
+    private String address_distric;
+    private String address_city;
+    private String description;
+    private String socket_id;
+    private String online_status;
+    public Doctor() {
+    }
 
-    public Doctor(int doctorID, String username, String password, String name, int gender, String clinic, String degree, String birthday, String id_card, String address) {
-        this.doctorID = doctorID;
+    public Doctor(int doctor_id, String username, String password, String doctor_name, String profile_picture, String gender, String clinic, String degree, String birthday, String phone_number, String id_number, String address_number, String address_street, String address_distric, String address_city, String description, String socket_id, String online_status) {
+        this.doctor_id = doctor_id;
         this.username = username;
         this.password = password;
-        this.name = name;
+        this.doctor_name = doctor_name;
+        this.profile_picture = profile_picture;
         this.gender = gender;
         this.clinic = clinic;
         this.degree = degree;
         this.birthday = birthday;
-        this.id_card = id_card;
-        this.address = address;
+        this.phone_number = phone_number;
+        this.id_number = id_number;
+        this.address_number = address_number;
+        this.address_street = address_street;
+        this.address_distric = address_distric;
+        this.address_city = address_city;
+        this.description = description;
+        this.socket_id = socket_id;
+        this.online_status = online_status;
     }
 
-    public int getDoctorID() {
-        return doctorID;
+    public String getPhone_number() {
+        return phone_number;
     }
 
-    public void setDoctorID(int doctorID) {
-        this.doctorID = doctorID;
+    public void setPhone_number(String phone_number) {
+        this.phone_number = phone_number;
+    }
+
+    public String getSocket_id() {
+        return socket_id;
+    }
+
+    public void setSocket_id(String socket_id) {
+        this.socket_id = socket_id;
+    }
+
+    public String getOnline_status() {
+        return online_status;
+    }
+
+    public void setOnline_status(String online_status) {
+        this.online_status = online_status;
+    }
+
+    public int getDoctor_id() {
+        return doctor_id;
+    }
+
+    public void setDoctor_id(int doctor_id) {
+        this.doctor_id = doctor_id;
     }
 
     public String getUsername() {
@@ -55,19 +97,27 @@ public class Doctor implements Serializable {
         this.password = password;
     }
 
-    public String getName() {
-        return name;
+    public String getDoctor_name() {
+        return doctor_name;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setDoctor_name(String doctor_name) {
+        this.doctor_name = doctor_name;
     }
 
-    public int getGender() {
+    public String getProfile_picture() {
+        return profile_picture;
+    }
+
+    public void setProfile_picture(String profile_picture) {
+        this.profile_picture = profile_picture;
+    }
+
+    public String getGender() {
         return gender;
     }
 
-    public void setGender(int gender) {
+    public void setGender(String gender) {
         this.gender = gender;
     }
 
@@ -95,19 +145,51 @@ public class Doctor implements Serializable {
         this.birthday = birthday;
     }
 
-    public String getId_card() {
-        return id_card;
+    public String getId_number() {
+        return id_number;
     }
 
-    public void setId_card(String id_card) {
-        this.id_card = id_card;
+    public void setId_number(String id_number) {
+        this.id_number = id_number;
     }
 
-    public String getAddress() {
-        return address;
+    public String getAddress_number() {
+        return address_number;
     }
 
-    public void setAddress(String address) {
-        this.address = address;
+    public void setAddress_number(String address_number) {
+        this.address_number = address_number;
+    }
+
+    public String getAddress_street() {
+        return address_street;
+    }
+
+    public void setAddress_street(String address_street) {
+        this.address_street = address_street;
+    }
+
+    public String getAddress_distric() {
+        return address_distric;
+    }
+
+    public void setAddress_distric(String address_distric) {
+        this.address_distric = address_distric;
+    }
+
+    public String getAddress_city() {
+        return address_city;
+    }
+
+    public void setAddress_city(String address_city) {
+        this.address_city = address_city;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
     }
 }

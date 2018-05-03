@@ -13,28 +13,42 @@
         <RelativeLayout
             android:id="@+id/RelLayoutTop"
             android:layout_width="match_parent"
-            android:layout_height="70dp"
+            android:layout_height="100dp"
             android:layout_alignParentTop="true">
 
             <EditText
-                android:id="@+id/TxtSearch"
+                android:id="@+id/edtSearch"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
                 android:layout_toStartOf="@+id/ImgSearch"
+                android:layout_alignParentTop="true"
                 android:ems="10"
                 android:inputType="textPersonName" />
 
             <ImageButton
+                android:layout_alignParentTop="true"
                 android:id="@+id/ImgSearch"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentEnd="true"
-                android:layout_alignTop="@+id/TxtSearch"
+                android:layout_alignTop="@+id/edtSearch"
                 app:srcCompat="@drawable/ic_glass" />
+                <TextView
+                    android:id="@+id/txtListName"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:text="Vu Hai Dang"
+                    android:textColor="@color/black"
+                    android:textSize="30dp"
+                    android:layout_below="@id/ImgSearch"
+                    />
+
         </RelativeLayout>
 
         <!-- Mid -->
+
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"

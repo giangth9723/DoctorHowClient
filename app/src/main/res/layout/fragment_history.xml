@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="project.fpt.edu.vn.registerscreen.Fragment.FragmentHistory">
+    tools:context="project.fpt.edu.vn.registerscreen.Activity.MenuActivity">
 
     <!-- TODO: Update blank fragment layout -->
     <ListView

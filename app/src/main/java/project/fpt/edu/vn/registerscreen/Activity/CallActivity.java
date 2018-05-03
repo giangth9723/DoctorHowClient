@@ -7,7 +7,6 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.ServiceConnection;
 import android.os.Bundle;
-import android.os.Handler;
 import android.os.IBinder;
 import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
@@ -15,7 +14,6 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
-import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.Toast;
 
@@ -29,13 +27,18 @@ import com.opentok.android.Subscriber;
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
+import org.json.JSONException;
+import org.json.JSONObject;
 
-import project.fpt.edu.vn.registerscreen.Activity.DoctorList.ActivityDoctorList1;
-import project.fpt.edu.vn.registerscreen.Activity.DoctorList.ActivityDoctorList2;
-import project.fpt.edu.vn.registerscreen.Activity.DoctorList.ActivityDoctorList3;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+
+import project.fpt.edu.vn.registerscreen.Activity.DoctorList.ActivityDoctorListFemale;
+import project.fpt.edu.vn.registerscreen.Activity.DoctorList.ActivityDoctorListDermatology;
+import project.fpt.edu.vn.registerscreen.Activity.DoctorList.ActivityDoctorListMental;
 import project.fpt.edu.vn.registerscreen.Application.SocketApplication;
 import project.fpt.edu.vn.registerscreen.BusEvent.EventChangeChatServerStateEvent;
-import project.fpt.edu.vn.registerscreen.BusEvent.EventConnectCall;
 import project.fpt.edu.vn.registerscreen.BusEvent.EventFinishCall;
 import project.fpt.edu.vn.registerscreen.R;
 import project.fpt.edu.vn.registerscreen.Service.SocketServiceProvider;
@@ -55,7 +58,11 @@ public class CallActivity extends AppCompatActivity implements  Session.SessionL
     private Publisher mPublisher;
     private Subscriber mSubscriber;
     private String Activity_before = "";
-    private String Doctor_Socket_id = "";
+    private String start_time;
+    private String end_time;
+    private String duration;
+    final DateFormat df = new SimpleDateFormat("HH:mm:ss"); //format time
+    project.fpt.edu.vn.registerscreen.Session session;
     FloatingActionButton fabCancel;
     Boolean mIsBound;
     SocketApplication socketApplication;
@@ -79,7 +86,24 @@ public class CallActivity extends AppCompatActivity implements  Session.SessionL
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_call);
+        onConnectSocket();
+        session = new project.fpt.edu.vn.registerscreen.Session(this);
         fabCancel = (FloatingActionButton)findViewById(R.id.fabCancel);
+        Intent intent = getIntent();
+        Bundle bundle = intent.getBundleExtra("dulieu");
+        SESSION_ID = bundle.getString("SESSION_ID");
+        TOKEN = bundle.getString("TOKEN");
+        Activity_before = bundle.getString("Activity_name");
+        start_time= df.format(Calendar.getInstance().getTime());
+        fabCancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                patient_finish_call();
+            }
+        });
+        requestPermissions();
+    }
+    private void onConnectSocket(){
         socketApplication = (SocketApplication) getApplication();
         Log.d("Check", "Login created");
         if (socketApplication.getSocket() != null) {
@@ -87,30 +111,17 @@ public class CallActivity extends AppCompatActivity implements  Session.SessionL
             doBindService();
         } else {
         }
-        Intent intent = getIntent();
-        Bundle bundle = intent.getBundleExtra("dulieu");
-        SESSION_ID = bundle.getString("SESSION_ID");
-        TOKEN = bundle.getString("TOKEN");
-        Activity_before = bundle.getString("Activity_name");
-        Doctor_Socket_id = bundle.getString("Doctor_socket_id");
-        fabCancel.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                socketApplication.getSocket().emit("patient_finish_call",Doctor_Socket_id);
-                patient_finish_call();
-            }
-        });
-        requestPermissions();
     }
     public void patient_finish_call(){
         mSession.disconnect();
+        socketApplication.getSocket().emit("patient_finish_call",session.getDoctorOpp().getSocket_id());
         AlertDialog.Builder alertDialog = new AlertDialog.Builder(CallActivity.this);
         alertDialog.setTitle("Thông báo !");
         alertDialog.setMessage("Cuộc gọi kết thúc ! Bạn có muốn chia sẻ bệnh án cho bác sĩ không?");
         alertDialog.setPositiveButton("Có", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
-                 socketApplication.getSocket().emit("patient_accept_request_emr",Doctor_Socket_id);
+                 socketApplication.getSocket().emit("patient_accept_request_emr",session.getDoctorOpp().getSocket_id());
                  finish();
                  getBack_activity();
             }
@@ -118,7 +129,7 @@ public class CallActivity extends AppCompatActivity implements  Session.SessionL
         alertDialog.setNegativeButton("Không", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
-                socketApplication.getSocket().emit("patient_decline_request_emr",Doctor_Socket_id);
+                socketApplication.getSocket().emit("patient_decline_request_emr",session.getDoctorOpp().getSocket_id());
                 finish();
                 getBack_activity();
             }
@@ -127,15 +138,15 @@ public class CallActivity extends AppCompatActivity implements  Session.SessionL
 
     }
     public void getBack_activity(){
-        if(Activity_before.equalsIgnoreCase(ActivityDoctorList1.class.getSimpleName())) {
-            Intent intent = new Intent(CallActivity.this, ActivityDoctorList1.class);
+        if(Activity_before.equalsIgnoreCase(ActivityDoctorListFemale.class.getSimpleName())) {
+            Intent intent = new Intent(CallActivity.this, ActivityDoctorListFemale.class);
             startActivity(intent);
         }
-        else if(Activity_before.equalsIgnoreCase(ActivityDoctorList2.class.getSimpleName())){
-            Intent intent = new Intent(CallActivity.this, ActivityDoctorList2.class);
+        else if(Activity_before.equalsIgnoreCase(ActivityDoctorListDermatology.class.getSimpleName())){
+            Intent intent = new Intent(CallActivity.this, ActivityDoctorListDermatology.class);
             startActivity(intent);
-        }else if(Activity_before.equalsIgnoreCase(ActivityDoctorList3.class.getSimpleName())){
-            Intent intent = new Intent(CallActivity.this, ActivityDoctorList3.class);
+        }else if(Activity_before.equalsIgnoreCase(ActivityDoctorListMental.class.getSimpleName())){
+            Intent intent = new Intent(CallActivity.this, ActivityDoctorListMental.class);
             startActivity(intent);
         }
     }
@@ -239,16 +250,70 @@ public class CallActivity extends AppCompatActivity implements  Session.SessionL
         }
         super.onStop();
     }
+    private String secToTime(int sec){
+        int seconds = sec % 60;
+        int minutes = sec / 60;
+        if (minutes >= 60) {
+            int hours = minutes / 60;
+            minutes %= 60;
+            if( hours >= 24) {
+                int days = hours / 24;
+                return String.format("%d days %02d:%02d:%02d", days,hours%24, minutes, seconds);
+            }
+            return String.format("%02d:%02d:%02d", hours, minutes, seconds);
+        }
+        return String.format("00:%02d:%02d", minutes, seconds);
+    }
 
+    private String timeToSec(String time1, String time2){
+        String[] unit1 = time1.split(":");
+        int hour1 = Integer.parseInt(unit1[0])*3600;
+        int minute1 = Integer.parseInt(unit1[1])*60;
+        int second1 = Integer.parseInt(unit1[2]);
+        int total1 = hour1 + minute1 + second1;
+
+        String[] unit2 = time2.split(":");
+        int hour2 = Integer.parseInt(unit2[0])*3600;
+        int minute2 = Integer.parseInt(unit2[1])*60;
+        int second2 = Integer.parseInt(unit2[2]);
+        int total2 = hour2 + minute2 + second2;
+
+        return String.valueOf(total2 - total1);
+    }
     @Override
     protected void onDestroy() {
+        end_time= df.format(Calendar.getInstance().getTime());
+        String sduration = timeToSec(start_time,end_time);
+        duration = secToTime(Integer.parseInt(sduration));
+        JSONObject obj = new JSONObject();
+        try {
+            Calendar cal = Calendar.getInstance();
+            obj.put("Doctor_id",session.getDoctorOpp().getDoctor_id());
+            obj.put("Patient_id",session.getPatient().getPatient_id());
+            obj.put("Start_time",start_time);
+            obj.put("End_time",end_time);
+            obj.put("Duration",duration);
+            if(Activity_before.equalsIgnoreCase(ActivityDoctorListFemale.class.getSimpleName())) {
+                obj.put("Emr_type","female");
+            }
+            else if(Activity_before.equalsIgnoreCase(ActivityDoctorListDermatology.class.getSimpleName())){
+                obj.put("Emr_type","dermatology");
+            }else if(Activity_before.equalsIgnoreCase(ActivityDoctorListMental.class.getSimpleName())){
+                obj.put("Emr_type","mental");
+            }
+            obj.put("Day",String.valueOf(cal.get(Calendar.YEAR))+"-"+cal.get(Calendar.MONTH)+"-"+cal.get(Calendar.DAY_OF_MONTH));
+            socketApplication.getSocket().emit("patient_save_history_call",obj.toString());
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
         super.onDestroy();
     }
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void onMessageEvent(EventChangeChatServerStateEvent event) {
         Toast.makeText(getBaseContext(), event.getState(), Toast.LENGTH_SHORT).show();
     }
-    @Subscribe
+    @Subscribe(threadMode = ThreadMode.MAIN)
     public void onMessageEvent(EventFinishCall event){
         patient_finish_call();
     }

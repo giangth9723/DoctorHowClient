@@ -8,80 +8,35 @@ import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
-import android.widget.GridView;
-import android.widget.ListView;
+import android.widget.LinearLayout;
+import android.widget.TextView;
 
-import project.fpt.edu.vn.registerscreen.Activity.DoctorList.ActivityDoctorList1;
-import project.fpt.edu.vn.registerscreen.Activity.DoctorList.ActivityDoctorList2;
-import project.fpt.edu.vn.registerscreen.Activity.DoctorList.ActivityDoctorList3;
+import project.fpt.edu.vn.registerscreen.Activity.DoctorList.ActivityDoctorListFemale;
+import project.fpt.edu.vn.registerscreen.Activity.DoctorList.ActivityDoctorListDermatology;
+import project.fpt.edu.vn.registerscreen.Activity.DoctorList.ActivityDoctorListMental;
 import project.fpt.edu.vn.registerscreen.R;
+import project.fpt.edu.vn.registerscreen.Session;
 
 
 /**
  * A simple {@link Fragment} subclass.
  */
 public class FragmentHome extends Fragment {
-    public static final String NAME = "NAME";
-    GridView gridView;
-    private ListView lv;
-    String[] ten = {
-            "Anh 01","Anh 02","Anh 03","Anh 04"
-    };
-    int[] hinh = {
-            R.drawable.logo01, R.drawable.logo02, R.drawable.logo03, R.drawable.logo04
-    };
-    String PicName;
-
+    Session session;
+    TextView txtClientName;
+    LinearLayout mental,female,dermatology;
+    public FragmentHome() {
+        // Required empty public constructor
+    }
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_home, container, false);
-        //gridView = (GridView)view.findViewById(R.id.GridView);
-
-        //GridViewAdapter gridViewAdapter = new GridViewAdapter(getContext(),ten,hinh);
-        //gridView.setAdapter(gridViewAdapter);
-
-        /*gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                //Toast.makeText(getContext(), ten[i], Toast.LENGTH_SHORT).show();
-                Intent intent = new Intent(getActivity(), ActivityDoctorList1.class);
-                intent.putExtra(NAME, ten[i]);
-                startActivity(intent);
-            }
-        });
-        */
-        lv = (ListView) view.findViewById(R.id.lstOption);
-        final String[] option = {"Bệnh phụ khoa", "Bệnh da liễu","Bệnh tâm thần"};
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(getContext(), R.layout.my_simple_list_item01, option);
-        lv.setAdapter(adapter);
-
-        lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                switch (i){
-                    case 0:
-                        Intent intent = new Intent(getActivity(), ActivityDoctorList1.class);
-                        intent.putExtra(NAME, option[i]);
-                        startActivity(intent);
-                        break;
-                    case 1:
-                        Intent intent2 = new Intent(getActivity(), ActivityDoctorList2.class);
-                        intent2.putExtra(NAME, option[i]);
-                        startActivity(intent2);
-                        break;
-                    case 2:
-                        Intent intent3 = new Intent(getActivity(), ActivityDoctorList3.class);
-                        intent3.putExtra(NAME, option[i]);
-                        startActivity(intent3);
-                        break;
-                }
-            }
-        });
-
+        mental = (LinearLayout)view.findViewById(R.id.mental);
+        female = (LinearLayout)view.findViewById(R.id.female);
+        dermatology = (LinearLayout)view.findViewById(R.id.dermatology);
+        SetEvent();
         view.setFocusableInTouchMode(true);
         view.requestFocus();
         view.setOnKeyListener(new View.OnKeyListener() {
@@ -94,7 +49,32 @@ public class FragmentHome extends Fragment {
                 return false;
             }
         });
+        session = new Session(getContext());
+
         return view;
+    }
+    public void SetEvent(){
+        mental.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getContext(),ActivityDoctorListMental.class);
+                startActivity(intent);
+            }
+        });
+        female.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getContext(),ActivityDoctorListFemale.class);
+                startActivity(intent);
+            }
+        });
+        dermatology.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getContext(),ActivityDoctorListDermatology.class);
+                startActivity(intent);
+            }
+        });
     }
 
     @Override

@@ -12,9 +12,10 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import project.fpt.edu.vn.registerscreen.Activity.ActivityAppoint;
+import java.io.Serializable;
+
+import project.fpt.edu.vn.registerscreen.Activity.AppointmentActivity;
 import project.fpt.edu.vn.registerscreen.Model.Doctor;
-import project.fpt.edu.vn.registerscreen.Model.DoctorOnline;
 
 public class DoctorProfileActivity extends AppCompatActivity {
 
@@ -34,18 +35,24 @@ public class DoctorProfileActivity extends AppCompatActivity {
         tvDocName = (TextView)findViewById(R.id.tvProDocName);
         fabDate = (FloatingActionButton)findViewById(R.id.fabDate);
 
+        Bundle b = getIntent().getExtras();
+        final Doctor doctor = (Doctor) b.getSerializable("doctor");
+        final String activity_name = b.getString("activity_name");
         fabDate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(DoctorProfileActivity.this, ActivityAppoint.class);
+                Intent intent = new Intent(DoctorProfileActivity.this, AppointmentActivity.class);
+                Bundle bundle = new Bundle();
+                bundle.putSerializable("doctor", doctor);
+                bundle.putString("activity_name",activity_name);
+                intent.putExtra("doctor_data",bundle);
                 startActivity(intent);
             }
         });
 
-        Bundle b = getIntent().getExtras();
+
         if (b != null) {
-            DoctorOnline doctorOnline = (DoctorOnline) b.getSerializable("array_doctor");
-            tvDocName.setText(doctorOnline.getDoctorName());
+            tvDocName.setText(doctor.getDoctor_name());
         }
 
         lnDocInfor = (LinearLayout)findViewById(R.id.LineDocProInfor);

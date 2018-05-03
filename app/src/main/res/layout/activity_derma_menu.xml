@@ -1,0 +1,394 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.design.widget.CoordinatorLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="project.fpt.edu.vn.registerscreen.Activity.Medical.ActivityDermaMenu">
+
+    <!-- Top -->
+    <android.support.design.widget.AppBarLayout
+        android:id="@+id/appBar"
+        android:layout_width="match_parent"
+        android:layout_height="220dp"
+        android:background="@color/pink">
+
+        <android.support.design.widget.CollapsingToolbarLayout
+            android:id="@+id/collapToolbar"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+
+            app:contentScrim="?attr/colorAccent"
+            app:expandedTitleMarginStart="48dp"
+            app:title="Bệnh da liễu"
+            app:layout_scrollFlags="exitUntilCollapsed|scroll">
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/profileImageView"
+                android:layout_gravity="right"
+                android:layout_width="130dp"
+                android:layout_height="130dp"
+                android:layout_marginRight="25dp"
+                android:layout_marginTop="30dp"
+                android:src="@drawable/user_default_avatar"
+                app:civ_border_color="#363632"
+                app:civ_border_width="0dp" />
+
+            <android.support.v7.widget.Toolbar
+                android:id="@+id/toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="?attr/actionBarSize"
+                android:theme="@style/ThemeOverlay.AppCompat.Light"
+                app:layout_collapseMode="pin">
+
+                <ImageButton
+                    android:id="@+id/imgBtnBack"
+                    app:srcCompat="@drawable/ic_chevron_white_left"
+                    android:background="@null"
+                    android:layout_width="50dp"
+                    android:layout_height="match_parent"
+                    tools:ignore="VectorDrawableCompat" />
+
+            </android.support.v7.widget.Toolbar>
+
+        </android.support.design.widget.CollapsingToolbarLayout>
+
+    </android.support.design.widget.AppBarLayout>
+
+    <!-- Middle -->
+    <android.support.v4.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_margin="10dp"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <android.support.v7.widget.CardView
+                android:layout_margin="10dp"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <TextView
+                        android:id="@+id/txtInformation"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginTop="5dp"
+                        android:textStyle="bold"
+                        android:drawableRight="@drawable/ic_down"
+                        android:text="I - Thông tin bệnh nhân"
+                        android:textColor="@color/black"
+                        android:textSize="25dp" />
+
+                    <LinearLayout
+                        android:id="@+id/lineHidden01"
+                        android:visibility="gone"
+                        android:orientation="vertical"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <!-- Ten -->
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_marginLeft="20dp"
+                            android:layout_marginRight="20dp"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="5dp"
+                                android:layout_marginTop="5dp"
+                                android:text="Tên"
+                                android:textColor="@color/black"
+                                android:textSize="20dp" />
+
+                            <EditText
+                                android:id="@+id/edtName"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:background="@drawable/edittext_border02"
+                                android:ems="10"
+                                android:focusableInTouchMode="false"
+                                android:focusable="false"
+                                android:inputType="textMultiLine"
+                                android:paddingLeft="5dp"
+                                android:paddingRight="5dp"
+                                android:paddingTop="5dp" />
+
+                        </LinearLayout>
+
+                        <!-- Ngay sinh -->
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_marginLeft="20dp"
+                            android:layout_marginRight="20dp"
+                            android:orientation="horizontal">
+
+                            <LinearLayout
+                                android:orientation="vertical"
+                                android:layout_width="0dp"
+                                android:layout_weight="0.8"
+                                android:layout_height="match_parent">
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginLeft="5dp"
+                                    android:layout_marginTop="5dp"
+                                    android:text="Ngày sinh"
+                                    android:textColor="@color/black"
+                                    android:textSize="20dp" />
+
+                                <EditText
+                                    android:text="14/04/1996"
+                                    android:id="@+id/edtBirth"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:background="@drawable/edittext_border02"
+                                    android:ems="10"
+                                    android:focusableInTouchMode="false"
+                                    android:focusable="false"
+                                    android:inputType="textMultiLine"
+                                    android:layout_marginRight="5dp"
+                                    android:paddingLeft="5dp"
+                                    android:paddingRight="5dp"
+                                    android:paddingTop="5dp" />
+
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:orientation="vertical"
+                                android:layout_width="0dp"
+                                android:layout_weight="0.2"
+                                android:layout_height="match_parent">
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginLeft="5dp"
+                                    android:layout_marginTop="5dp"
+                                    android:text="Tuổi"
+                                    android:textColor="@color/black"
+                                    android:textSize="20dp" />
+
+                                <EditText
+                                    android:id="@+id/edtAge"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:background="@drawable/edittext_border02"
+                                    android:ems="10"
+                                    android:focusableInTouchMode="false"
+                                    android:focusable="false"
+                                    android:inputType="textMultiLine"
+                                    android:layout_marginLeft="5dp"
+                                    android:paddingLeft="5dp"
+                                    android:paddingRight="5dp"
+                                    android:paddingTop="5dp" />
+
+                            </LinearLayout>
+
+                        </LinearLayout>
+
+                        <!-- So dien thoai -->
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_marginLeft="20dp"
+                            android:layout_marginRight="20dp"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="5dp"
+                                android:layout_marginTop="5dp"
+                                android:text="Số điện thoại"
+                                android:textColor="@color/black"
+                                android:textSize="20dp" />
+
+                            <EditText
+                                android:id="@+id/edtPhone"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:background="@drawable/edittext_border02"
+                                android:ems="10"
+                                android:focusableInTouchMode="false"
+                                android:focusable="false"
+                                android:inputType="number"
+                                android:paddingLeft="5dp"
+                                android:paddingRight="5dp"
+                                android:paddingTop="5dp" />
+
+                        </LinearLayout>
+
+                        <!-- dia chi -->
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_marginLeft="20dp"
+                            android:layout_marginRight="20dp"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="5dp"
+                                android:layout_marginTop="5dp"
+                                android:text="Địa chỉ"
+                                android:textColor="@color/black"
+                                android:textSize="20dp" />
+
+                            <EditText
+                                android:id="@+id/edtAddress"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:background="@drawable/edittext_border02"
+                                android:ems="10"
+                                android:focusable="false"
+                                android:focusableInTouchMode="false"
+                                android:inputType="textMultiLine"
+                                android:paddingLeft="5dp"
+                                android:paddingRight="5dp"
+                                android:paddingTop="5dp" />
+                        </LinearLayout>
+
+                        <!-- Can nang -->
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_marginLeft="20dp"
+                            android:layout_marginRight="20dp"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="5dp"
+                                android:layout_marginTop="5dp"
+                                android:text="Cân nặng"
+                                android:textColor="@color/black"
+                                android:textSize="20dp" />
+
+                            <EditText
+                                android:id="@+id/edtWeight"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:background="@drawable/edittext_border02"
+                                android:ems="10"
+                                android:focusableInTouchMode="false"
+                                android:focusable="false"
+                                android:paddingLeft="5dp"
+                                android:paddingRight="5dp"
+                                android:paddingTop="5dp" />
+                        </LinearLayout>
+
+                        <!-- Chieu cao -->
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_marginLeft="20dp"
+                            android:layout_marginRight="20dp"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="5dp"
+                                android:layout_marginTop="5dp"
+                                android:text="Chiều cao"
+                                android:textColor="@color/black"
+                                android:textSize="20dp" />
+
+                            <EditText
+                                android:id="@+id/edtHeight"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:background="@drawable/edittext_border02"
+                                android:ems="10"
+                                android:focusableInTouchMode="false"
+                                android:focusable="false"
+                                android:paddingLeft="5dp"
+                                android:paddingRight="5dp"
+                                android:paddingTop="5dp" />
+                        </LinearLayout>
+
+                        <!-- CMT-->
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_marginBottom="20dp"
+                            android:layout_marginLeft="20dp"
+                            android:layout_marginRight="20dp"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="5dp"
+                                android:layout_marginTop="5dp"
+                                android:text="Chứng minh thư"
+                                android:textColor="@color/black"
+                                android:textSize="20dp" />
+
+                            <EditText
+                                android:id="@+id/edtCMT"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:background="@drawable/edittext_border02"
+                                android:ems="10"
+                                android:focusableInTouchMode="false"
+                                android:focusable="false"
+                                android:paddingLeft="5dp"
+                                android:paddingRight="5dp"
+                                android:paddingTop="5dp" />
+                        </LinearLayout>
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+            </android.support.v7.widget.CardView>
+
+            <android.support.v7.widget.CardView
+                android:layout_margin="10dp"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <TextView
+                        android:id="@+id/txtHistory"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginTop="5dp"
+                        android:textStyle="bold"
+                        android:drawableRight="@drawable/ic_chevron_right"
+                        android:text="II - Thông tin bệnh án"
+                        android:textColor="@color/black"
+                        android:textSize="25dp" />
+
+                </LinearLayout>
+
+            </android.support.v7.widget.CardView>
+
+        </LinearLayout>
+
+    </android.support.v4.widget.NestedScrollView>
+
+</android.support.design.widget.CoordinatorLayout>

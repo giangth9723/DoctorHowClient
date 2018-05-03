@@ -1,305 +1,457 @@
-<RelativeLayout
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:onClick="hideKey"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="project.fpt.edu.vn.registerscreen.Activity.ActivityUserProfileChange">
+    android:orientation="vertical"
+    tools:context="project.fpt.edu.vn.registerscreen.Activity.UserProfileChangeActivity">
 
-    <!-- TODO: Update blank fragment layout -->
-    <LinearLayout
-        android:orientation="horizontal"
-        android:id="@+id/LineChangeTop"
+    <!-- top -->
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar"
         android:background="@drawable/border_top"
         android:layout_width="match_parent"
-        android:layout_height="50dp">
+        android:layout_height="?attr/actionBarSize">
 
         <ImageButton
-            android:id="@+id/ImgBtnBack"
+            android:id="@+id/imgBtnBack"
             app:srcCompat="@drawable/ic_chevron_left"
             android:background="@null"
             android:layout_width="50dp"
-            android:layout_height="50dp" />
+            android:layout_height="match_parent"
+            tools:ignore="VectorDrawableCompat" />
 
         <TextView
-            android:layout_gravity="center_vertical"
-            android:layout_marginBottom="5dp"
-            android:layout_marginTop="6dp"
-            android:textSize="20sp"
-            android:textColor="@color/colorBlack"
-            android:text="Chỉnh sửa thông tin cá nhân"
+            android:id="@+id/txtBack"
             android:layout_width="wrap_content"
-            android:layout_height="30dp"/>
+            android:layout_height="30dp"
+            android:layout_centerVertical="true"
+            android:layout_marginStart="0dp"
+            android:text="Trở về"
+            android:textColor="@color/black"
+            android:textSize="20dp" />
 
-    </LinearLayout>
-    <ScrollView
-        android:layout_below="@+id/LineChangeTop"
+        <TextView
+            android:id="@+id/txtSave"
+            android:layout_width="wrap_content"
+            android:layout_height="30dp"
+            android:layout_centerVertical="true"
+            android:text="Lưu"
+            android:textColor="@color/black"
+            android:layout_gravity="right"
+            android:layout_marginRight="30dp"
+            android:textSize="20dp" />
+
+    </android.support.v7.widget.Toolbar>
+
+    <!-- middle -->
+    <android.support.v4.widget.NestedScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:clipToPadding="false"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
-        <RelativeLayout
+        <android.support.v7.widget.CardView
+            android:layout_margin="10dp"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="wrap_content">
 
-            <!-- First Box -->
-            <TextView
-                android:text="Đổi thông tin cá nhân"
-                android:id="@+id/tv01"
-                android:textColor="@color/colorBlack"
-                android:layout_marginLeft="10dp"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:textSize="20dp" />
             <LinearLayout
-                android:layout_below="@+id/tv01"
-                android:background="@drawable/border"
-                android:layout_marginTop="10dp"
-                android:layout_marginLeft="10dp"
-                android:layout_marginRight="10dp"
-                android:id="@+id/LinePCInfor"
+                android:id="@+id/lineVerInfor"
                 android:orientation="vertical"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 
-                <!-- Name-->
-                <LinearLayout
-                    android:background="@drawable/border_style01"
-                    android:orientation="horizontal"
+                <TextView
+                    android:text="Đổi thông tin cá nhân"
+                    android:textSize="20dp"
+                    android:textStyle="bold"
+                    android:textColor="@color/black"
+                    android:textAlignment="center"
                     android:layout_width="match_parent"
-                    android:layout_height="60dp">
-                    <ImageView
-                        android:layout_gravity="center_vertical"
-                        android:layout_width="0dp"
-                        android:layout_height="30dp"
-                        android:layout_weight=".2"
-                        app:srcCompat="@drawable/ic_person"/>
+                    android:layout_height="30dp" />
+
+                <!-- Name -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginBottom="10dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="5dp"
+                        android:layout_marginTop="5dp"
+                        android:text="Tên người dùng: "
+                        android:textColor="@color/black"
+                        android:textSize="20dp" />
+
                     <EditText
-                        android:textColor="@color/colorBlack"
-                        android:background="@drawable/edittext_border03"
-                        android:layout_gravity="center_vertical"
-                        android:id="@+id/etPCName"
-                        android:layout_marginRight="5dp"
-                        android:layout_width="0dp"
-                        android:layout_height="50dp"
-                        android:layout_weight=".8"
-                        android:text=""
-                        android:hint="Tên người dùng"
-                        android:textSize="25dp"/>
+                        android:id="@+id/edtName"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/edittext_border02"
+                        android:ems="10"
+                        android:inputType="textMultiLine"
+                        android:paddingLeft="5dp"
+                        android:paddingRight="5dp"
+                        android:paddingTop="5dp"
+                        android:textSize="18dp"/>
                 </LinearLayout>
 
-                <!-- Gender-->
+                <!-- Gender -->
                 <LinearLayout
-                    android:orientation="horizontal"
-                    android:background="@drawable/border_style01"
                     android:layout_width="match_parent"
-                    android:layout_height="60dp">
-                    <ImageView
-                        android:layout_gravity="center_vertical"
-                        android:layout_width="0dp"
-                        android:layout_height="30dp"
-                        android:layout_weight=".2"
-                        app:srcCompat="@drawable/ic_gender"/>
+                    android:layout_height="match_parent"
+                    android:layout_marginBottom="10dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:orientation="vertical">
+
                     <TextView
-                        android:textColor="@color/colorBlack"
-                        android:layout_gravity="center_vertical"
-                        android:id="@+id/tvUserProGender"
-                        android:layout_width="0dp"
-                        android:layout_height="40dp"
-                        android:layout_weight=".8"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="5dp"
+                        android:layout_marginTop="5dp"
+                        android:text="Giới tính: "
+                        android:textColor="@color/black"
+                        android:textSize="20dp" />
+
+                    <TextView
                         android:text="Nam"
-                        android:textSize="25dp"/>
+                        android:background="@drawable/edittext_border02"
+                        android:textColor="@color/black"
+                        android:id="@+id/txtGender"
+                        android:layout_width="match_parent"
+                        android:layout_height="30dp"
+                        android:textSize="18dp"
+                        android:ems="10"
+                        android:paddingLeft="5dp"
+                        android:paddingRight="5dp"
+                        android:paddingTop="5dp" />
                 </LinearLayout>
 
-                <!-- Birthday -->
+                <!-- Birth -->
                 <LinearLayout
-                    android:orientation="horizontal"
-                    android:background="@drawable/border_style01"
                     android:layout_width="match_parent"
-                    android:layout_height="60dp">
-                    <ImageView
-                        android:layout_gravity="center_vertical"
-                        android:layout_width="0dp"
-                        android:layout_height="30dp"
-                        android:layout_weight=".2"
-                        app:srcCompat="@drawable/ic_date"/>
+                    android:layout_height="match_parent"
+                    android:layout_marginBottom="10dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:orientation="vertical">
+
                     <TextView
-                        android:textColor="@color/colorBlack"
-                        android:layout_gravity="center_vertical"
-                        android:id="@+id/tvUserProBirth"
-                        android:layout_width="0dp"
-                        android:layout_height="40dp"
-                        android:layout_weight=".8"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="5dp"
+                        android:layout_marginTop="5dp"
+                        android:text="Ngày sinh: "
+                        android:textColor="@color/black"
+                        android:textSize="20dp" />
+
+                    <TextView
                         android:text="14/04/1996"
-                        android:textSize="25dp"/>
-                </LinearLayout>
-                <!-- Job -->
-                <LinearLayout
-                    android:orientation="horizontal"
-                    android:background="@drawable/border_style01"
-                    android:layout_width="match_parent"
-                    android:layout_height="60dp">
-                    <ImageView
-                        android:layout_gravity="center_vertical"
-                        android:layout_width="0dp"
+                        android:background="@drawable/edittext_border02"
+                        android:textColor="@color/black"
+                        android:id="@+id/txtBirth"
+                        android:layout_width="match_parent"
                         android:layout_height="30dp"
-                        android:layout_weight=".2"
-                        app:srcCompat="@drawable/ic_job_suitcase"/>
-                    <EditText
-                        android:textColor="@color/colorBlack"
-                        android:background="@drawable/edittext_border03"
-                        android:layout_gravity="center_vertical"
-                        android:id="@+id/etPCJob"
-                        android:layout_marginRight="5dp"
-                        android:layout_width="0dp"
-                        android:layout_height="50dp"
-                        android:layout_weight=".8"
-                        android:text=""
-                        android:hint="Nghề nghiệp"
-                        android:textSize="25dp"/>
+                        android:textSize="18dp"
+                        android:ems="10"
+                        android:paddingLeft="5dp"
+                        android:paddingRight="5dp"
+                        android:paddingTop="5dp" />
                 </LinearLayout>
 
                 <!-- Phone -->
                 <LinearLayout
-                    android:orientation="horizontal"
                     android:layout_width="match_parent"
-                    android:layout_height="60dp">
-                    <ImageView
-                        android:layout_gravity="center_vertical"
-                        android:layout_width="0dp"
-                        android:layout_height="30dp"
-                        android:layout_weight=".2"
-                        app:srcCompat="@drawable/ic_phone"/>
+                    android:layout_height="match_parent"
+                    android:layout_marginBottom="10dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="5dp"
+                        android:layout_marginTop="5dp"
+                        android:text="Số điện thoại: "
+                        android:textColor="@color/black"
+                        android:textSize="20dp" />
+
                     <EditText
-                        android:textColor="@color/colorBlack"
-                        android:background="@drawable/edittext_border03"
-                        android:layout_gravity="center_vertical"
-                        android:id="@+id/etPCPhone"
-                        android:layout_marginRight="5dp"
-                        android:layout_width="0dp"
-                        android:layout_height="50dp"
-                        android:layout_weight=".8"
+                        android:id="@+id/edtPhone"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/edittext_border02"
+                        android:ems="10"
+                        android:inputType="number"
+                        android:paddingLeft="5dp"
+                        android:paddingRight="5dp"
+                        android:paddingTop="5dp"
+                        android:textColor="@color/black"
+                        android:textSize="18dp"/>
+
+                </LinearLayout>
+
+                <!-- Phone -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginBottom="10dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="5dp"
+                        android:layout_marginTop="5dp"
+                        android:text="Cân nặng: "
+                        android:textColor="@color/black"
+                        android:textSize="20dp" />
+
+                    <EditText
+                        android:id="@+id/edtWeight"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/edittext_border02"
+                        android:ems="10"
+                        android:paddingLeft="5dp"
+                        android:paddingRight="5dp"
+                        android:paddingTop="5dp"
+                        android:textColor="@color/black"
+                        android:textSize="18dp"/>
+
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginBottom="10dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="5dp"
+                        android:layout_marginTop="5dp"
+                        android:text="Chiều cao "
+                        android:textColor="@color/black"
+                        android:textSize="20dp" />
+
+                    <TextView
                         android:text=""
-                        android:hint="Số điện thoại"
-                        android:textSize="25dp"/>
+                        android:background="@drawable/edittext_border02"
+                        android:textColor="@color/black"
+                        android:id="@+id/txtHeight"
+                        android:layout_width="match_parent"
+                        android:layout_height="30dp"
+                        android:textSize="18dp"
+                        android:ems="10"
+                        android:paddingLeft="5dp"
+                        android:paddingRight="5dp"
+                        android:paddingTop="5dp" />
                 </LinearLayout>
+
+                <!-- Phone -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginBottom="10dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="5dp"
+                        android:layout_marginTop="5dp"
+                        android:text="Chứng minh thư: "
+                        android:textColor="@color/black"
+                        android:textSize="20dp" />
+
+                    <EditText
+                        android:id="@+id/edtCMT"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/edittext_border02"
+                        android:ems="10"
+                        android:inputType="number"
+                        android:paddingLeft="5dp"
+                        android:paddingRight="5dp"
+                        android:paddingTop="5dp"
+                        android:textColor="@color/black"
+                        android:textSize="18dp"/>
+                </LinearLayout>
+
+                <!-- Address -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginBottom="10dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="5dp"
+                        android:layout_marginTop="5dp"
+                        android:text="Địa chỉ: "
+                        android:textColor="@color/black"
+                        android:textSize="20dp" />
+
+                    <!-- So nha -->
+                    <LinearLayout
+                        android:orientation="horizontal"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <TextView
+                            android:text="Số "
+                            android:textSize="20dp"
+                            android:textColor="#000000"
+                            android:layout_marginLeft="5dp"
+                            android:layout_marginBottom="5dp"
+                            android:layout_width="0dp"
+                            android:layout_weight="0.3"
+                            android:layout_height="wrap_content" />
+
+                        <EditText
+                            android:text="2 "
+                            android:background="@drawable/edittext_border02"
+                            android:id="@+id/edtAddressNumber"
+                            android:textSize="20dp"
+                            android:textColor="#000000"
+                            android:layout_marginLeft="5dp"
+                            android:layout_marginBottom="5dp"
+                            android:layout_width="0dp"
+                            android:layout_weight="0.7"
+                            android:layout_height="wrap_content"
+                            android:paddingLeft="5dp"
+                            android:paddingRight="5dp"
+                            android:paddingTop="5dp"/>
+
+                    </LinearLayout>
+
+                    <!-- ten duong -->
+                    <LinearLayout
+                        android:orientation="horizontal"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <TextView
+                            android:text="Đường "
+                            android:textSize="20dp"
+                            android:textColor="#000000"
+                            android:layout_marginLeft="5dp"
+                            android:layout_marginBottom="5dp"
+                            android:layout_width="0dp"
+                            android:layout_weight="0.3"
+                            android:layout_height="wrap_content" />
+
+                        <EditText
+                            android:background="@drawable/edittext_border02"
+                            android:id="@+id/edtAddressRoad"
+                            android:text="Nguyễn Khánh Toàn "
+                            android:textSize="20dp"
+                            android:textColor="#000000"
+                            android:layout_marginLeft="5dp"
+                            android:layout_marginBottom="5dp"
+                            android:layout_width="0dp"
+                            android:layout_weight="0.7"
+                            android:layout_height="wrap_content"
+                            android:inputType="textMultiLine"
+                            android:paddingLeft="5dp"
+                            android:paddingRight="5dp"
+                            android:paddingTop="5dp"/>
+
+                    </LinearLayout>
+
+                    <!-- quan -->
+                    <LinearLayout
+                        android:orientation="horizontal"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <TextView
+                            android:text="Quận "
+                            android:textSize="20dp"
+                            android:textColor="#000000"
+                            android:layout_marginLeft="5dp"
+                            android:layout_marginBottom="5dp"
+                            android:layout_width="0dp"
+                            android:layout_weight="0.3"
+                            android:layout_height="wrap_content" />
+
+                        <EditText
+                            android:background="@drawable/edittext_border02"
+                            android:id="@+id/edtAddressQuan"
+                            android:text="Cầu Giấy"
+                            android:textSize="20dp"
+                            android:textColor="#000000"
+                            android:layout_marginLeft="5dp"
+                            android:layout_marginBottom="5dp"
+                            android:layout_width="0dp"
+                            android:layout_weight="0.7"
+                            android:layout_height="wrap_content"
+                            android:paddingLeft="5dp"
+                            android:paddingRight="5dp"
+                            android:paddingTop="5dp"/>
+
+                    </LinearLayout>
+
+                    <!-- thanh pho -->
+                    <LinearLayout
+                        android:orientation="horizontal"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <TextView
+                            android:text="Thành phố "
+                            android:textSize="20dp"
+                            android:textColor="#000000"
+                            android:layout_marginLeft="5dp"
+                            android:layout_marginBottom="5dp"
+                            android:layout_width="0dp"
+                            android:layout_weight="0.3"
+                            android:layout_height="wrap_content" />
+
+                        <EditText
+                            android:background="@drawable/edittext_border02"
+                            android:text="Hà Nội "
+                            android:id="@+id/edtAddressCity"
+                            android:textSize="20dp"
+                            android:textColor="#000000"
+                            android:layout_marginLeft="5dp"
+                            android:layout_marginBottom="5dp"
+                            android:layout_width="0dp"
+                            android:layout_weight="0.7"
+                            android:layout_height="wrap_content"
+                            android:paddingLeft="5dp"
+                            android:paddingRight="5dp"
+                            android:paddingTop="5dp"/>
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
             </LinearLayout>
 
-            <!-- Second Box-->
+        </android.support.v7.widget.CardView>
 
-            <TextView
-                android:layout_below="@+id/LinePCInfor"
-                android:text="Đổi mật khẩu"
-                android:id="@+id/tv02"
-                android:textColor="@color/colorBlack"
-                android:layout_marginLeft="10dp"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:textSize="20dp"/>
-            <!-- Pass -->
-            <LinearLayout
-                android:layout_below="@+id/tv02"
-                android:background="@drawable/border"
-                android:layout_marginTop="10dp"
-                android:layout_marginLeft="10dp"
-                android:layout_marginRight="10dp"
-                android:id="@+id/LinePCPass"
-                android:orientation="vertical"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+    </android.support.v4.widget.NestedScrollView>
 
-                <!-- Old Pass-->
-                <LinearLayout
-                    android:orientation="horizontal"
-                    android:background="@drawable/border_style01"
-                    android:layout_width="match_parent"
-                    android:layout_height="60dp">
-                    <ImageView
-                        android:layout_gravity="center_vertical"
-                        android:layout_width="0dp"
-                        android:layout_height="30dp"
-                        android:layout_weight=".2"
-                        app:srcCompat="@drawable/ic_pass"/>
-
-                    <EditText
-                        android:id="@+id/etPCOldpass"
-                        android:layout_width="0dp"
-                        android:layout_height="50dp"
-                        android:layout_gravity="center_vertical"
-                        android:layout_marginRight="5dp"
-                        android:layout_weight=".8"
-                        android:background="@drawable/edittext_border03"
-                        android:hint="Mật khẩu cũ"
-                        android:inputType="textPassword"
-                        android:textSize="25dp" />
-                </LinearLayout>
-
-                <!-- New Pass -->
-                <LinearLayout
-                    android:orientation="horizontal"
-                    android:background="@drawable/border_style01"
-                    android:layout_width="match_parent"
-                    android:layout_height="60dp">
-                    <ImageView
-                        android:textColor="@color/colorBlack"
-                        android:layout_gravity="center_vertical"
-                        android:layout_width="0dp"
-                        android:layout_height="30dp"
-                        android:layout_weight=".2"
-                        app:srcCompat="@drawable/ic_pass"/>
-                    <EditText
-                        android:textColor="@color/colorBlack"
-                        android:background="@drawable/edittext_border03"
-                        android:layout_gravity="center_vertical"
-                        android:id="@+id/etPCNewPass"
-                        android:inputType="textPassword"
-                        android:layout_marginRight="5dp"
-                        android:layout_width="0dp"
-                        android:layout_height="50dp"
-                        android:layout_weight=".8"
-                        android:hint="Mật khẩu mới"
-                        android:textSize="25dp"/>
-                </LinearLayout>
-
-                <!-- Comfrim New Pass -->
-                <LinearLayout
-                    android:orientation="horizontal"
-                    android:background="@drawable/border_style01"
-                    android:layout_width="match_parent"
-                    android:layout_height="60dp">
-                    <ImageView
-                        android:layout_gravity="center_vertical"
-                        android:layout_width="0dp"
-                        android:layout_height="30dp"
-                        android:layout_weight=".2"
-                        app:srcCompat="@drawable/ic_pass"/>
-                    <EditText
-                        android:textColor="@color/colorBlack"
-                        android:background="@drawable/edittext_border03"
-                        android:layout_gravity="center_vertical"
-                        android:id="@+id/etPCNewPassCom"
-                        android:inputType="textPassword"
-                        android:layout_marginRight="5dp"
-                        android:layout_width="0dp"
-                        android:layout_height="50dp"
-                        android:layout_weight=".8"
-                        android:hint="Nhập lại mật khẩu mới"
-                        android:textSize="25dp"/>
-                </LinearLayout>
-            </LinearLayout>
-
-            <!-- Save Change Button-->
-            <Button
-                android:background="@drawable/green_button"
-                android:text="Lưu thay đổi"
-                android:textColor="#ffff"
-                android:id="@+id/btnPCSave"
-                android:layout_marginTop="10dp"
-                android:layout_marginLeft="10dp"
-                android:layout_marginRight="10dp"
-                android:layout_below="@+id/LinePCPass"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent" />
-        </RelativeLayout>
-    </ScrollView>
-</RelativeLayout>
+</LinearLayout>

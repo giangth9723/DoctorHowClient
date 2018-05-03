@@ -1,18 +1,383 @@
-<FrameLayout
+<LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:id="@+id/Frag"
-    tools:context="project.fpt.edu.vn.registerscreen.Fragment.FragmentHome">
+    android:orientation="vertical"
+    tools:context="project.fpt.edu.vn.registerscreen.Activity.MenuActivity">
 
     <!-- TODO: Update blank fragment layout -->
+    <!--<LinearLayout-->
+    <!--android:orientation="vertical"-->
+    <!--android:gravity="center"-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="150dp">-->
 
-    <ListView
-        android:id="@+id/lstOption"
+    <!--<TextView-->
+    <!--android:text="Xin chào "-->
+    <!--android:textColor="@color/black"-->
+    <!--android:textSize="35dp"-->
+    <!--android:layout_width="wrap_content"-->
+    <!--android:layout_height="wrap_content" />-->
+
+    <!--<TextView-->
+    <!--android:id="@+id/txtClientName"-->
+    <!--android:text="Vũ Hải Đăng"-->
+    <!--android:textColor="@color/black"-->
+    <!--android:textSize="35dp"-->
+    <!--android:layout_width="wrap_content"-->
+    <!--android:layout_height="wrap_content" />-->
+
+    <!--</LinearLayout>-->
+
+    <!--<LinearLayout-->
+    <!--android:clipToPadding="false"-->
+    <!--android:gravity="center"-->
+    <!--android:orientation="horizontal"-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="wrap_content">-->
+
+    <!--&lt;!&ndash; Benh phu khoa + tam than &ndash;&gt;-->
+    <!--<android.support.v7.widget.CardView-->
+    <!--android:layout_width="160dp"-->
+    <!--android:layout_height="150dp"-->
+    <!--android:layout_margin="10dp">-->
+
+    <!--<LinearLayout-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="match_parent"-->
+    <!--android:orientation="vertical"-->
+    <!--android:gravity="center">-->
+
+    <!--<ImageView-->
+    <!--android:layout_width="66dp"-->
+    <!--android:layout_height="64dp"-->
+    <!--android:src="@drawable/ic_icon_female"-->
+    <!--android:background="@drawable/circle_pink_background"-->
+    <!--android:padding="10dp"/>-->
+
+    <!--<TextView-->
+    <!--android:text="Bệnh phụ khoa"-->
+    <!--android:textSize="18dp"-->
+    <!--android:layout_marginTop="10dp"-->
+    <!--android:layout_width="wrap_content"-->
+    <!--android:layout_height="wrap_content" />-->
+
+    <!--&lt;!&ndash; <View-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="1dp"-->
+    <!--android:background="@color/lightgray"/> &ndash;&gt;-->
+
+    <!--</LinearLayout>-->
+
+    <!--</android.support.v7.widget.CardView>-->
+
+    <!--<android.support.v7.widget.CardView-->
+    <!--android:layout_width="160dp"-->
+    <!--android:layout_height="150dp"-->
+    <!--android:layout_margin="10dp">-->
+
+    <!--<LinearLayout-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="match_parent"-->
+    <!--android:orientation="vertical"-->
+    <!--android:gravity="center">-->
+
+    <!--<ImageView-->
+    <!--android:layout_width="66dp"-->
+    <!--android:layout_height="64dp"-->
+    <!--android:src="@drawable/ic_icon_mental"-->
+    <!--android:background="@drawable/circle_blue_background"-->
+    <!--android:padding="10dp"/>-->
+
+    <!--<TextView-->
+    <!--android:text="Bệnh tâm thần"-->
+    <!--android:textSize="18dp"-->
+    <!--android:layout_marginTop="10dp"-->
+    <!--android:layout_width="wrap_content"-->
+    <!--android:layout_height="wrap_content" />-->
+
+    <!--&lt;!&ndash; <View-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="1dp"-->
+    <!--android:background="@color/lightgray"/> &ndash;&gt;-->
+
+    <!--</LinearLayout>-->
+
+    <!--</android.support.v7.widget.CardView>-->
+
+    <!--</LinearLayout>-->
+
+    <!--&lt;!&ndash; benh da lieu &ndash;&gt;-->
+    <!--<LinearLayout-->
+    <!--android:clipToPadding="false"-->
+    <!--android:gravity="center"-->
+    <!--android:orientation="horizontal"-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="wrap_content">-->
+
+    <!--<android.support.v7.widget.CardView-->
+    <!--android:layout_width="160dp"-->
+    <!--android:layout_height="150dp"-->
+    <!--android:layout_margin="10dp">-->
+
+    <!--<LinearLayout-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="match_parent"-->
+    <!--android:orientation="vertical"-->
+    <!--android:gravity="center">-->
+
+    <!--<ImageView-->
+    <!--android:layout_width="66dp"-->
+    <!--android:layout_height="64dp"-->
+    <!--android:src="@drawable/ic_icon_dermatology"-->
+    <!--android:background="@drawable/circle_deepgreen_background"-->
+    <!--android:padding="10dp"/>-->
+
+    <!--<TextView-->
+    <!--android:text="Bệnh da liễu"-->
+    <!--android:textSize="18dp"-->
+    <!--android:layout_marginTop="10dp"-->
+    <!--android:layout_width="wrap_content"-->
+    <!--android:layout_height="wrap_content" />-->
+
+    <!--&lt;!&ndash; <View-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="1dp"-->
+    <!--android:background="@color/lightgray"/> &ndash;&gt;-->
+
+    <!--</LinearLayout>-->
+
+    <!--</android.support.v7.widget.CardView>-->
+
+    <!--</LinearLayout>-->
+
+    <!-- Benh phu khoa -->
+    <TextView
+        android:layout_gravity="center_horizontal"
+        android:textSize="30dp"
+        android:text="Chào mừng bạn đến với Doctor How"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+    <android.support.v7.widget.CardView
+        android:id="@+id/cvFemale"
+        android:layout_marginRight="10dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginBottom="5dp"
+        android:layout_marginTop="5dp"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="100dp">
 
-    </ListView>
+        <LinearLayout
+            android:id="@+id/female"
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
 
-</FrameLayout>
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_weight="0.6"
+                android:background="@color/pink"
+                android:orientation="vertical"
+                android:layout_height="match_parent"
+                android:gravity="center">
+
+                <TextView
+                    android:text="Phụ khoa"
+                    android:textSize="27dp"
+                    android:textColor="@color/white"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
+                <View
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="@color/lightgray"/>
+
+                <TextView
+                    android:text="Những bệnh liên quan đến sinh dục nữ"
+                    android:textSize="15dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:textColor="@color/white"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_weight="0.4"
+                android:layout_height="match_parent"
+                android:gravity="center">
+
+                <!--<TextView-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:text="Kiểm tra bệnh án phụ khoa"-->
+                <!--android:textSize="18dp" />-->
+
+                <ImageView
+                    android:layout_width="66dp"
+                    android:layout_height="64dp"
+                    android:background="@drawable/circle_pink_background"
+                    android:padding="10dp"
+                    app:srcCompat="@drawable/ic_icon_female" />
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </android.support.v7.widget.CardView>
+
+    <!-- Benh tam than -->
+    <android.support.v7.widget.CardView
+        android:id="@+id/cvMental"
+        android:layout_marginRight="10dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginBottom="5dp"
+        android:layout_width="match_parent"
+        android:layout_height="100dp">
+
+        <LinearLayout
+            android:id="@+id/mental"
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_weight="0.6"
+                android:background="@color/blue"
+                android:orientation="vertical"
+                android:layout_height="match_parent"
+                android:gravity="center">
+
+                <TextView
+                    android:text="Tâm thần"
+                    android:textSize="27dp"
+                    android:textColor="@color/white"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
+                <View
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="@color/lightgray"/>
+
+                <TextView
+                    android:text="Những bệnh sức khỏe tinh thần, cảm xúc, tâm lý"
+                    android:textSize="15dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:textColor="@color/white"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_weight="0.4"
+                android:layout_height="match_parent"
+                android:gravity="center">
+
+                <!--<TextView-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:text="Kiểm tra bệnh án phụ khoa"-->
+                <!--android:textSize="18dp" />-->
+
+                <ImageView
+                    android:layout_width="66dp"
+                    android:layout_height="64dp"
+                    android:background="@drawable/circle_blue_background"
+                    android:padding="10dp"
+                    app:srcCompat="@drawable/ic_icon_mental" />
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </android.support.v7.widget.CardView>
+
+    <!-- Benh phu khoa -->
+    <android.support.v7.widget.CardView
+        android:id="@+id/cvDermatology"
+        android:layout_marginRight="10dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginBottom="5dp"
+        android:layout_width="match_parent"
+        android:layout_height="100dp">
+
+        <LinearLayout
+            android:id="@+id/dermatology"
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_weight="0.6"
+                android:background="@color/deepgreen"
+                android:orientation="vertical"
+                android:layout_height="match_parent"
+                android:gravity="center">
+
+                <TextView
+                    android:text="Da liễu"
+                    android:textSize="27dp"
+                    android:textColor="@color/white"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
+                <View
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="@color/lightgray"/>
+
+                <TextView
+                    android:text="Những bệnh ảnh hưởng tới bề mặt cơ thể: da, lông, tóc, các cơ quan khác"
+                    android:textSize="15dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:textColor="@color/white"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_weight="0.4"
+                android:layout_height="match_parent"
+                android:gravity="center">
+
+                <!--<TextView-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:text="Kiểm tra bệnh án phụ khoa"-->
+                <!--android:textSize="18dp" />-->
+
+                <ImageView
+                    android:layout_width="66dp"
+                    android:layout_height="64dp"
+                    android:background="@drawable/circle_deepgreen_background"
+                    android:padding="10dp"
+                    app:srcCompat="@drawable/ic_icon_dermatology"/>
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </android.support.v7.widget.CardView>
+
+</LinearLayout>

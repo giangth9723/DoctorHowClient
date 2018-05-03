@@ -3,20 +3,16 @@ package project.fpt.edu.vn.registerscreen.Activity;
 import android.content.ComponentName;
 import android.content.Intent;
 import android.content.ServiceConnection;
-import android.graphics.Typeface;
 import android.os.Bundle;
 import android.os.IBinder;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
-import android.support.design.widget.NavigationView;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
-import android.text.Spannable;
-import android.text.SpannableString;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.SubMenu;
+import android.view.View;
 import android.widget.TextView;
 import android.support.v4.app.FragmentManager;
 import android.widget.Toast;
@@ -24,25 +20,26 @@ import android.widget.Toast;
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
 
-import java.net.Socket;
-import java.net.URISyntaxException;
-
-import io.socket.client.IO;
+import de.hdodenhof.circleimageview.CircleImageView;
 import project.fpt.edu.vn.registerscreen.Application.SocketApplication;
 import project.fpt.edu.vn.registerscreen.BottomNavigationHelper;
 import project.fpt.edu.vn.registerscreen.BusEvent.EventChangeChatServerStateEvent;
-import project.fpt.edu.vn.registerscreen.CustomTypefaceSpan;
 import project.fpt.edu.vn.registerscreen.Fragment.FragmentHistory;
 import project.fpt.edu.vn.registerscreen.Fragment.FragmentHome;
 import project.fpt.edu.vn.registerscreen.Fragment.FragmentMedical;
 import project.fpt.edu.vn.registerscreen.Fragment.FragmentSetting;
+import project.fpt.edu.vn.registerscreen.Model.Patient;
 import project.fpt.edu.vn.registerscreen.R;
 import project.fpt.edu.vn.registerscreen.Service.SocketServiceProvider;
 import project.fpt.edu.vn.registerscreen.Session;
 
 public class MenuActivity extends AppCompatActivity {
+    CircleImageView civProfilePic;
+    TextView txtPatientName;
+    public void anhXa(){
+        civProfilePic = (CircleImageView) findViewById(R.id.civProfileImageView);
+    }
     Session session;
-    TextView tvShowName;
     FragmentManager fragmentManager = getSupportFragmentManager();
     Boolean mIsBound;
     SocketApplication socketApplication;
@@ -118,9 +115,15 @@ public class MenuActivity extends AppCompatActivity {
         if(!session.LoggedIn()){
             Logout();
         }
-        tvShowName = (TextView)findViewById(R.id.txtShowName);
-        String patient_name = session.getPatient_name();
-        tvShowName.setText(patient_name);
+        txtPatientName = (TextView)findViewById(R.id.txtPatientName);
+        txtPatientName.setText(session.getPatient().getPatient_name());
+        anhXa();
+        civProfilePic.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(MenuActivity.this, UserProfileActivity.class));
+            }
+        });
     }
 
     private void Logout(){
